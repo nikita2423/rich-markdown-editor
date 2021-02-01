@@ -6,8 +6,9 @@ import { Decoration, DecorationSet } from "prosemirror-view";
 import Extension from "../lib/Extension";
 
 const MAX_MATCH = 500;
-const OPEN_REGEX = /^\/(\w+)?$/;
-const CLOSE_REGEX = /(^(?!\/(\w+)?)(.*)$|^\/((\w+)\s.*|\s)$)/;
+const OPEN_REGEX = /\/(\w+)?$/;
+//const CLOSE_REGEX = /(^(?!\/(\w+)?)(.*)$|^\/((\w+)\s.*|\s)$)/;
+const CLOSE_REGEX = /(^(?!\/(\w+)?)(.*)[^\/]$|^\/((\w+)\s.*[^\/]|\s|\s.*[^\/])$)/;
 
 // based on the input rules code in Prosemirror, here:
 // https://github.com/ProseMirror/prosemirror-inputrules/blob/master/src/inputrules.js
@@ -44,6 +45,7 @@ export default class BlockMenuTrigger extends Extension {
       new Plugin({
         props: {
           handleClick: () => {
+            console.log("On Clsoe 2");
             this.options.onClose();
             return false;
           },
@@ -58,8 +60,10 @@ export default class BlockMenuTrigger extends Extension {
                 const { pos } = view.state.selection.$from;
                 return run(view, pos, pos, OPEN_REGEX, (state, match) => {
                   if (match) {
+                    console.log("On Open backspace 3");
                     this.options.onOpen(match[1]);
                   } else {
+                    console.log("On Clsoe 3");
                     this.options.onClose();
                   }
                   return null;
@@ -85,14 +89,15 @@ export default class BlockMenuTrigger extends Extension {
 
             return false;
           },
-          decorations: state => {
+          decorations: (state) => {
             const parent = findParentNode(
-              node => node.type.name === "paragraph"
+              (node) => node.type.name === "paragraph"
             )(state.selection);
 
             if (!parent) {
               return;
             }
+            // console.log("parent Node", parent.node.textContent);
 
             const decorations: Decoration[] = [];
             const isEmpty = parent && parent.node.content.size === 0;
@@ -108,6 +113,7 @@ export default class BlockMenuTrigger extends Extension {
                     icon.className = "block-menu-trigger";
                     icon.innerText = "+";
                     icon.addEventListener("click", () => {
+                      console.log("On Open icon 2");
                       this.options.onOpen("");
                     });
                     return icon;
@@ -154,11 +160,14 @@ export default class BlockMenuTrigger extends Extension {
       // main regex should match only:
       // /word
       new InputRule(OPEN_REGEX, (state, match) => {
+        console.log("Inpit Rule match", state.selection.$from.parent.type.name);
+
         if (
           match &&
           state.selection.$from.parent.type.name === "paragraph" &&
           !isInTable(state)
         ) {
+          console.log("On Open 1");
           this.options.onOpen(match[1]);
         }
         return null;
@@ -168,7 +177,9 @@ export default class BlockMenuTrigger extends Extension {
       // /<space>
       // /word<space>
       new InputRule(CLOSE_REGEX, (state, match) => {
+        console.log("Match", match);
         if (match) {
+          console.log("On Close getting called 1");
           this.options.onClose();
         }
         return null;
