@@ -28,6 +28,7 @@ type Props = {
   onLinkToolbarOpen: () => void;
   onClose: () => void;
   embeds: EmbedDescriptor[];
+  onOpenEmoji?: () => void;
 };
 
 type State = {
@@ -162,6 +163,10 @@ class BlockMenu extends React.Component<Props, State> {
         this.props.onLinkToolbarOpen();
         return;
       }
+      case "emoji": {
+        console.log("Emoji Getting called");
+        return this.handleEmojiClick();
+      }
       default:
         this.insertBlock(item);
     }
@@ -170,6 +175,18 @@ class BlockMenu extends React.Component<Props, State> {
   close = () => {
     this.props.onClose();
     this.props.view.focus();
+  };
+
+  handleEmojiClick = () => {
+    const { view, onOpenEmoji } = this.props;
+    const { dispatch, state } = view;
+    const { from, to } = state.selection;
+    const colonText = `:`;
+    dispatch(view.state.tr.insertText(colonText, from - 1, to));
+    this.close();
+    if (onOpenEmoji) {
+      onOpenEmoji();
+    }
   };
 
   handleLinkInputKeydown = (event: React.KeyboardEvent<HTMLInputElement>) => {

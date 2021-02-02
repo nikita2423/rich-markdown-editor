@@ -657,6 +657,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
                   onImageUploadStop={this.props.onImageUploadStop}
                   onShowToast={this.props.onShowToast}
                   embeds={this.props.embeds}
+                  onOpenEmoji={this.handleOpenEmojiIcons}
                 />
                 <EmojiPopup
                   view={this.view}
