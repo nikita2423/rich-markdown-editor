@@ -5,7 +5,7 @@ import { ToastType } from "../types";
 
 const insertFiles = function(view, event, pos, files, options) {
   // filter to only include image files
-  const images = files.filter(file => /image/i.test(file.type));
+  const images = files.filter((file) => /image/i.test(file.type));
   if (images.length === 0) return;
 
   const {
@@ -52,7 +52,7 @@ const insertFiles = function(view, event, pos, files, options) {
     // to allow all placeholders to be entered at once with the uploads
     // happening in the background in parallel.
     uploadImage(file)
-      .then(src => {
+      .then((src) => {
         const pos = findPlaceholder(view.state, id);
 
         // if the content around the placeholder has been deleted
@@ -67,7 +67,7 @@ const insertFiles = function(view, event, pos, files, options) {
 
         view.dispatch(transaction);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
 
         // cleanup the placeholder if there is a failure

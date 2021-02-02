@@ -138,5 +138,20 @@ export default function blockMenuItems(
       keywords: "container_notice card suggestion",
       attrs: { style: "tip" },
     },
+    {
+      name: "separator",
+    },
+    {
+      name: "emoji",
+      title: dictionary.emoji,
+      icon: BlockQuoteIcon,
+      shortcut: `:`,
+    },
+    {
+      name: "mention",
+      title: dictionary.mention,
+      icon: BlockQuoteIcon,
+      shortcut: `@`,
+    },
   ];
 }

@@ -55,6 +55,8 @@ export const base = {
   tipNotice: "Tip notice",
   warning: "Warning",
   warningNotice: "Warning notice",
+  emoji: "Emoji",
+  mention: "Mention a person",
 };
 
 export default base;

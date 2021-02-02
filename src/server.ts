@@ -34,6 +34,8 @@ import Strikethrough from "./marks/Strikethrough";
 import TemplatePlaceholder from "./marks/Placeholder";
 import Underline from "./marks/Underline";
 
+// inline
+
 const extensions = new ExtensionManager([
   new Doc(),
   new Text(),

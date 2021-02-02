@@ -20,14 +20,8 @@ type Props = {
   commands: Record<string, any>;
   dictionary: typeof baseDictionary;
   view: EditorView;
-  search: string;
-  uploadImage?: (file: File) => Promise<string>;
-  onImageUploadStart?: () => void;
-  onImageUploadStop?: () => void;
-  onShowToast?: (message: string, id: string) => void;
-  onLinkToolbarOpen: () => void;
+  //   search: string;
   onClose: () => void;
-  embeds: EmbedDescriptor[];
 };
 
 type State = {
@@ -39,7 +33,7 @@ type State = {
   selectedIndex: number;
 };
 
-class BlockMenu extends React.Component<Props, State> {
+class EmojiPopup extends React.Component<Props, State> {
   menuRef = React.createRef<HTMLDivElement>();
   inputRef = React.createRef<HTMLInputElement>();
 
@@ -75,9 +69,10 @@ class BlockMenu extends React.Component<Props, State> {
         selectedIndex: 0,
         ...position,
       });
-    } else if (prevProps.search !== this.props.search) {
-      this.setState({ selectedIndex: 0 });
     }
+    // else if (prevProps.search !== this.props.search) {
+    //   this.setState({ selectedIndex: 0 });
+    // }
   }
 
   componentWillUnmount() {
@@ -86,198 +81,179 @@ class BlockMenu extends React.Component<Props, State> {
     }
   }
 
-  handleKeyDown = (event: KeyboardEvent) => {
-    if (!this.props.isActive) return;
+  //   handleKeyDown = (event: KeyboardEvent) => {
+  //     if (!this.props.isActive) return;
 
-    if (event.key === "Enter") {
-      event.preventDefault();
-      event.stopPropagation();
+  //     if (event.key === "Enter") {
+  //       event.preventDefault();
+  //       event.stopPropagation();
 
-      const item = this.filtered[this.state.selectedIndex];
+  //       const item = this.filtered[this.state.selectedIndex];
 
-      if (item) {
-        this.insertItem(item);
-      } else {
-        this.props.onClose();
-      }
-    }
+  //       if (item) {
+  //         this.insertItem(item);
+  //       } else {
+  //         this.props.onClose();
+  //       }
+  //     }
 
-    if (event.key === "ArrowUp" || (event.ctrlKey && event.key === "p")) {
-      event.preventDefault();
-      event.stopPropagation();
+  //     if (event.key === "ArrowUp" || (event.ctrlKey && event.key === "p")) {
+  //       event.preventDefault();
+  //       event.stopPropagation();
 
-      if (this.filtered.length) {
-        const prevIndex = this.state.selectedIndex - 1;
-        const prev = this.filtered[prevIndex];
+  //       if (this.filtered.length) {
+  //         const prevIndex = this.state.selectedIndex - 1;
+  //         const prev = this.filtered[prevIndex];
 
-        this.setState({
-          selectedIndex: Math.max(
-            0,
-            prev && prev.name === "separator" ? prevIndex - 1 : prevIndex
-          ),
-        });
-      } else {
-        this.close();
-      }
-    }
+  //         this.setState({
+  //           selectedIndex: Math.max(
+  //             0,
+  //             prev && prev.name === "separator" ? prevIndex - 1 : prevIndex
+  //           ),
+  //         });
+  //       } else {
+  //         this.close();
+  //       }
+  //     }
 
-    if (
-      event.key === "ArrowDown" ||
-      event.key === "Tab" ||
-      (event.ctrlKey && event.key === "n")
-    ) {
-      event.preventDefault();
-      event.stopPropagation();
+  //     if (
+  //       event.key === "ArrowDown" ||
+  //       event.key === "Tab" ||
+  //       (event.ctrlKey && event.key === "n")
+  //     ) {
+  //       event.preventDefault();
+  //       event.stopPropagation();
 
-      if (this.filtered.length) {
-        const total = this.filtered.length - 1;
-        const nextIndex = this.state.selectedIndex + 1;
-        const next = this.filtered[nextIndex];
+  //       if (this.filtered.length) {
+  //         const total = this.filtered.length - 1;
+  //         const nextIndex = this.state.selectedIndex + 1;
+  //         const next = this.filtered[nextIndex];
 
-        this.setState({
-          selectedIndex: Math.min(
-            next && next.name === "separator" ? nextIndex + 1 : nextIndex,
-            total
-          ),
-        });
-      } else {
-        this.close();
-      }
-    }
+  //         this.setState({
+  //           selectedIndex: Math.min(
+  //             next && next.name === "separator" ? nextIndex + 1 : nextIndex,
+  //             total
+  //           ),
+  //         });
+  //       } else {
+  //         this.close();
+  //       }
+  //     }
 
-    if (event.key === "Escape") {
-      this.close();
-    }
-  };
-
-  insertItem = (item) => {
-    switch (item.name) {
-      case "image":
-        return this.triggerImagePick();
-      case "embed":
-        return this.triggerLinkInput(item);
-      case "link": {
-        this.clearSearch();
-        this.props.onClose();
-        this.props.onLinkToolbarOpen();
-        return;
-      }
-      default:
-        this.insertBlock(item);
-    }
-  };
+  //     if (event.key === "Escape") {
+  //       this.close();
+  //     }
+  //   };
 
   close = () => {
     this.props.onClose();
     this.props.view.focus();
   };
 
-  handleLinkInputKeydown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!this.props.isActive) return;
-    if (!this.state.insertItem) return;
+  //   handleLinkInputKeydown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  //     if (!this.props.isActive) return;
+  //     if (!this.state.insertItem) return;
 
-    if (event.key === "Enter") {
-      event.preventDefault();
-      event.stopPropagation();
+  //     if (event.key === "Enter") {
+  //       event.preventDefault();
+  //       event.stopPropagation();
 
-      const href = event.currentTarget.value;
-      const matches = this.state.insertItem.matcher(href);
+  //       const href = event.currentTarget.value;
+  //       const matches = this.state.insertItem.matcher(href);
 
-      if (!matches && this.props.onShowToast) {
-        this.props.onShowToast(
-          this.props.dictionary.embedInvalidLink,
-          ToastType.Error
-        );
-        return;
-      }
+  //       if (!matches && this.props.onShowToast) {
+  //         this.props.onShowToast(
+  //           this.props.dictionary.embedInvalidLink,
+  //           ToastType.Error
+  //         );
+  //         return;
+  //       }
 
-      this.insertBlock({
-        name: "embed",
-        attrs: {
-          href,
-          component: this.state.insertItem.component,
-          matches,
-        },
-      });
-    }
+  //       this.insertBlock({
+  //         name: "embed",
+  //         attrs: {
+  //           href,
+  //           component: this.state.insertItem.component,
+  //           matches,
+  //         },
+  //       });
+  //     }
 
-    if (event.key === "Escape") {
-      this.props.onClose();
-      this.props.view.focus();
-    }
-  };
+  //     if (event.key === "Escape") {
+  //       this.props.onClose();
+  //       this.props.view.focus();
+  //     }
+  //   };
 
-  handleLinkInputPaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
-    if (!this.props.isActive) return;
-    if (!this.state.insertItem) return;
+  //   handleLinkInputPaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
+  //     if (!this.props.isActive) return;
+  //     if (!this.state.insertItem) return;
 
-    const href = event.clipboardData.getData("text/plain");
-    const matches = this.state.insertItem.matcher(href);
+  //     const href = event.clipboardData.getData("text/plain");
+  //     const matches = this.state.insertItem.matcher(href);
 
-    if (matches) {
-      event.preventDefault();
-      event.stopPropagation();
+  //     if (matches) {
+  //       event.preventDefault();
+  //       event.stopPropagation();
 
-      this.insertBlock({
-        name: "embed",
-        attrs: {
-          href,
-          component: this.state.insertItem.component,
-          matches,
-        },
-      });
-    }
-  };
+  //       this.insertBlock({
+  //         name: "embed",
+  //         attrs: {
+  //           href,
+  //           component: this.state.insertItem.component,
+  //           matches,
+  //         },
+  //       });
+  //     }
+  //   };
 
-  triggerImagePick = () => {
-    if (this.inputRef.current) {
-      this.inputRef.current.click();
-    }
-  };
+  //   triggerImagePick = () => {
+  //     if (this.inputRef.current) {
+  //       this.inputRef.current.click();
+  //     }
+  //   };
 
-  triggerLinkInput = (item) => {
-    this.setState({ insertItem: item });
-  };
+  //   triggerLinkInput = (item) => {
+  //     this.setState({ insertItem: item });
+  //   };
 
-  handleImagePicked = (event) => {
-    const files = getDataTransferFiles(event);
+  //   handleImagePicked = (event) => {
+  //     const files = getDataTransferFiles(event);
 
-    const {
-      view,
-      uploadImage,
-      onImageUploadStart,
-      onImageUploadStop,
-      onShowToast,
-    } = this.props;
-    const { state, dispatch } = view;
-    const parent = findParentNode((node) => !!node)(state.selection);
+  //     const {
+  //       view,
+  //       uploadImage,
+  //       onImageUploadStart,
+  //       onImageUploadStop,
+  //       onShowToast,
+  //     } = this.props;
+  //     const { state, dispatch } = view;
+  //     const parent = findParentNode((node) => !!node)(state.selection);
 
-    if (parent) {
-      // dispatch(
-      //   state.tr.insertText(
-      //     "",
-      //     parent.pos,
-      //     parent.pos + parent.node.textContent.length + 1
-      //   )
-      // );
+  //     if (parent) {
+  //       dispatch(
+  //         state.tr.insertText(
+  //           "",
+  //           parent.pos,
+  //           parent.pos + parent.node.textContent.length + 1
+  //         )
+  //       );
 
-      console.log("On handle Image Picked");
+  //       insertFiles(view, event, parent.pos, files, {
+  //         uploadImage,
+  //         onImageUploadStart,
+  //         onImageUploadStop,
+  //         onShowToast,
+  //         dictionary: this.props.dictionary,
+  //       });
+  //     }
 
-      // insertFiles(view, event, parent.pos, files, {
-      //   uploadImage,
-      //   onImageUploadStart,
-      //   onImageUploadStop,
-      //   onShowToast,
-      //   dictionary: this.props.dictionary,
-      // });
-    }
+  //     if (this.inputRef.current) {
+  //       this.inputRef.current.value = "";
+  //     }
 
-    if (this.inputRef.current) {
-      this.inputRef.current.value = "";
-    }
-
-    this.props.onClose();
-  };
+  //     this.props.onClose();
+  //   };
 
   clearSearch() {
     const { state, dispatch } = this.props.view;
@@ -299,6 +275,7 @@ class BlockMenu extends React.Component<Props, State> {
 
     const command = this.props.commands[item.name];
     if (command) {
+      console.log("Command", command);
       command(item.attrs);
     } else {
       this.props.commands[`create${capitalize(item.name)}`](item.attrs);
@@ -306,6 +283,37 @@ class BlockMenu extends React.Component<Props, State> {
 
     this.props.onClose();
   }
+
+  insertItem = (item) => {
+    const { view } = this.props;
+    const { dispatch, state } = view;
+    const { from, to } = state.selection;
+    // console.log("Insert Item", from, to);
+    dispatch(
+      view.state.tr.insertText("😃", from, to)
+      // .addMark(
+      //   from,
+      //   to + title.length,
+      //   state.schema.marks.link.create({ href })
+      // )
+    );
+    this.props.onClose();
+    // this.insertBlock(item);
+    // switch (item.name) {
+    //   case "image":
+    //     return this.triggerImagePick();
+    //   case "embed":
+    //     return this.triggerLinkInput(item);
+    //   case "link": {
+    //     this.clearSearch();
+    //     this.props.onClose();
+    //     this.props.onLinkToolbarOpen();
+    //     return;
+    //   }
+    //   default:
+    //     this.insertBlock(item);
+    // }
+  };
 
   get caretPosition(): { top: number; left: number } {
     const selection = window.document.getSelection();
@@ -381,65 +389,66 @@ class BlockMenu extends React.Component<Props, State> {
     }
   }
 
-  get filtered() {
-    const { dictionary, embeds, search = "", uploadImage } = this.props;
-    let items: (EmbedDescriptor | MenuItem)[] = getMenuItems(dictionary);
-    const embedItems: EmbedDescriptor[] = [];
+  //   get filtered() {
+  //     const { dictionary, embeds, search = "", uploadImage } = this.props;
+  //     let items: (EmbedDescriptor | MenuItem)[] = getMenuItems(dictionary);
+  //     const embedItems: EmbedDescriptor[] = [];
 
-    for (const embed of embeds) {
-      if (embed.title && embed.icon) {
-        embedItems.push({
-          ...embed,
-          name: "embed",
-        });
-      }
-    }
+  //     for (const embed of embeds) {
+  //       if (embed.title && embed.icon) {
+  //         embedItems.push({
+  //           ...embed,
+  //           name: "embed",
+  //         });
+  //       }
+  //     }
 
-    if (embedItems.length) {
-      items.push({
-        name: "separator",
-      });
-      items = items.concat(embedItems);
-    }
+  //     if (embedItems.length) {
+  //       items.push({
+  //         name: "separator",
+  //       });
+  //       items = items.concat(embedItems);
+  //     }
 
-    const filtered = items.filter((item) => {
-      if (item.name === "separator") return true;
+  //     const filtered = items.filter((item) => {
+  //       if (item.name === "separator") return true;
 
-      // If no image upload callback has been passed, filter the image block out
-      if (!uploadImage && item.name === "image") return false;
+  //       // If no image upload callback has been passed, filter the image block out
+  //       if (!uploadImage && item.name === "image") return false;
 
-      const n = search.toLowerCase();
-      return (
-        (item.title || "").toLowerCase().includes(n) ||
-        (item.keywords || "").toLowerCase().includes(n)
-      );
-    });
+  //       const n = search.toLowerCase();
+  //       return (
+  //         (item.title || "").toLowerCase().includes(n) ||
+  //         (item.keywords || "").toLowerCase().includes(n)
+  //       );
+  //     });
 
-    // this block literally just trims unneccessary separators from the results
-    return filtered.reduce((acc, item, index) => {
-      // trim separators from start / end
-      if (item.name === "separator" && index === 0) return acc;
-      if (item.name === "separator" && index === filtered.length - 1)
-        return acc;
+  //     // this block literally just trims unneccessary separators from the results
+  //     return filtered.reduce((acc, item, index) => {
+  //       // trim separators from start / end
+  //       if (item.name === "separator" && index === 0) return acc;
+  //       if (item.name === "separator" && index === filtered.length - 1)
+  //         return acc;
 
-      // trim double separators looking ahead / behind
-      const prev = filtered[index - 1];
-      if (prev && prev.name === "separator" && item.name === "separator")
-        return acc;
+  //       // trim double separators looking ahead / behind
+  //       const prev = filtered[index - 1];
+  //       if (prev && prev.name === "separator" && item.name === "separator")
+  //         return acc;
 
-      const next = filtered[index + 1];
-      if (next && next.name === "separator" && item.name === "separator")
-        return acc;
+  //       const next = filtered[index + 1];
+  //       if (next && next.name === "separator" && item.name === "separator")
+  //         return acc;
 
-      // otherwise, continue
-      return [...acc, item];
-    }, []);
-  }
+  //       // otherwise, continue
+  //       return [...acc, item];
+  //     }, []);
+  //   }
 
   render() {
     const { dictionary, isActive, uploadImage } = this.props;
-    const items = this.filtered;
+    // const items = this.filtered;
     const { insertItem, ...positioning } = this.state;
+    const items: (EmbedDescriptor | MenuItem)[] = getMenuItems(dictionary);
     return (
       <Portal>
         <Wrapper
@@ -448,7 +457,22 @@ class BlockMenu extends React.Component<Props, State> {
           ref={this.menuRef}
           {...positioning}
         >
-          {insertItem ? (
+          <div style={{ marginTop: "10px", height: "inherit" }}>
+            <div
+              style={{ marginBottom: "5px", height: "20px" }}
+              onClick={() => this.insertItem(items[19])}
+            >
+              😀
+            </div>
+            <div style={{ marginBottom: "5px", height: "20px" }}>😃</div>
+            <div style={{ marginBottom: "5px", height: "20px" }}>😄</div>
+            <div style={{ marginBottom: "5px", height: "20px" }}>😁</div>
+            <div style={{ marginBottom: "5px", height: "20px" }}>😆</div>
+            <div style={{ marginBottom: "5px", height: "20px" }}>😅</div>
+            <div style={{ marginBottom: "5px", height: "20px" }}>😂</div>
+            <div style={{ marginBottom: "5px", height: "20px" }}>🤣</div>
+          </div>
+          {/* {insertItem ? (
             <LinkInputWrapper>
               <LinkInput
                 type="text"
@@ -496,8 +520,8 @@ class BlockMenu extends React.Component<Props, State> {
                 </ListItem>
               )}
             </List>
-          )}
-          {uploadImage && (
+          )} */}
+          {/* {uploadImage && (
             <VisuallyHidden>
               <input
                 type="file"
@@ -506,7 +530,7 @@ class BlockMenu extends React.Component<Props, State> {
                 accept="image/*"
               />
             </VisuallyHidden>
-          )}
+          )} */}
         </Wrapper>
       </Portal>
     );
@@ -596,6 +620,7 @@ export const Wrapper = styled.div<{
     transform: translateY(${isAbove ? "6px" : "-6px"}) scale(1);
     pointer-events: all;
     opacity: 1;
+    min-height: 100px
   `};
 
   @media print {
@@ -603,4 +628,4 @@ export const Wrapper = styled.div<{
   }
 `;
 
-export default BlockMenu;
+export default EmojiPopup;

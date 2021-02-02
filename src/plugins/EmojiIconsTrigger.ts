@@ -6,9 +6,9 @@ import { Decoration, DecorationSet } from "prosemirror-view";
 import Extension from "../lib/Extension";
 
 const MAX_MATCH = 500;
-const OPEN_REGEX = /\/(\w+)?$/;
+const OPEN_REGEX = /:(\w+)?$/;
 //const CLOSE_REGEX = /(^(?!\/(\w+)?)(.*)$|^\/((\w+)\s.*|\s)$)/;
-const CLOSE_REGEX = /(^(?!\/(\w+)?)(.*)[^\/]$|^\/((\w+)\s.*[^\/]|\s|\s.*[^\/])$)/;
+const CLOSE_REGEX = /(^(?!:(\w+)?)(.*)[^:]$|^:((\w+)\s.*[^:]|\s|\s.*[^:])$)/;
 
 // based on the input rules code in Prosemirror, here:
 // https://github.com/ProseMirror/prosemirror-inputrules/blob/master/src/inputrules.js
@@ -35,9 +35,9 @@ function run(view, from, to, regex, handler) {
   return true;
 }
 
-export default class BlockMenuTrigger extends Extension {
+export default class EmojiIcons extends Extension {
   get name() {
-    return "blockmenu";
+    return "emojiicons";
   }
 
   get plugins() {
@@ -70,81 +70,81 @@ export default class BlockMenuTrigger extends Extension {
 
             // If the query is active and we're navigating the block menu then
             // just ignore the key events in the editor itself until we're done
-            if (
-              event.key === "Enter" ||
-              event.key === "ArrowUp" ||
-              event.key === "ArrowDown" ||
-              event.key === "Tab"
-            ) {
-              const { pos } = view.state.selection.$from;
+            // if (
+            //   event.key === "Enter" ||
+            //   event.key === "ArrowUp" ||
+            //   event.key === "ArrowDown" ||
+            //   event.key === "Tab"
+            // ) {
+            //   const { pos } = view.state.selection.$from;
 
-              return run(view, pos, pos, OPEN_REGEX, (state, match) => {
-                // just tell Prosemirror we handled it and not to do anything
-                return match ? true : null;
-              });
-            }
+            //   return run(view, pos, pos, OPEN_REGEX, (state, match) => {
+            //     // just tell Prosemirror we handled it and not to do anything
+            //     return match ? true : null;
+            //   });
+            // }
 
             return false;
           },
-          decorations: (state) => {
-            const parent = findParentNode(
-              (node) => node.type.name === "paragraph"
-            )(state.selection);
+          // decorations: (state) => {
+          //   const parent = findParentNode(
+          //     (node) => node.type.name === "paragraph"
+          //   )(state.selection);
 
-            if (!parent) {
-              return;
-            }
+          //   if (!parent) {
+          //     return;
+          //   }
 
-            const decorations: Decoration[] = [];
-            const isEmpty = parent && parent.node.content.size === 0;
-            const isSlash = parent && parent.node.textContent === "/";
-            const isTopLevel = state.selection.$from.depth === 1;
+          //   const decorations: Decoration[] = [];
+          //   const isEmpty = parent && parent.node.content.size === 0;
+          //   const isEmoji = parent && parent.node.textContent === ":";
+          //   const isTopLevel = state.selection.$from.depth === 1;
 
-            if (isTopLevel) {
-              if (isEmpty) {
-                decorations.push(
-                  Decoration.widget(parent.pos, () => {
-                    const icon = document.createElement("button");
-                    icon.type = "button";
-                    icon.className = "block-menu-trigger";
-                    icon.innerText = "+";
-                    icon.addEventListener("click", () => {
-                      this.options.onOpen("");
-                    });
-                    return icon;
-                  })
-                );
+          //   if (isTopLevel) {
+          //     if (isEmpty) {
+          //       decorations.push(
+          //         Decoration.widget(parent.pos, () => {
+          //           const icon = document.createElement("button");
+          //           icon.type = "button";
+          //           icon.className = "block-menu-trigger";
+          //           icon.innerText = "+";
+          //           icon.addEventListener("click", () => {
+          //             this.options.onOpen("");
+          //           });
+          //           return icon;
+          //         })
+          //       );
 
-                decorations.push(
-                  Decoration.node(
-                    parent.pos,
-                    parent.pos + parent.node.nodeSize,
-                    {
-                      class: "placeholder",
-                      "data-empty-text": this.options.dictionary.newLineEmpty,
-                    }
-                  )
-                );
-              }
+          //       decorations.push(
+          //         Decoration.node(
+          //           parent.pos,
+          //           parent.pos + parent.node.nodeSize,
+          //           {
+          //             class: "placeholder",
+          //             "data-empty-text": this.options.dictionary.newLineEmpty,
+          //           }
+          //         )
+          //       );
+          //     }
 
-              if (isSlash) {
-                decorations.push(
-                  Decoration.node(
-                    parent.pos,
-                    parent.pos + parent.node.nodeSize,
-                    {
-                      class: "placeholder",
-                      "data-empty-text": `  ${this.options.dictionary.newLineWithSlash}`,
-                    }
-                  )
-                );
-              }
+          //     if (isSlash) {
+          //       decorations.push(
+          //         Decoration.node(
+          //           parent.pos,
+          //           parent.pos + parent.node.nodeSize,
+          //           {
+          //             class: "placeholder",
+          //             "data-empty-text": `  ${this.options.dictionary.newLineWithSlash}`,
+          //           }
+          //         )
+          //       );
+          //     }
 
-              return DecorationSet.create(state.doc, decorations);
-            }
+          //     return DecorationSet.create(state.doc, decorations);
+          //   }
 
-            return;
-          },
+          //   return;
+          // },
         },
       }),
     ];
@@ -155,11 +155,7 @@ export default class BlockMenuTrigger extends Extension {
       // main regex should match only:
       // /word
       new InputRule(OPEN_REGEX, (state, match) => {
-        if (
-          match &&
-          state.selection.$from.parent.type.name === "paragraph" &&
-          !isInTable(state)
-        ) {
+        if (match && !isInTable(state)) {
           this.options.onOpen(match[1]);
         }
         return null;
