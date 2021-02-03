@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "copy-to-clipboard": "^3.0.8",
-    "core-js": "^2.6.5",
+    "core-js": "^3.8.3",
     "lodash": "^4.17.11",
     "markdown-it-container": "^3.0.0",
     "outline-icons": "^1.23.0",
