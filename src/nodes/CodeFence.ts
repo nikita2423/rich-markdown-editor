@@ -69,13 +69,15 @@ export default class CodeFence extends Node {
           preserveWhitespace: "full",
           contentElement: "code",
           getAttrs: (dom: HTMLDivElement) => {
+            console.log("Code aprse Doem");
             return {
               language: dom.dataset.language,
             };
           },
         },
       ],
-      toDOM: node => {
+      toDOM: (node) => {
+        console.log("code To Rom gettinf called");
         const button = document.createElement("button");
         button.innerText = "Copy";
         button.type = "button";
@@ -125,7 +127,7 @@ export default class CodeFence extends Node {
     };
   }
 
-  handleLanguageChange = event => {
+  handleLanguageChange = (event) => {
     const { view } = this.editor;
     const { tr } = view.state;
     const element = event.target;
@@ -168,7 +170,7 @@ export default class CodeFence extends Node {
   parseMarkdown() {
     return {
       block: "code_block",
-      getAttrs: tok => ({ language: tok.info }),
+      getAttrs: (tok) => ({ language: tok.info }),
     };
   }
 }

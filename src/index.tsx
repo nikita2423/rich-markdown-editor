@@ -12,6 +12,7 @@ import { keymap } from "prosemirror-keymap";
 import { baseKeymap } from "prosemirror-commands";
 import { selectColumn, selectRow, selectTable } from "prosemirror-utils";
 import styled, { ThemeProvider } from "styled-components";
+import { getMentionsPlugin } from "prosemirror-mentions";
 
 import { light as lightTheme, dark as darkTheme } from "./theme";
 import baseDictionary from "./dictionary";
@@ -33,6 +34,7 @@ import ReactNode from "./nodes/ReactNode";
 import Doc from "./nodes/Doc";
 import Text from "./nodes/Text";
 import Emoji from "./nodes/Emoji";
+import Mention from "./nodes/Mention";
 import Blockquote from "./nodes/Blockquote";
 import BulletList from "./nodes/BulletList";
 import CodeBlock from "./nodes/CodeBlock";
@@ -232,6 +234,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
         new Doc(),
         new Text(),
         new Emoji(),
+        new Mention(),
         new HardBreak(),
         new Paragraph(),
         new Blockquote(),
@@ -386,9 +389,50 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
     });
   }
 
+  /**
+   * IMPORTANT: outer div's "suggestion-item-list" class is mandatory. The plugin uses this class for querying.
+   * IMPORTANT: inner div's "suggestion-item" class is mandatory too for the same reasons
+   */
+  getMentionSuggestionsHTML = (items) => {
+    return (
+      // <StyledMention>
+      //   {items.map((i) => <div className="suggestion-item">{i.name}
+      //   </div>)}
+      // </StyledMention>
+      '<div class="suggestion-item-list">' +
+      items
+        .map((i) => '<div class="suggestion-item">' + i.name + "</div>")
+        .join("") +
+      "</div>"
+    );
+  };
+
+  importMentionPlugin = () => {
+    return getMentionsPlugin({
+      getSuggestions: (type, text, done) => {
+        setTimeout(() => {
+          if (type === "mention") {
+            // pass dummy mention suggestions
+            done([
+              { name: "John Doe", id: "101", email: "joe@gmail.com" },
+              { name: "Joe Lewis", id: "102", email: "lewis@gmail.com" },
+            ]);
+          }
+        }, 0);
+      },
+      getSuggestionsHTML: (items, type) => {
+        if (type === "mention") {
+          return this.getMentionSuggestionsHTML(items);
+        }
+      },
+    });
+  };
+
   createState(value?: string) {
     const doc = this.createDocument(value || this.props.defaultValue);
-
+    if (this.plugins) {
+      this.plugins.unshift(this.importMentionPlugin());
+    }
     return EditorState.create({
       schema: this.schema,
       doc,
@@ -674,6 +718,18 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
     );
   };
 }
+
+const StyledMention = styled("div")`
+  z-index: 200;
+  background: white;
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 1px 5px;
+  padding: 5px;
+
+  .suggestion-item {
+    marginbottom: 5px;
+  }
+`;
 
 const StyledEditor = styled("div")<{
   readOnly?: boolean;
