@@ -164,8 +164,10 @@ class BlockMenu extends React.Component<Props, State> {
         return;
       }
       case "emoji": {
-        console.log("Emoji Getting called");
         return this.handleEmojiClick();
+      }
+      case "mention": {
+        return this.handleMentionClick();
       }
       default:
         this.insertBlock(item);
@@ -187,6 +189,15 @@ class BlockMenu extends React.Component<Props, State> {
     if (onOpenEmoji) {
       onOpenEmoji();
     }
+  };
+
+  handleMentionClick = () => {
+    const { view } = this.props;
+    const { dispatch, state } = view;
+    const { from, to } = state.selection;
+    const mentionText = `@`;
+    dispatch(view.state.tr.insertText(mentionText, from - 1, to));
+    this.close();
   };
 
   handleLinkInputKeydown = (event: React.KeyboardEvent<HTMLInputElement>) => {
