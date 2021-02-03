@@ -12,7 +12,7 @@
     "start": "webpack-serve --config example/webpack.config.js",
     "build": "tsc",
     "prepublish": "yarn build",
-    "postinstall": "cd ./node_modules/duework-editor && npm install && npm run build"
+    "postinstall": "cd ./node_modules/duework-editor && yarn install && yarn run build"
   },
   "serve": {
     "open": true,
