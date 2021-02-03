@@ -11,7 +11,8 @@
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet",
     "start": "webpack-serve --config example/webpack.config.js",
     "build": "tsc",
-    "prepublish": "yarn build"
+    "prepublish": "yarn build",
+    "postinstall": "cd ./node_modules/duework-editor && npm install && npm run build"
   },
   "serve": {
     "open": true,
