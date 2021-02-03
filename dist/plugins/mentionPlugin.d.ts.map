@@ -1,0 +1,1 @@
+{"version":3,"file":"mentionPlugin.d.ts","sourceRoot":"","sources":["../../src/plugins/mentionPlugin.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAa,MAAM,mBAAmB,CAAC;AAUtD,wBAAgB,SAAS,CAAC,cAAc,KAAA,EAAE,cAAc,KAAA,EAAE,UAAU,KAAA;;;EAYnE;AAQD,wBAAgB,QAAQ,CAAC,SAAS,KAAA,EAAE,IAAI,KAAA;;;;;;;cA+CvC;AAMD,eAAO,MAAM,QAAQ,iDAWjB,CAAC;AAoBL,wBAAgB,iBAAiB,CAAC,IAAI,KAAA,oBA4PrC"}
