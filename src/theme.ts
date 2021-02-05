@@ -23,7 +23,7 @@ export const base = {
   zIndex: 100,
   link: colors.primary,
   placeholder: "#B1BECC",
-  textSecondary: "#4E5C6E",
+  textSecondary: "#bbb",
   textLight: colors.white,
   textHighlight: "#b3e7ff",
   textHighlightForeground: colors.black,
@@ -45,7 +45,7 @@ export const base = {
   codeImportant: "#c94922",
 
   blockToolbarBackground: colors.white,
-  blockToolbarTrigger: colors.greyMid,
+  blockToolbarTrigger: colors.greyLight,
   blockToolbarTriggerIcon: colors.white,
   blockToolbarItem: colors.almostBlack,
   blockToolbarText: colors.almostBlack,

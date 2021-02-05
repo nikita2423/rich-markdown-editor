@@ -24,12 +24,12 @@ function BlockMenuItem({
   const Icon = icon;
 
   const ref = React.useCallback(
-    node => {
+    (node) => {
       if (selected && node) {
         scrollIntoView(node, {
           scrollMode: "if-needed",
           block: "center",
-          boundary: parent => {
+          boundary: (parent) => {
             // All the parent elements of your target are checked until they
             // reach the #block-menu-container. Prevents body and other parent
             // elements from being scrolled
@@ -47,9 +47,23 @@ function BlockMenuItem({
       onClick={disabled ? undefined : onClick}
       ref={ref}
     >
-      <Icon color={selected ? theme.black : undefined} />
-      &nbsp;&nbsp;{title}
-      <Shortcut>{shortcut}</Shortcut>
+      <div className="icon-container">
+        <Icon
+          color={selected ? theme.black : undefined}
+          style={{ width: "19px", height: "auto" }}
+        />
+      </div>
+      <div className="text-container">
+        {/* &nbsp;&nbsp; */}
+        <div style={{ textAlign: "left" }}>
+          <div>{title}</div>
+          <div style={{ color: "#aaa", fontSize: "12px", marginTop: "4px" }}>
+            Start writing your new idea or topic.
+          </div>
+        </div>
+
+        <Shortcut>{shortcut}</Shortcut>
+      </div>
     </MenuItem>
   );
 }
@@ -64,29 +78,49 @@ const MenuItem = styled.button<{
   font-size: 14px;
   line-height: 1;
   width: 100%;
-  height: 36px;
   cursor: pointer;
   border: none;
-  opacity: ${props => (props.disabled ? ".5" : "1")};
-  color: ${props =>
+  opacity: ${(props) => (props.disabled ? ".5" : "1")};
+  color: ${(props) =>
     props.selected ? props.theme.black : props.theme.blockToolbarText};
-  background: ${props =>
+  background: ${(props) =>
     props.selected ? props.theme.blockToolbarTrigger : "none"};
   padding: 0 16px;
   outline: none;
+  padding: 0px 21px;
 
   &:hover,
   &:active {
-    color: ${props => props.theme.black};
-    background: ${props =>
+    color: ${(props) => props.theme.black};
+    background: ${(props) =>
       props.selected
         ? props.theme.blockToolbarTrigger
         : props.theme.blockToolbarHoverBackground};
   }
+
+  .icon-container {
+    min-width: 44px;
+    height: 44px;
+    border: 1px solid #eeeeee;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 9px 0px;
+  }
+
+  .text-container {
+    display: flex;
+    align-items: center;
+    height: 62px;
+    border-bottom: 1px solid #f5f5f5;
+    width: 100%;
+    margin-left: 15px;
+  }
 `;
 
 const Shortcut = styled.span`
-  color: ${props => props.theme.textSecondary};
+  color: ${(props) => props.theme.textSecondary};
   flex-grow: 1;
   text-align: right;
 `;

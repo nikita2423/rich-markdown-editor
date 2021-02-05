@@ -494,13 +494,13 @@ class BlockMenu extends React.Component<Props, State> {
           ) : (
             <List>
               {items.map((item, index) => {
-                if (item.name === "separator") {
-                  return (
-                    <ListItem key={index}>
-                      <hr />
-                    </ListItem>
-                  );
-                }
+                // if (item.name === "separator") {
+                //   return (
+                //     <ListItem key={index}>
+                //       <hr />
+                //     </ListItem>
+                //   );
+                // }
                 const selected = index === this.state.selectedIndex && isActive;
 
                 if (!item.title || !item.icon) {
@@ -604,8 +604,8 @@ export const Wrapper = styled.div<{
   box-sizing: border-box;
   pointer-events: none;
   white-space: nowrap;
-  width: 300px;
-  max-height: 224px;
+  width: 355px;
+  max-height: 336px;
   overflow: hidden;
   overflow-y: auto;
 

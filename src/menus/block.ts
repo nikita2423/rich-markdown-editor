@@ -69,9 +69,9 @@ export default function blockMenuItems(
       shortcut: "^ ⇧ 3",
       attrs: { level: 3 },
     },
-    {
-      name: "separator",
-    },
+    // {
+    //   name: "separator",
+    // },
     {
       name: "checkbox_list",
       title: dictionary.checkboxList,
@@ -91,9 +91,9 @@ export default function blockMenuItems(
       icon: OrderedListIcon,
       shortcut: "^ ⇧ 9",
     },
-    {
-      name: "separator",
-    },
+    // {
+    //   name: "separator",
+    // },
     {
       name: "table",
       title: dictionary.table,
@@ -133,9 +133,9 @@ export default function blockMenuItems(
       shortcut: `${mod} k`,
       keywords: "link url uri href",
     },
-    {
-      name: "separator",
-    },
+    // {
+    //   name: "separator",
+    // },
     {
       name: "container_notice",
       title: dictionary.infoNotice,
@@ -157,9 +157,9 @@ export default function blockMenuItems(
       keywords: "container_notice card suggestion",
       attrs: { style: "tip" },
     },
-    {
-      name: "separator",
-    },
+    // {
+    //   name: "separator",
+    // },
     {
       name: "emoji",
       title: dictionary.emoji,
