@@ -1,9 +1,15 @@
-import {
-  TrashIcon,
-  AlignImageLeftIcon,
-  AlignImageRightIcon,
-  AlignImageCenterIcon,
-} from "outline-icons";
+// import {
+//   TrashIcon,
+//   AlignImageLeftIcon,
+//   AlignImageRightIcon,
+//   AlignImageCenterIcon,
+// } from "outline-icons";
+
+import TrashIcon from "../icons/PlusIcon";
+import AlignImageLeftIcon from "../icons/PlusIcon";
+import AlignImageRightIcon from "../icons/PlusIcon";
+import AlignImageCenterIcon from "../icons/PlusIcon";
+
 import isNodeActive from "../queries/isNodeActive";
 import { MenuItem } from "../types";
 import baseDictionary from "../dictionary";
@@ -34,7 +40,7 @@ export default function imageMenuItems(
       tooltip: dictionary.alignCenter,
       icon: AlignImageCenterIcon,
       visible: true,
-      active: state =>
+      active: (state) =>
         isNodeActive(schema.nodes.image)(state) &&
         !isLeftAligned(state) &&
         !isRightAligned(state),

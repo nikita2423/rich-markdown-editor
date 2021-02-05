@@ -1,11 +1,19 @@
-import {
-  TrashIcon,
-  AlignLeftIcon,
-  AlignRightIcon,
-  AlignCenterIcon,
-  InsertLeftIcon,
-  InsertRightIcon,
-} from "outline-icons";
+// import {
+//   TrashIcon,
+//   AlignLeftIcon,
+//   AlignRightIcon,
+//   AlignCenterIcon,
+//   InsertLeftIcon,
+//   InsertRightIcon,
+// } from "outline-icons";
+
+import TrashIcon from "../icons/PlusIcon";
+import AlignLeftIcon from "../icons/PlusIcon";
+import AlignRightIcon from "../icons/PlusIcon";
+import AlignCenterIcon from "../icons/PlusIcon";
+import InsertLeftIcon from "../icons/PlusIcon";
+import InsertRightIcon from "../icons/PlusIcon";
+
 import { EditorState } from "prosemirror-state";
 import isNodeActive from "../queries/isNodeActive";
 import { MenuItem } from "../types";

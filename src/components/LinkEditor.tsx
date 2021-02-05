@@ -2,13 +2,19 @@ import * as React from "react";
 import { setTextSelection } from "prosemirror-utils";
 import { EditorView } from "prosemirror-view";
 import { Mark } from "prosemirror-model";
-import {
-  DocumentIcon,
-  CloseIcon,
-  PlusIcon,
-  TrashIcon,
-  OpenIcon,
-} from "outline-icons";
+// import {
+//   DocumentIcon,
+//   CloseIcon,
+//   PlusIcon,
+//   TrashIcon,
+//   OpenIcon,
+// } from "outline-icons";
+import PlusIcon from "../icons/PlusIcon";
+import DocumentIcon from "../icons/PlusIcon";
+import CloseIcon from "../icons/PlusIcon";
+import TrashIcon from "../icons/PlusIcon";
+import OpenIcon from "../icons/PlusIcon";
+
 import styled, { withTheme } from "styled-components";
 import isUrl from "../lib/isUrl";
 import theme from "../theme";
@@ -203,7 +209,7 @@ class LinkEditor extends React.Component<Props, State> {
     if (trimmedValue && this.props.onSearchLink) {
       try {
         const results = await this.props.onSearchLink(trimmedValue);
-        this.setState(state => ({
+        this.setState((state) => ({
           results: {
             ...state.results,
             [trimmedValue]: results,
@@ -248,7 +254,7 @@ class LinkEditor extends React.Component<Props, State> {
     view.focus();
   };
 
-  handleSelectLink = (url: string, title: string) => event => {
+  handleSelectLink = (url: string, title: string) => (event) => {
     event.preventDefault();
     this.save(url, title);
 
@@ -360,7 +366,7 @@ const Wrapper = styled(Flex)`
 `;
 
 const SearchResults = styled.ol`
-  background: ${props => props.theme.toolbarBackground};
+  background: ${(props) => props.theme.toolbarBackground};
   position: absolute;
   top: 100%;
   width: 100%;

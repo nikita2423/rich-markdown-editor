@@ -1,5 +1,10 @@
 import { EditorState } from "prosemirror-state";
-import { TrashIcon, InsertAboveIcon, InsertBelowIcon } from "outline-icons";
+// import { TrashIcon, InsertAboveIcon, InsertBelowIcon } from "outline-icons";
+
+import TrashIcon from "../icons/PlusIcon";
+import InsertAboveIcon from "../icons/PlusIcon";
+import InsertBelowIcon from "../icons/PlusIcon";
+
 import { MenuItem } from "../types";
 import baseDictionary from "../dictionary";
 

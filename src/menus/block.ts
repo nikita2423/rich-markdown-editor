@@ -1,23 +1,42 @@
-import {
-  BlockQuoteIcon,
-  BulletedListIcon,
-  CodeIcon,
-  Heading1Icon,
-  Heading2Icon,
-  Heading3Icon,
-  HorizontalRuleIcon,
-  OrderedListIcon,
-  TableIcon,
-  TodoListIcon,
-  ImageIcon,
-  StarredIcon,
-  WarningIcon,
-  InfoIcon,
-  LinkIcon,
-} from "outline-icons";
+// import {
+//   BlockQuoteIcon,
+//   BulletedListIcon,
+//   CodeIcon,
+//   Heading1Icon,
+//   Heading2Icon,
+//   Heading3Icon,
+//   HorizontalRuleIcon,
+//   OrderedListIcon,
+//   TableIcon,
+//   TodoListIcon,
+//   ImageIcon,
+//   StarredIcon,
+//   WarningIcon,
+//   InfoIcon,
+//   LinkIcon,
+// } from "outline-icons";
+import Heading1Icon from "../icons/H1Icon";
+import Heading2Icon from "../icons/H2Icon";
+import Heading3Icon from "../icons/H3Icon";
+import TodoListIcon from "../icons/CheckListIcon";
+import BulletedListIcon from "../icons/BulletIcon";
+import OrderedListIcon from "../icons/OrderedIcon";
+import TableIcon from "../icons/TableIcon";
+import BlockQuoteIcon from "../icons/QuoteIcon";
+import CodeIcon from "../icons/CodeBlockIcon";
+import HorizontalRuleIcon from "../icons/DividerIcon";
+import ImageIcon from "../icons/ImageIcon";
+import LinkIcon from "../icons/LinkIcon";
+import InfoIcon from "../icons/InfoHintIcon";
+import WarningIcon from "../icons/WarningIcon";
+import StarredIcon from "../icons/BasicIcon";
+import EmojiIcon from "../icons/EmojiIcon";
+import MentionIcon from "../icons/MentionIcon";
+import DangerIcon from "../icons/DangerIcon";
+import SuccessIcon from "../icons/SuccessIcon";
+
 import { MenuItem } from "../types";
 import baseDictionary from "../dictionary";
-
 const SSR = typeof window === "undefined";
 const isMac = !SSR && window.navigator.platform === "MacIntel";
 const mod = isMac ? "⌘" : "ctrl";
@@ -144,13 +163,13 @@ export default function blockMenuItems(
     {
       name: "emoji",
       title: dictionary.emoji,
-      icon: BlockQuoteIcon,
+      icon: EmojiIcon,
       shortcut: `:`,
     },
     {
       name: "mention",
       title: dictionary.mention,
-      icon: BlockQuoteIcon,
+      icon: MentionIcon,
       shortcut: `@`,
     },
   ];

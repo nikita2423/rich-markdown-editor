@@ -1,4 +1,6 @@
-import { TrashIcon } from "outline-icons";
+// import { TrashIcon } from "outline-icons";
+import TrashIcon from "../icons/PlusIcon";
+
 import { MenuItem } from "../types";
 import baseDictionary from "../dictionary";
 

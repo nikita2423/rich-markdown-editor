@@ -1,9 +1,13 @@
 import { wrappingInputRule } from "prosemirror-inputrules";
 import toggleWrap from "../commands/toggleWrap";
-import { WarningIcon, InfoIcon, StarredIcon } from "outline-icons";
+// import { WarningIcon, InfoIcon, StarredIcon } from "outline-icons";
 import * as React from "react";
 import ReactDOM from "react-dom";
 import Node from "./Node";
+
+import WarningIcon from "../icons/WarningIcon";
+import InfoIcon from "../icons/InfoHintIcon";
+import StarredIcon from "../icons/BasicIcon";
 
 export default class Notice extends Node {
   get styleOptions() {
@@ -43,7 +47,7 @@ export default class Notice extends Node {
           }),
         },
       ],
-      toDOM: node => {
+      toDOM: (node) => {
         const select = document.createElement("select");
         select.addEventListener("change", this.handleStyleChange);
 
@@ -81,10 +85,10 @@ export default class Notice extends Node {
   }
 
   commands({ type }) {
-    return attrs => toggleWrap(type, attrs);
+    return (attrs) => toggleWrap(type, attrs);
   }
 
-  handleStyleChange = event => {
+  handleStyleChange = (event) => {
     const { view } = this.editor;
     const { tr } = view.state;
     const element = event.target;
@@ -114,7 +118,7 @@ export default class Notice extends Node {
   parseMarkdown() {
     return {
       block: "container_notice",
-      getAttrs: tok => ({ style: tok.info }),
+      getAttrs: (tok) => ({ style: tok.info }),
     };
   }
 }
