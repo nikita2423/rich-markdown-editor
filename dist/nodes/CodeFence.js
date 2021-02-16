@@ -100,7 +100,6 @@ class CodeFence extends Node_1.default {
                 },
             ],
             toDOM: (node) => {
-                console.log("code To Rom gettinf called");
                 const button = document.createElement("button");
                 button.innerText = "Copy";
                 button.type = "button";

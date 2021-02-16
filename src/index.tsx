@@ -985,6 +985,10 @@ const StyledEditor = styled("div")<{
     border-radius: 4px;
     padding: 8px 16px;
     margin: 8px 0;
+    border: 1px solid;
+    border-color: ${(props) => props.theme.noticeInfoStroke};
+    border-left-color: ${(props) => props.theme.noticeInfoText};
+    border-left-width: 3px;
 
     a {
       color: ${(props) => props.theme.noticeInfoText};
