@@ -1001,6 +1001,9 @@ const StyledEditor = styled("div")<{
     a:not(.heading-name) {
       text-decoration: underline;
     }
+    p {
+      margin: 0 !important;
+    }
   }
 
   .notice-block .icon {
@@ -1040,6 +1043,7 @@ const StyledEditor = styled("div")<{
     overflow: hidden;
     position: relative;
     margin-top: 15px;
+    margin-bottom: 5px;
 
     &:before {
       content: "";

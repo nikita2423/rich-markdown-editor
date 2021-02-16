@@ -752,6 +752,9 @@ const StyledEditor = styled_components_1.default("div") `
     a:not(.heading-name) {
       text-decoration: underline;
     }
+    p {
+      margin: 0 !important;
+    }
   }
 
   .notice-block .icon {
@@ -791,6 +794,7 @@ const StyledEditor = styled_components_1.default("div") `
     overflow: hidden;
     position: relative;
     margin-top: 15px;
+    margin-bottom: 5px;
 
     &:before {
       content: "";
