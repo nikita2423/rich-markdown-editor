@@ -1024,10 +1024,10 @@ const StyledEditor = styled("div")<{
 
   blockquote {
     margin: 0;
-    padding-left: 1em;
-    font-style: italic;
+    padding-left: 10px;
     overflow: hidden;
     position: relative;
+    margin-top: 15px;
 
     &:before {
       content: "";
