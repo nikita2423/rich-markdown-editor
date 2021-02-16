@@ -15,7 +15,7 @@ const WarningIcon = ({ fill, size, style, className, onClick, id, }) => {
 };
 WarningIcon.defaultProps = {
     fill: "#ff1744",
-    size: "tiny",
+    size: "medium",
     style: {},
     className: null,
     circleClassName: "",

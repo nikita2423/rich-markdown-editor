@@ -46,7 +46,7 @@ const WarningIcon = ({
 
 WarningIcon.defaultProps = {
   fill: "#ff1744",
-  size: "tiny", // mini | tiny | small | medium | large | big | huge | massive
+  size: "medium", // mini | tiny | small | medium | large | big | huge | massive
   style: {},
   className: null,
   circleClassName: "",

@@ -13,7 +13,7 @@ const BasicIcon = ({ fill, size, style, className, onClick, id, }) => {
 };
 BasicIcon.defaultProps = {
     fill: "#ff1744",
-    size: "tiny",
+    size: "medium",
     style: {},
     className: null,
     circleClassName: "",
