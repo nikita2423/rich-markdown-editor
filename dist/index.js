@@ -512,7 +512,6 @@ const StyledMention = styled_components_1.default("div") `
   }
 `;
 const StyledEditor = styled_components_1.default("div") `
-  color: ${(props) => props.theme.text};
   background: ${(props) => props.theme.background};
   font-family: ${(props) => props.theme.fontFamily};
   font-weight: ${(props) => props.theme.fontWeight};
