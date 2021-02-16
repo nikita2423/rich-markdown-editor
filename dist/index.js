@@ -734,7 +734,7 @@ const StyledEditor = styled_components_1.default("div") `
     background: ${(props) => props.theme.noticeInfoBackground};
     color: ${(props) => props.theme.noticeInfoText};
     border-radius: 4px;
-    padding: 8px 16px;
+    padding: 15px 20px;
     margin: 8px 0;
     border: 1px solid;
     border-color: ${(props) => props.theme.noticeInfoStroke};
@@ -756,7 +756,7 @@ const StyledEditor = styled_components_1.default("div") `
     align-self: flex-start;
     margin-right: 4px;
     position: relative;
-    top: 1px;
+    top: 2px;
   }
 
   .notice-block.tip {

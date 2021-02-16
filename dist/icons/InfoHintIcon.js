@@ -13,7 +13,7 @@ const InfoHintIcon = ({ fill, size, style, className, onClick, id, }) => {
 };
 InfoHintIcon.defaultProps = {
     fill: "#ff1744",
-    size: "tiny",
+    size: "medium",
     style: {},
     className: null,
     circleClassName: "",
