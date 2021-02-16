@@ -1,14 +1,19 @@
+import * as React from "react";
 import { InputRule } from "prosemirror-inputrules";
+import ReactDOM from "react-dom";
 import { Plugin } from "prosemirror-state";
 import { isInTable } from "prosemirror-tables";
 import { findParentNode } from "prosemirror-utils";
 import { Decoration, DecorationSet } from "prosemirror-view";
 import Extension from "../lib/Extension";
+import PlusIcon from "../icons/PlusIcon";
 
 const MAX_MATCH = 500;
 const OPEN_REGEX = /\/(\w+)?$/;
 //const CLOSE_REGEX = /(^(?!\/(\w+)?)(.*)$|^\/((\w+)\s.*|\s)$)/;
 const CLOSE_REGEX = /(^(?!\/(\w+)?)(.*)[^\/]$|^\/((\w+)\s.*[^\/]|\s|\s.*[^\/])$)/;
+
+const plusComponent = <PlusIcon style={{ width: "18px", height: "18px" }} />;
 
 // based on the input rules code in Prosemirror, here:
 // https://github.com/ProseMirror/prosemirror-inputrules/blob/master/src/inputrules.js
@@ -104,13 +109,15 @@ export default class BlockMenuTrigger extends Extension {
               if (isEmpty) {
                 decorations.push(
                   Decoration.widget(parent.pos, () => {
-                    const icon = document.createElement("button");
-                    icon.type = "button";
+                    const icon = document.createElement("div");
+                    // icon.type = "button";
                     icon.className = "block-menu-trigger";
-                    icon.innerText = "+";
+                    // icon.innerText = "+";
                     icon.addEventListener("click", () => {
                       this.options.onOpen("");
                     });
+
+                    ReactDOM.render(plusComponent, icon);
                     return icon;
                   })
                 );

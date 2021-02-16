@@ -1,17 +1,28 @@
 "use strict";
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const React = __importStar(require("react"));
 const prosemirror_inputrules_1 = require("prosemirror-inputrules");
+const react_dom_1 = __importDefault(require("react-dom"));
 const prosemirror_state_1 = require("prosemirror-state");
 const prosemirror_tables_1 = require("prosemirror-tables");
 const prosemirror_utils_1 = require("prosemirror-utils");
 const prosemirror_view_1 = require("prosemirror-view");
 const Extension_1 = __importDefault(require("../lib/Extension"));
+const PlusIcon_1 = __importDefault(require("../icons/PlusIcon"));
 const MAX_MATCH = 500;
 const OPEN_REGEX = /\/(\w+)?$/;
 const CLOSE_REGEX = /(^(?!\/(\w+)?)(.*)[^\/]$|^\/((\w+)\s.*[^\/]|\s|\s.*[^\/])$)/;
+const plusComponent = React.createElement(PlusIcon_1.default, { style: { width: "18px", height: "18px" } });
 function run(view, from, to, regex, handler) {
     if (view.composing) {
         return false;
@@ -78,13 +89,12 @@ class BlockMenuTrigger extends Extension_1.default {
                         if (isTopLevel) {
                             if (isEmpty) {
                                 decorations.push(prosemirror_view_1.Decoration.widget(parent.pos, () => {
-                                    const icon = document.createElement("button");
-                                    icon.type = "button";
+                                    const icon = document.createElement("div");
                                     icon.className = "block-menu-trigger";
-                                    icon.innerText = "+";
                                     icon.addEventListener("click", () => {
                                         this.options.onOpen("");
                                     });
+                                    react_dom_1.default.render(plusComponent, icon);
                                     return icon;
                                 }));
                                 decorations.push(prosemirror_view_1.Decoration.node(parent.pos, parent.pos + parent.node.nodeSize, {

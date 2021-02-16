@@ -143,7 +143,7 @@ type Step = {
 class RichMarkdownEditor extends React.PureComponent<Props, State> {
   static defaultProps = {
     defaultValue: "",
-    placeholder: "Write something nice…",
+    placeholder: "Type / to browse options",
     onImageUploadStart: () => {
       // no default behavior
     },
@@ -767,6 +767,10 @@ const StyledEditor = styled("div")<{
   line-height: 1.7em;
   width: 100%;
 
+  .empty-placeholder {
+    padding-top: 10px;
+  }
+
   .ProseMirror {
     position: relative;
     outline: none;
@@ -1069,7 +1073,7 @@ const StyledEditor = styled("div")<{
   }
 
   p {
-    margin: 0;
+    margin: 0 0 5px 0;
   }
 
   a {
@@ -1521,18 +1525,18 @@ const StyledEditor = styled("div")<{
     border-radius: 100%;
     font-size: 1em;
     position: absolute;
-    transform: scale(2);
     transition: color 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
       transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
     outline: none;
     border: 0;
     line-height: 1.2em;
     margin-left: -28px;
+    padding-top: 4px;
 
     &:hover,
     &:focus {
       cursor: pointer;
-      transform: scale(2.25);
+      transform: scale(1.1);
       color: ${(props) => props.theme.text};
     }
   }
