@@ -82,8 +82,10 @@ export declare const theme: {
     noticeInfoText: string;
     noticeInfoStroke: string;
     noticeTipBackground: string;
+    noticeTipStroke: string;
     noticeTipText: string;
     noticeWarningBackground: string;
+    noticeWarningStroke: string;
     noticeWarningText: string;
     almostBlack: string;
     lightBlack: string;
@@ -276,8 +278,10 @@ declare class RichMarkdownEditor extends React.PureComponent<Props, State> {
         noticeInfoText: string;
         noticeInfoStroke: string;
         noticeTipBackground: string;
+        noticeTipStroke: string;
         noticeTipText: string;
         noticeWarningBackground: string;
+        noticeWarningStroke: string;
         noticeWarningText: string;
         almostBlack: string;
         lightBlack: string;

@@ -55,10 +55,12 @@ export const base = {
   noticeInfoBackground: "#CFE2FF",
   noticeInfoText: "#084298",
   noticeInfoStroke: "#B6D4FE",
-  noticeTipBackground: "#9E5CF7",
-  noticeTipText: colors.white,
-  noticeWarningBackground: "#FF5C80",
-  noticeWarningText: colors.white,
+  noticeTipBackground: "#CFF4FC",
+  noticeTipStroke: "#B6EFFB",
+  noticeTipText: "#055160",
+  noticeWarningBackground: "#FFF3CD",
+  noticeWarningStroke: "#FFECB5",
+  noticeWarningText: "#664D03",
 };
 
 export const light = {

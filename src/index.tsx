@@ -1011,6 +1011,8 @@ const StyledEditor = styled("div")<{
   .notice-block.tip {
     background: ${(props) => props.theme.noticeTipBackground};
     color: ${(props) => props.theme.noticeTipText};
+    border-color: ${(props) => props.theme.noticeTipStroke};
+    border-left-color: ${(props) => props.theme.noticeTipText};
 
     a {
       color: ${(props) => props.theme.noticeTipText};
@@ -1020,6 +1022,8 @@ const StyledEditor = styled("div")<{
   .notice-block.warning {
     background: ${(props) => props.theme.noticeWarningBackground};
     color: ${(props) => props.theme.noticeWarningText};
+    border-color: ${(props) => props.theme.noticeWarningStroke};
+    border-left-color: ${(props) => props.theme.noticeWarningText};
 
     a {
       color: ${(props) => props.theme.noticeWarningText};

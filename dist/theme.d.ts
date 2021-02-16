@@ -36,8 +36,10 @@ export declare const base: {
     noticeInfoText: string;
     noticeInfoStroke: string;
     noticeTipBackground: string;
+    noticeTipStroke: string;
     noticeTipText: string;
     noticeWarningBackground: string;
+    noticeWarningStroke: string;
     noticeWarningText: string;
     almostBlack: string;
     lightBlack: string;
@@ -109,8 +111,10 @@ export declare const light: {
     noticeInfoText: string;
     noticeInfoStroke: string;
     noticeTipBackground: string;
+    noticeTipStroke: string;
     noticeTipText: string;
     noticeWarningBackground: string;
+    noticeWarningStroke: string;
     noticeWarningText: string;
     almostBlack: string;
     lightBlack: string;
@@ -182,8 +186,10 @@ export declare const dark: {
     noticeInfoText: string;
     noticeInfoStroke: string;
     noticeTipBackground: string;
+    noticeTipStroke: string;
     noticeTipText: string;
     noticeWarningBackground: string;
+    noticeWarningStroke: string;
     noticeWarningText: string;
     almostBlack: string;
     lightBlack: string;
