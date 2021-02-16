@@ -945,7 +945,6 @@ const StyledEditor = styled_components_1.default("div") `
 
     -webkit-font-smoothing: initial;
     font-family: ${(props) => props.theme.fontFamilyMono};
-    font-size: 13px;
     direction: ltr;
     text-align: left;
     white-space: pre;
@@ -962,7 +961,6 @@ const StyledEditor = styled_components_1.default("div") `
     margin: 0;
 
     code {
-      font-size: 13px;
       background: none;
       padding: 0;
       border: 0;
