@@ -58,7 +58,7 @@ export const base = {
   noticeTipBackground: "#CFF4FC",
   noticeTipStroke: "#B6EFFB",
   noticeTipText: "#055160",
-  noticeWarningBackground: "#FFF3CD",
+  noticeWarningBackground: "#FF5C80",
   noticeWarningStroke: "#FFECB5",
   noticeWarningText: "#664D03",
 };
