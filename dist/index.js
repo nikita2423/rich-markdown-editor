@@ -73,6 +73,7 @@ const SmartText_1 = __importDefault(require("./plugins/SmartText"));
 const TrailingNode_1 = __importDefault(require("./plugins/TrailingNode"));
 const MarkdownPaste_1 = __importDefault(require("./plugins/MarkdownPaste"));
 const EmojiIconsTrigger_1 = __importDefault(require("./plugins/EmojiIconsTrigger"));
+const helper_1 = require("./helper");
 var server_1 = require("./server");
 exports.schema = server_1.schema;
 exports.parser = server_1.parser;
@@ -80,6 +81,7 @@ exports.serializer = server_1.serializer;
 var Extension_1 = require("./lib/Extension");
 exports.Extension = Extension_1.default;
 exports.theme = theme_1.light;
+const HTTP_LINK_REGEX = /\bhttps?:\/\/[\w_\/\.]+/g;
 class RichMarkdownEditor extends React.PureComponent {
     constructor() {
         super(...arguments);
@@ -112,6 +114,15 @@ class RichMarkdownEditor extends React.PureComponent {
                     if (type === "mention") {
                         return this.getMentionSuggestionsHTML(items);
                     }
+                },
+            });
+        };
+        this.importLinkifyPlugin = () => {
+            return new prosemirror_state_1.Plugin({
+                props: {
+                    transformPasted: (slice) => {
+                        return new prosemirror_model_1.Slice(helper_1.linkify(slice.content), slice.openStart, slice.openEnd);
+                    },
                 },
             });
         };
@@ -413,6 +424,7 @@ class RichMarkdownEditor extends React.PureComponent {
     createState(value) {
         const doc = this.createDocument(value || this.props.defaultValue);
         if (this.plugins) {
+            this.plugins.unshift(this.importLinkifyPlugin());
             this.plugins.unshift(this.importMentionPlugin());
         }
         return prosemirror_state_1.EditorState.create({
