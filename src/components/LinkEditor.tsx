@@ -308,15 +308,15 @@ class LinkEditor extends React.Component<Props, State> {
 
         <ToolbarButton onClick={this.handleOpenLink} disabled={!value}>
           <Tooltip tooltip={dictionary.openLink} placement="top">
-            <OpenIcon color={theme.toolbarItem} />
+            <OpenIcon /*color={theme.toolbarItem} */ />
           </Tooltip>
         </ToolbarButton>
         <ToolbarButton onClick={this.handleRemoveLink}>
           <Tooltip tooltip={dictionary.removeLink} placement="top">
             {this.initialValue ? (
-              <TrashIcon color={theme.toolbarItem} />
+              <TrashIcon /*color={theme.toolbarItem}*/ />
             ) : (
-              <CloseIcon color={theme.toolbarItem} />
+              <CloseIcon /*color={theme.toolbarItem}*/ />
             )}
           </Tooltip>
         </ToolbarButton>
@@ -328,7 +328,7 @@ class LinkEditor extends React.Component<Props, State> {
                 key={result.url}
                 title={result.title}
                 subtitle={result.subtitle}
-                icon={<DocumentIcon color={theme.toolbarItem} />}
+                icon={<DocumentIcon /*color={theme.toolbarItem}*/ />}
                 onMouseOver={() => this.handleFocusLink(index)}
                 onClick={this.handleSelectLink(result.url, result.title)}
                 selected={index === selectedIndex}
@@ -340,7 +340,7 @@ class LinkEditor extends React.Component<Props, State> {
                 key="create"
                 title={suggestedLinkTitle}
                 subtitle={dictionary.createNewDoc}
-                icon={<PlusIcon color={theme.toolbarItem} />}
+                icon={<PlusIcon /*color={theme.toolbarItem}*/ />}
                 onMouseOver={() => this.handleFocusLink(results.length)}
                 onClick={() => {
                   this.handleCreateLink(suggestedLinkTitle);

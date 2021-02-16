@@ -12,14 +12,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const prosemirror_inputrules_1 = require("prosemirror-inputrules");
 const toggleWrap_1 = __importDefault(require("../commands/toggleWrap"));
-const outline_icons_1 = require("outline-icons");
 const React = __importStar(require("react"));
 const react_dom_1 = __importDefault(require("react-dom"));
 const Node_1 = __importDefault(require("./Node"));
+const WarningIcon_1 = __importDefault(require("../icons/WarningIcon"));
+const InfoHintIcon_1 = __importDefault(require("../icons/InfoHintIcon"));
+const BasicIcon_1 = __importDefault(require("../icons/BasicIcon"));
 class Notice extends Node_1.default {
     constructor() {
         super(...arguments);
-        this.handleStyleChange = event => {
+        this.handleStyleChange = (event) => {
             const { view } = this.editor;
             const { tr } = view.state;
             const element = event.target;
@@ -68,7 +70,7 @@ class Notice extends Node_1.default {
                     }),
                 },
             ],
-            toDOM: node => {
+            toDOM: (node) => {
                 const select = document.createElement("select");
                 select.addEventListener("change", this.handleStyleChange);
                 this.styleOptions.forEach(([key, label]) => {
@@ -80,13 +82,13 @@ class Notice extends Node_1.default {
                 });
                 let component;
                 if (node.attrs.style === "tip") {
-                    component = React.createElement(outline_icons_1.StarredIcon, { color: "currentColor" });
+                    component = React.createElement(BasicIcon_1.default, null);
                 }
                 else if (node.attrs.style === "warning") {
-                    component = React.createElement(outline_icons_1.WarningIcon, { color: "currentColor" });
+                    component = React.createElement(WarningIcon_1.default, null);
                 }
                 else {
-                    component = React.createElement(outline_icons_1.InfoIcon, { color: "currentColor" });
+                    component = React.createElement(InfoHintIcon_1.default, null);
                 }
                 const icon = document.createElement("div");
                 icon.className = "icon";
@@ -102,7 +104,7 @@ class Notice extends Node_1.default {
         };
     }
     commands({ type }) {
-        return attrs => toggleWrap_1.default(type, attrs);
+        return (attrs) => toggleWrap_1.default(type, attrs);
     }
     inputRules({ type }) {
         return [prosemirror_inputrules_1.wrappingInputRule(/^:::$/, type)];
@@ -117,7 +119,7 @@ class Notice extends Node_1.default {
     parseMarkdown() {
         return {
             block: "container_notice",
-            getAttrs: tok => ({ style: tok.info }),
+            getAttrs: (tok) => ({ style: tok.info }),
         };
     }
 }

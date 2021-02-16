@@ -6,7 +6,14 @@ import { dropCursor } from "prosemirror-dropcursor";
 import { gapCursor } from "prosemirror-gapcursor";
 import { MarkdownParser, MarkdownSerializer } from "prosemirror-markdown";
 import { EditorView } from "prosemirror-view";
-import { Schema, NodeSpec, MarkSpec, Slice } from "prosemirror-model";
+import {
+  Schema,
+  NodeSpec,
+  MarkSpec,
+  Slice,
+  Fragment,
+  Node,
+} from "prosemirror-model";
 import { inputRules, InputRule } from "prosemirror-inputrules";
 import { keymap } from "prosemirror-keymap";
 import { baseKeymap } from "prosemirror-commands";
@@ -75,11 +82,15 @@ import TrailingNode from "./plugins/TrailingNode";
 import MarkdownPaste from "./plugins/MarkdownPaste";
 import EmojiIconsTrigger from "./plugins/EmojiIconsTrigger";
 
+import { linkify } from "./helper";
+
 export { schema, parser, serializer } from "./server";
 
 export { default as Extension } from "./lib/Extension";
 
 export const theme = lightTheme;
+
+const HTTP_LINK_REGEX = /\bhttps?:\/\/[\w_\/\.]+/g;
 
 export type Props = {
   id?: string;
@@ -428,9 +439,26 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
     });
   };
 
+
+
+  importLinkifyPlugin = () => {
+    return new Plugin({
+      props: {
+        transformPasted: (slice: Slice) => {
+          return new Slice(
+            linkify(slice.content),
+            slice.openStart,
+            slice.openEnd
+          );
+        },
+      },
+    });
+  };
+
   createState(value?: string) {
     const doc = this.createDocument(value || this.props.defaultValue);
     if (this.plugins) {
+      this.plugins.unshift(this.importLinkifyPlugin());
       this.plugins.unshift(this.importMentionPlugin());
     }
     return EditorState.create({
@@ -1090,6 +1118,7 @@ const StyledEditor = styled("div")<{
     margin: 0.5em 0.5em 0 0;
     width: 14px;
     height: 14px;
+    border-radius: 14px;
   }
 
   li p:first-child {

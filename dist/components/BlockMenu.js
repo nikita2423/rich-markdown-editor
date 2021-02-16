@@ -371,10 +371,6 @@ class BlockMenu extends React.Component {
                             ? dictionary.pasteLinkWithTitle(insertItem.title)
                             : dictionary.pasteLink, onKeyDown: this.handleLinkInputKeydown, onPaste: this.handleLinkInputPaste, autoFocus: true }))) : (React.createElement(List, null,
                     items.map((item, index) => {
-                        if (item.name === "separator") {
-                            return (React.createElement(ListItem, { key: index },
-                                React.createElement("hr", null)));
-                        }
                         const selected = index === this.state.selectedIndex && isActive;
                         if (!item.title || !item.icon) {
                             return null;
@@ -439,8 +435,8 @@ exports.Wrapper = styled_components_1.default.div `
   box-sizing: border-box;
   pointer-events: none;
   white-space: nowrap;
-  width: 300px;
-  max-height: 224px;
+  width: 355px;
+  max-height: 336px;
   overflow: hidden;
   overflow-y: auto;
 

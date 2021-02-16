@@ -3,7 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const outline_icons_1 = require("outline-icons");
+const PlusIcon_1 = __importDefault(require("../icons/PlusIcon"));
+const PlusIcon_2 = __importDefault(require("../icons/PlusIcon"));
+const PlusIcon_3 = __importDefault(require("../icons/PlusIcon"));
+const PlusIcon_4 = __importDefault(require("../icons/PlusIcon"));
 const isNodeActive_1 = __importDefault(require("../queries/isNodeActive"));
 function imageMenuItems(state, dictionary) {
     const { schema } = state;
@@ -17,23 +20,23 @@ function imageMenuItems(state, dictionary) {
         {
             name: "alignLeft",
             tooltip: dictionary.alignLeft,
-            icon: outline_icons_1.AlignImageLeftIcon,
+            icon: PlusIcon_2.default,
             visible: true,
             active: isLeftAligned,
         },
         {
             name: "alignCenter",
             tooltip: dictionary.alignCenter,
-            icon: outline_icons_1.AlignImageCenterIcon,
+            icon: PlusIcon_4.default,
             visible: true,
-            active: state => isNodeActive_1.default(schema.nodes.image)(state) &&
+            active: (state) => isNodeActive_1.default(schema.nodes.image)(state) &&
                 !isLeftAligned(state) &&
                 !isRightAligned(state),
         },
         {
             name: "alignRight",
             tooltip: dictionary.alignRight,
-            icon: outline_icons_1.AlignImageRightIcon,
+            icon: PlusIcon_3.default,
             visible: true,
             active: isRightAligned,
         },
@@ -44,7 +47,7 @@ function imageMenuItems(state, dictionary) {
         {
             name: "deleteImage",
             tooltip: dictionary.deleteImage,
-            icon: outline_icons_1.TrashIcon,
+            icon: PlusIcon_1.default,
             visible: true,
             active: () => false,
         },

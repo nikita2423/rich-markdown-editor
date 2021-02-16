@@ -1,12 +1,17 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const outline_icons_1 = require("outline-icons");
+const PlusIcon_1 = __importDefault(require("../icons/PlusIcon"));
+const PlusIcon_2 = __importDefault(require("../icons/PlusIcon"));
+const PlusIcon_3 = __importDefault(require("../icons/PlusIcon"));
 function tableRowMenuItems(state, index, dictionary) {
     return [
         {
             name: "addRowAfter",
             tooltip: dictionary.addRowBefore,
-            icon: outline_icons_1.InsertAboveIcon,
+            icon: PlusIcon_2.default,
             attrs: { index: index - 1 },
             active: () => false,
             visible: index !== 0,
@@ -14,7 +19,7 @@ function tableRowMenuItems(state, index, dictionary) {
         {
             name: "addRowAfter",
             tooltip: dictionary.addRowAfter,
-            icon: outline_icons_1.InsertBelowIcon,
+            icon: PlusIcon_3.default,
             attrs: { index },
             active: () => false,
         },
@@ -24,7 +29,7 @@ function tableRowMenuItems(state, index, dictionary) {
         {
             name: "deleteRow",
             tooltip: dictionary.deleteRow,
-            icon: outline_icons_1.TrashIcon,
+            icon: PlusIcon_1.default,
             active: () => false,
         },
     ];

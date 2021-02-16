@@ -62,11 +62,11 @@ export default class Notice extends Node {
         let component;
 
         if (node.attrs.style === "tip") {
-          component = <StarredIcon color="currentColor" />;
+          component = <StarredIcon /*color="currentColor"*/ />;
         } else if (node.attrs.style === "warning") {
-          component = <WarningIcon color="currentColor" />;
+          component = <WarningIcon /*color="currentColor"*/ />;
         } else {
-          component = <InfoIcon color="currentColor" />;
+          component = <InfoIcon /*color="currentColor"*/ />;
         }
 
         const icon = document.createElement("div");

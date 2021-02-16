@@ -852,6 +852,7 @@ const StyledEditor = styled_components_1.default("div") `
     margin: 0.5em 0.5em 0 0;
     width: 14px;
     height: 14px;
+    border-radius: 14px;
   }
 
   li p:first-child {
