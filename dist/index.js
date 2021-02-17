@@ -830,6 +830,7 @@ const StyledEditor = styled_components_1.default("div") `
 
   p {
     margin: 0 0 5px 0;
+    font-family: Roboto;
   }
 
   a {

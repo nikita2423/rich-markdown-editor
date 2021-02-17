@@ -1081,6 +1081,7 @@ const StyledEditor = styled("div")<{
 
   p {
     margin: 0 0 5px 0;
+    font-family: Roboto;
   }
 
   a {
