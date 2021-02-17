@@ -22,7 +22,7 @@ const PlusIcon_1 = __importDefault(require("../icons/PlusIcon"));
 const MAX_MATCH = 500;
 const OPEN_REGEX = /\/(\w+)?$/;
 const CLOSE_REGEX = /(^(?!\/(\w+)?)(.*)[^\/]$|^\/((\w+)\s.*[^\/]|\s|\s.*[^\/])$)/;
-const plusComponent = React.createElement(PlusIcon_1.default, { style: { width: "18px", height: "18px" } });
+const plusComponent = React.createElement(PlusIcon_1.default, { style: { width: "16px", height: "16px" } });
 function run(view, from, to, regex, handler) {
     if (view.composing) {
         return false;

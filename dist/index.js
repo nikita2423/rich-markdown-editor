@@ -1283,8 +1283,8 @@ const StyledEditor = styled_components_1.default("div") `
     outline: none;
     border: 0;
     line-height: 1.2em;
-    margin-left: -28px;
-    padding-top: 4px;
+    margin-left: -24px;
+    padding-top: 3px;
 
     &:hover,
     &:focus {

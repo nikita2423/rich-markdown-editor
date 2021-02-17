@@ -13,7 +13,7 @@ const OPEN_REGEX = /\/(\w+)?$/;
 //const CLOSE_REGEX = /(^(?!\/(\w+)?)(.*)$|^\/((\w+)\s.*|\s)$)/;
 const CLOSE_REGEX = /(^(?!\/(\w+)?)(.*)[^\/]$|^\/((\w+)\s.*[^\/]|\s|\s.*[^\/])$)/;
 
-const plusComponent = <PlusIcon style={{ width: "18px", height: "18px" }} />;
+const plusComponent = <PlusIcon style={{ width: "16px", height: "16px" }} />;
 
 // based on the input rules code in Prosemirror, here:
 // https://github.com/ProseMirror/prosemirror-inputrules/blob/master/src/inputrules.js
