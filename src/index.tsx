@@ -113,7 +113,7 @@ export type Props = {
   uploadImage?: (file: File) => Promise<string>;
   onSave?: ({ done: boolean }) => void;
   onCancel?: () => void;
-  onChange: (value: () => string) => void;
+  onChange: (value: () => object) => void;
   onImageUploadStart?: () => void;
   onImageUploadStop?: () => void;
   onCreateLink?: (title: string) => Promise<string>;
@@ -549,7 +549,10 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
     if (!this.props.onChange) return;
 
     this.props.onChange(() => {
-      return this.value();
+      return {
+        markdownText: this.value(),
+        json: this.view.state.doc,
+      };
     });
   };
 

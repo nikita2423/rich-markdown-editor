@@ -133,7 +133,10 @@ class RichMarkdownEditor extends React.PureComponent {
             if (!this.props.onChange)
                 return;
             this.props.onChange(() => {
-                return this.value();
+                return {
+                    markdownText: this.value(),
+                    json: this.view.state.doc,
+                };
             });
         };
         this.handleSave = () => {

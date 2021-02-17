@@ -123,7 +123,7 @@ export declare type Props = {
         done: any;
     }) => void;
     onCancel?: () => void;
-    onChange: (value: () => string) => void;
+    onChange: (value: () => object) => void;
     onImageUploadStart?: () => void;
     onImageUploadStop?: () => void;
     onCreateLink?: (title: string) => Promise<string>;
