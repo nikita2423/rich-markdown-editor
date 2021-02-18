@@ -7,6 +7,7 @@ import { EmbedDescriptor, MenuItem } from "../types";
 
 import getMenuItems from "../menus/block";
 import baseDictionary from "../dictionary";
+import map from "lodash/map";
 
 const SSR = typeof window === "undefined";
 
@@ -17,6 +18,7 @@ type Props = {
   view: EditorView;
   //   search: string;
   onClose: () => void;
+  emojiData: string[];
 };
 
 type State = {
@@ -82,7 +84,7 @@ class EmojiPopup extends React.Component<Props, State> {
     }
   }
 
-  insertItem = (item, emojiCode) => {
+  insertItem = (emojiCode) => {
     const { view } = this.props;
     const { dispatch, state } = view;
     const { from, to } = state.selection;
@@ -166,6 +168,26 @@ class EmojiPopup extends React.Component<Props, State> {
     }
   }
 
+  getAllEmojis = () => {
+    const { emojiData } = this.props;
+    if (emojiData && emojiData.length) {
+      return map(emojiData, (emoji) => {
+        const onSelect = () => {
+          this.insertItem(emoji);
+        };
+        return (
+          <div
+            className="editor-emoji-item"
+            // style={{ marginBottom: "5px", height: "20px" }}
+            onClick={onSelect}
+          >
+            {emoji}
+          </div>
+        );
+      });
+    }
+  };
+
   render() {
     const { dictionary, isActive } = this.props;
     // const items = this.filtered;
@@ -179,8 +201,9 @@ class EmojiPopup extends React.Component<Props, State> {
           ref={this.menuRef}
           {...positioning}
         >
-          <div style={{ marginTop: "10px", height: "inherit" }}>
-            <div
+          <div className="editor-emoji-container">
+            {this.getAllEmojis()}
+            {/* <div
               style={{ marginBottom: "5px", height: "20px" }}
               onClick={() => this.insertItem(items[19], "😀")}
             >
@@ -227,7 +250,7 @@ class EmojiPopup extends React.Component<Props, State> {
               onClick={() => this.insertItem(items[19], "🤣")}
             >
               🤣
-            </div>
+            </div> */}
           </div>
         </Wrapper>
       </Portal>
@@ -264,10 +287,11 @@ export const Wrapper = styled.div<{
   box-sizing: border-box;
   pointer-events: none;
   white-space: nowrap;
-  width: 300px;
+  width: 268px;
   max-height: 224px;
   overflow: hidden;
   overflow-y: auto;
+  padding: 0px 0px 0 14px;
 
   * {
     box-sizing: border-box;
@@ -287,6 +311,32 @@ export const Wrapper = styled.div<{
     opacity: 1;
     min-height: 100px
   `};
+
+  .editor-emoji-container {
+    margin-top: 10px;
+    height: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .editor-emoji-item {
+    height: 32px;
+    min-width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    padding-right: 3px;
+    padding-top: 2px;
+    cursor: pointer;
+    font-size: 22px;
+    margin-right: 10px;
+  }
+
+  .editor-emoji-item:hover {
+    background: #f4f7fa;
+  }
 
   @media print {
     display: none;

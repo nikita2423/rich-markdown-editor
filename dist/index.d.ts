@@ -136,6 +136,7 @@ export declare type Props = {
     onShowToast?: (message: string, code: ToastType) => void;
     tooltip: typeof React.Component | React.FC<any>;
     className?: string;
+    emojiData: string[];
     style?: Record<string, string>;
 };
 declare type State = {
@@ -474,6 +475,7 @@ declare class RichMarkdownEditor extends React.PureComponent<Props, State> {
         emoji: string;
         mention: string;
     }) & import("lodash").MemoizedFunction;
+    getEmoji: () => string[];
     render: () => JSX.Element;
 }
 export default RichMarkdownEditor;

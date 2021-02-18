@@ -225,6 +225,36 @@ class RichMarkdownEditor extends React.PureComponent {
         this.dictionary = memoize_1.default((providedDictionary) => {
             return Object.assign(Object.assign({}, dictionary_1.default), providedDictionary);
         });
+        this.getEmoji = () => {
+            const { emojiData } = this.props;
+            const emojiList = emojiData && emojiData.length
+                ? emojiData
+                : [
+                    "😀",
+                    "😃",
+                    "😄",
+                    "😁",
+                    "😆",
+                    "😅",
+                    "🤣",
+                    "😂",
+                    "🙂",
+                    "🙃",
+                    "😉",
+                    "😊",
+                    "😇",
+                    "🥰",
+                    "😍",
+                    "🤩",
+                    "😘",
+                    "😗",
+                    "☺️",
+                    "☺",
+                    "😚",
+                    "😙",
+                ];
+            return emojiList;
+        };
         this.render = () => {
             const { readOnly, readOnlyWriteCheckboxes, style, tooltip, className, onKeyDown, } = this.props;
             const dictionary = this.dictionary(this.props.dictionary);
@@ -236,7 +266,7 @@ class RichMarkdownEditor extends React.PureComponent {
                             React.createElement(SelectionToolbar_1.default, { view: this.view, dictionary: dictionary, commands: this.commands, isTemplate: this.props.template === true, onSearchLink: this.props.onSearchLink, onClickLink: this.props.onClickLink, onCreateLink: this.props.onCreateLink, tooltip: tooltip }),
                             React.createElement(LinkToolbar_1.default, { view: this.view, dictionary: dictionary, isActive: this.state.linkMenuOpen, onCreateLink: this.props.onCreateLink, onSearchLink: this.props.onSearchLink, onClickLink: this.props.onClickLink, onShowToast: this.props.onShowToast, onClose: this.handleCloseLinkMenu, tooltip: tooltip }),
                             React.createElement(BlockMenu_1.default, { view: this.view, commands: this.commands, dictionary: dictionary, isActive: this.state.blockMenuOpen, search: this.state.blockMenuSearch, onClose: this.handleCloseBlockMenu, uploadImage: this.props.uploadImage, onLinkToolbarOpen: this.handleOpenLinkMenu, onImageUploadStart: this.props.onImageUploadStart, onImageUploadStop: this.props.onImageUploadStop, onShowToast: this.props.onShowToast, embeds: this.props.embeds, onOpenEmoji: this.handleOpenEmojiIcons }),
-                            React.createElement(EmojiPopup_1.default, { view: this.view, isActive: this.state.emojiIconsOpen, onClose: this.handleCloseEmojiIcons, commands: this.commands, dictionary: dictionary })))))));
+                            React.createElement(EmojiPopup_1.default, { view: this.view, isActive: this.state.emojiIconsOpen, onClose: this.handleCloseEmojiIcons, commands: this.commands, dictionary: dictionary, emojiData: this.getEmoji() })))))));
         };
     }
     componentDidMount() {

@@ -8,6 +8,7 @@ declare type Props = {
     dictionary: typeof baseDictionary;
     view: EditorView;
     onClose: () => void;
+    emojiData: string[];
 };
 declare type State = {
     insertItem?: EmbedDescriptor;
@@ -24,7 +25,7 @@ declare class EmojiPopup extends React.Component<Props, State> {
     componentDidUpdate(prevProps: any): void;
     close: () => void;
     clearSearch(): void;
-    insertItem: (item: any, emojiCode: any) => void;
+    insertItem: (emojiCode: any) => void;
     get caretPosition(): {
         top: number;
         left: number;
@@ -40,6 +41,7 @@ declare class EmojiPopup extends React.Component<Props, State> {
         bottom: undefined;
         isAbove: boolean;
     };
+    getAllEmojis: () => JSX.Element[] | undefined;
     render(): JSX.Element;
 }
 export declare const Wrapper: import("styled-components").StyledComponent<"div", any, {

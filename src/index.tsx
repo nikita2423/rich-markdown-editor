@@ -126,6 +126,7 @@ export type Props = {
   onShowToast?: (message: string, code: ToastType) => void;
   tooltip: typeof React.Component | React.FC<any>;
   className?: string;
+  emojiData: string[];
   style?: Record<string, string>;
 };
 
@@ -668,6 +669,38 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
     }
   );
 
+  getEmoji = () => {
+    const { emojiData } = this.props;
+    const emojiList =
+      emojiData && emojiData.length
+        ? emojiData
+        : [
+            "😀",
+            "😃",
+            "😄",
+            "😁",
+            "😆",
+            "😅",
+            "🤣",
+            "😂",
+            "🙂",
+            "🙃",
+            "😉",
+            "😊",
+            "😇",
+            "🥰",
+            "😍",
+            "🤩",
+            "😘",
+            "😗",
+            "☺️",
+            "☺",
+            "😚",
+            "😙",
+          ];
+    return emojiList;
+  };
+
   render = () => {
     const {
       readOnly,
@@ -738,6 +771,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
                   onClose={this.handleCloseEmojiIcons}
                   commands={this.commands}
                   dictionary={dictionary}
+                  emojiData={this.getEmoji()}
                 />
               </React.Fragment>
             )}
