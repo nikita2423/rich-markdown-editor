@@ -174,7 +174,7 @@ exports.Wrapper = styled_components_1.default.div `
   box-sizing: border-box;
   pointer-events: none;
   white-space: nowrap;
-  width: 268px;
+  width: 277px;
   max-height: 224px;
   overflow: hidden;
   overflow-y: auto;
