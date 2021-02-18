@@ -1119,6 +1119,7 @@ const StyledEditor = styled("div")<{
   p {
     margin: 0 0 5px 0;
     font-family: Roboto;
+    line-height: 1.6;
   }
 
   a {
@@ -1176,7 +1177,7 @@ const StyledEditor = styled("div")<{
 
   li p:first-child {
     word-break: break-word;
-    margin: 0.2em 0 0 0;
+    margin: 0.1em 0 0 0;
   }
 
   hr {
