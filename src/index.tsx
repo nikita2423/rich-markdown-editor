@@ -542,7 +542,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
   }
 
   value = (): string => {
-    // console.log("this.view", this.serializer.serialize(this.view.state.doc));
+    console.log("this.view", this.serializer.serialize(this.view.state.doc));
     return this.serializer.serialize(this.view.state.doc);
   };
 
@@ -1100,7 +1100,7 @@ const StyledEditor = styled("div")<{
 
   b,
   strong {
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .template-placeholder {
