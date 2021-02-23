@@ -16,7 +16,7 @@ export declare type MenuItem = {
     active?: (state: EditorState) => boolean;
 };
 export declare type EmbedDescriptor = MenuItem & {
-    matcher: (url: string) => boolean | [];
+    matcher: (url: string) => boolean | [] | RegExpMatchArray;
     component: typeof React.Component | React.FC<any>;
 };
 //# sourceMappingURL=index.d.ts.map

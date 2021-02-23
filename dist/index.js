@@ -68,6 +68,7 @@ const Underline_1 = __importDefault(require("./marks/Underline"));
 const BlockMenuTrigger_1 = __importDefault(require("./plugins/BlockMenuTrigger"));
 const History_1 = __importDefault(require("./plugins/History"));
 const Keys_1 = __importDefault(require("./plugins/Keys"));
+const MaxLength_1 = __importDefault(require("./plugins/MaxLength"));
 const Placeholder_2 = __importDefault(require("./plugins/Placeholder"));
 const SmartText_1 = __importDefault(require("./plugins/SmartText"));
 const TrailingNode_1 = __importDefault(require("./plugins/TrailingNode"));
@@ -86,6 +87,8 @@ class RichMarkdownEditor extends React.PureComponent {
     constructor() {
         super(...arguments);
         this.state = {
+            isEditorFocused: false,
+            selectionMenuOpen: false,
             blockMenuOpen: false,
             linkMenuOpen: false,
             blockMenuSearch: "",
@@ -127,6 +130,7 @@ class RichMarkdownEditor extends React.PureComponent {
             });
         };
         this.value = () => {
+            console.log("this.view", this.serializer.serialize(this.view.state.doc));
             return this.serializer.serialize(this.view.state.doc);
         };
         this.handleChange = () => {
@@ -151,8 +155,20 @@ class RichMarkdownEditor extends React.PureComponent {
                 onSave({ done: true });
             }
         };
+        this.handleEditorBlur = () => {
+            this.setState({ isEditorFocused: false });
+        };
+        this.handleEditorFocus = () => {
+            this.setState({ isEditorFocused: true });
+        };
+        this.handleOpenSelectionMenu = () => {
+            this.setState({ blockMenuOpen: false, selectionMenuOpen: true });
+        };
+        this.handleCloseSelectionMenu = () => {
+            this.setState({ selectionMenuOpen: false });
+        };
         this.handleOpenLinkMenu = () => {
-            this.setState({ linkMenuOpen: true });
+            this.setState({ blockMenuOpen: false, linkMenuOpen: true });
         };
         this.handleCloseLinkMenu = () => {
             this.setState({ linkMenuOpen: false });
@@ -263,7 +279,7 @@ class RichMarkdownEditor extends React.PureComponent {
                     React.createElement(React.Fragment, null,
                         React.createElement(StyledEditor, { readOnly: readOnly, readOnlyWriteCheckboxes: readOnlyWriteCheckboxes, ref: (ref) => (this.element = ref) }),
                         !readOnly && this.view && (React.createElement(React.Fragment, null,
-                            React.createElement(SelectionToolbar_1.default, { view: this.view, dictionary: dictionary, commands: this.commands, isTemplate: this.props.template === true, onSearchLink: this.props.onSearchLink, onClickLink: this.props.onClickLink, onCreateLink: this.props.onCreateLink, tooltip: tooltip }),
+                            React.createElement(SelectionToolbar_1.default, { view: this.view, dictionary: dictionary, commands: this.commands, isTemplate: this.props.template === true, onOpen: this.handleOpenSelectionMenu, onClose: this.handleCloseSelectionMenu, onSearchLink: this.props.onSearchLink, onClickLink: this.props.onClickLink, onCreateLink: this.props.onCreateLink, tooltip: tooltip }),
                             React.createElement(LinkToolbar_1.default, { view: this.view, dictionary: dictionary, isActive: this.state.linkMenuOpen, onCreateLink: this.props.onCreateLink, onSearchLink: this.props.onSearchLink, onClickLink: this.props.onClickLink, onShowToast: this.props.onShowToast, onClose: this.handleCloseLinkMenu, tooltip: tooltip }),
                             React.createElement(BlockMenu_1.default, { view: this.view, commands: this.commands, dictionary: dictionary, isActive: this.state.blockMenuOpen, search: this.state.blockMenuSearch, onClose: this.handleCloseBlockMenu, uploadImage: this.props.uploadImage, onLinkToolbarOpen: this.handleOpenLinkMenu, onImageUploadStart: this.props.onImageUploadStart, onImageUploadStop: this.props.onImageUploadStop, onShowToast: this.props.onShowToast, embeds: this.props.embeds, onOpenEmoji: this.handleOpenEmojiIcons }),
                             React.createElement(EmojiPopup_1.default, { view: this.view, isActive: this.state.emojiIconsOpen, onClose: this.handleCloseEmojiIcons, commands: this.commands, dictionary: dictionary, emojiData: this.getEmoji() })))))));
@@ -293,6 +309,26 @@ class RichMarkdownEditor extends React.PureComponent {
         }
         if (prevProps.readOnly && !this.props.readOnly && this.props.autoFocus) {
             this.focusAtEnd();
+        }
+        if (!this.isBlurred &&
+            !this.state.isEditorFocused &&
+            !this.state.blockMenuOpen &&
+            !this.state.linkMenuOpen &&
+            !this.state.selectionMenuOpen) {
+            this.isBlurred = true;
+            if (this.props.onBlur) {
+                this.props.onBlur();
+            }
+        }
+        if (this.isBlurred &&
+            (this.state.isEditorFocused ||
+                this.state.blockMenuOpen ||
+                this.state.linkMenuOpen ||
+                this.state.selectionMenuOpen)) {
+            this.isBlurred = false;
+            if (this.props.onFocus) {
+                this.props.onFocus();
+            }
         }
     }
     init() {
@@ -378,6 +414,8 @@ class RichMarkdownEditor extends React.PureComponent {
             new TrailingNode_1.default(),
             new MarkdownPaste_1.default(),
             new Keys_1.default({
+                onBlur: this.handleEditorBlur,
+                onFocus: this.handleEditorFocus,
                 onSave: this.handleSave,
                 onSaveAndExit: this.handleSaveAndExit,
                 onCancel: this.props.onCancel,
@@ -393,6 +431,9 @@ class RichMarkdownEditor extends React.PureComponent {
             new EmojiIconsTrigger_1.default({
                 onOpen: this.handleOpenEmojiIcons,
                 onClose: this.handleCloseEmojiIcons,
+            }),
+            new MaxLength_1.default({
+                maxLength: this.props.maxLength,
             }),
             ...this.props.extensions,
         ], this);
@@ -482,9 +523,11 @@ class RichMarkdownEditor extends React.PureComponent {
             throw new Error("createView called before ref available");
         }
         const isEditingCheckbox = (tr) => {
-            return tr.steps.some((step) => step.slice.content.firstChild &&
-                step.slice.content.firstChild.type.name ===
-                    this.schema.nodes.checkbox_item.name);
+            return tr.steps.some((step) => {
+                var _a, _b, _c;
+                return ((_c = (_b = (_a = step.slice) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.firstChild) === null || _c === void 0 ? void 0 : _c.type.name) ===
+                    this.schema.nodes.checkbox_item.name;
+            });
         };
         const view = new prosemirror_view_1.EditorView(this.element, {
             state: this.createState(),
@@ -503,6 +546,7 @@ class RichMarkdownEditor extends React.PureComponent {
                 this.forceUpdate();
             },
         });
+        view.dom.setAttribute("role", "textbox");
         return view;
     }
     scrollToAnchor(hash) {
@@ -789,6 +833,10 @@ const StyledEditor = styled_components_1.default("div") `
     }
   }
 
+  .notice-block .content {
+    flex-grow: 1;
+  }
+
   .notice-block .icon {
     width: 24px;
     height: 24px;
@@ -846,7 +894,7 @@ const StyledEditor = styled_components_1.default("div") `
 
   b,
   strong {
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .template-placeholder {
@@ -1310,16 +1358,14 @@ const StyledEditor = styled_components_1.default("div") `
     height: 1em;
     color: ${(props) => props.theme.textSecondary};
     background: none;
-    border-radius: 100%;
-    font-size: 1em;
     position: absolute;
     transition: color 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
       transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
     outline: none;
     border: 0;
     line-height: 1.2em;
-    margin-left: -24px;
-    padding-top: 3px;
+    margin-left: -28px;
+    padding-top: 5px;
 
     &:hover,
     &:focus {

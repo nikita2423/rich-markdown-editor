@@ -16,7 +16,7 @@ export default class Embed extends Node {
             getAttrs: (dom: HTMLIFrameElement) => {
                 href: string;
                 component: typeof React.Component | React.FC<any>;
-                matches: true | [];
+                matches: true | RegExpMatchArray | [];
             } | {
                 href?: undefined;
                 component?: undefined;

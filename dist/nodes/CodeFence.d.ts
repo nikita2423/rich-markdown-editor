@@ -43,6 +43,8 @@ export default class CodeFence extends Node {
         type: any;
     }): {
         "Shift-Ctrl-\\": (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
+        "Shift-Enter": (state: any, dispatch: any) => boolean;
+        Tab: (state: any, dispatch: any) => boolean;
     };
     handleCopyToClipboard(node: any): () => void;
     handleLanguageChange: (event: any) => void;

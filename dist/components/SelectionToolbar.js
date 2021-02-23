@@ -39,7 +39,7 @@ const isNodeActive_1 = __importDefault(require("../queries/isNodeActive"));
 const getColumnIndex_1 = __importDefault(require("../queries/getColumnIndex"));
 const getRowIndex_1 = __importDefault(require("../queries/getRowIndex"));
 const createAndInsertLink_1 = __importDefault(require("../commands/createAndInsertLink"));
-function isActive(props) {
+function isVisible(props) {
     const { view } = props;
     const { selection } = view.state;
     if (!selection)
@@ -59,6 +59,7 @@ function isActive(props) {
 class SelectionToolbar extends React.Component {
     constructor() {
         super(...arguments);
+        this.isActive = false;
         this.handleOnCreateLink = async (title) => {
             const { dictionary, onCreateLink, view, onShowToast } = this.props;
             if (!onCreateLink) {
@@ -86,6 +87,17 @@ class SelectionToolbar extends React.Component {
                 .removeMark(from, to, markType)
                 .addMark(from, to, markType.create({ href })));
         };
+    }
+    componentDidUpdate() {
+        const visible = isVisible(this.props);
+        if (this.isActive && !visible) {
+            this.isActive = false;
+            this.props.onClose();
+        }
+        if (!this.isActive && visible) {
+            this.isActive = true;
+            this.props.onOpen();
+        }
     }
     render() {
         const _a = this.props, { dictionary, onCreateLink, isTemplate } = _a, rest = __rest(_a, ["dictionary", "onCreateLink", "isTemplate"]);
@@ -122,7 +134,7 @@ class SelectionToolbar extends React.Component {
             return null;
         }
         return (React.createElement(react_portal_1.Portal, null,
-            React.createElement(FloatingToolbar_1.default, { view: view, active: isActive(this.props) }, link && range ? (React.createElement(LinkEditor_1.default, Object.assign({ dictionary: dictionary, mark: range.mark, from: range.from, to: range.to, onCreateLink: onCreateLink ? this.handleOnCreateLink : undefined, onSelectLink: this.handleOnSelectLink }, rest))) : (React.createElement(Menu_1.default, Object.assign({ items: items }, rest))))));
+            React.createElement(FloatingToolbar_1.default, { view: view, active: isVisible(this.props) }, link && range ? (React.createElement(LinkEditor_1.default, Object.assign({ dictionary: dictionary, mark: range.mark, from: range.from, to: range.to, onCreateLink: onCreateLink ? this.handleOnCreateLink : undefined, onSelectLink: this.handleOnSelectLink }, rest))) : (React.createElement(Menu_1.default, Object.assign({ items: items }, rest))))));
     }
 }
 exports.default = SelectionToolbar;

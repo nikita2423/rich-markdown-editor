@@ -11,15 +11,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __importStar(require("react"));
-const styled_components_1 = require("styled-components");
+const styled_components_1 = __importStar(require("styled-components"));
 const ToolbarButton_1 = __importDefault(require("./ToolbarButton"));
 const ToolbarSeparator_1 = __importDefault(require("./ToolbarSeparator"));
+const FlexibleWrapper = styled_components_1.default.div `
+  display: flex;
+`;
 class Menu extends React.Component {
     render() {
         const { view, items } = this.props;
         const { state } = view;
         const Tooltip = this.props.tooltip;
-        return (React.createElement("div", null, items.map((item, index) => {
+        return (React.createElement(FlexibleWrapper, null, items.map((item, index) => {
             if (item.name === "separator" && item.visible !== false) {
                 return React.createElement(ToolbarSeparator_1.default, { key: index });
             }

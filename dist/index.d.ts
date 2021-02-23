@@ -114,11 +114,14 @@ export declare type Props = {
     theme?: typeof theme;
     template?: boolean;
     headingsOffset?: number;
+    maxLength?: number;
     scrollTo?: string;
     handleDOMEvents?: {
         [name: string]: (view: EditorView, event: Event) => boolean;
     };
     uploadImage?: (file: File) => Promise<string>;
+    onBlur?: () => void;
+    onFocus?: () => void;
     onSave?: ({ done: boolean }: {
         done: any;
     }) => void;
@@ -140,6 +143,8 @@ export declare type Props = {
     style?: Record<string, string>;
 };
 declare type State = {
+    isEditorFocused: boolean;
+    selectionMenuOpen: boolean;
     blockMenuOpen: boolean;
     linkMenuOpen: boolean;
     blockMenuSearch: string;
@@ -157,11 +162,14 @@ declare class RichMarkdownEditor extends React.PureComponent<Props, State> {
         tooltip: typeof Tooltip;
     };
     state: {
+        isEditorFocused: boolean;
+        selectionMenuOpen: boolean;
         blockMenuOpen: boolean;
         linkMenuOpen: boolean;
         blockMenuSearch: string;
         emojiIconsOpen: boolean;
     };
+    isBlurred: boolean;
     extensions: ExtensionManager;
     element?: HTMLElement | null;
     view: EditorView;
@@ -206,6 +214,10 @@ declare class RichMarkdownEditor extends React.PureComponent<Props, State> {
     handleChange: () => void;
     handleSave: () => void;
     handleSaveAndExit: () => void;
+    handleEditorBlur: () => void;
+    handleEditorFocus: () => void;
+    handleOpenSelectionMenu: () => void;
+    handleCloseSelectionMenu: () => void;
     handleOpenLinkMenu: () => void;
     handleCloseLinkMenu: () => void;
     handleOpenBlockMenu: (search: string) => void;

@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const prosemirror_schema_list_1 = require("prosemirror-schema-list");
 const Node_1 = __importDefault(require("./Node"));
+const isInList_1 = __importDefault(require("../queries/isInList"));
 class ListItem extends Node_1.default {
     get name() {
         return "list_item";
@@ -25,6 +26,15 @@ class ListItem extends Node_1.default {
             "Shift-Tab": prosemirror_schema_list_1.liftListItem(type),
             "Mod-]": prosemirror_schema_list_1.sinkListItem(type),
             "Mod-[": prosemirror_schema_list_1.liftListItem(type),
+            "Shift-Enter": (state, dispatch) => {
+                if (!isInList_1.default(state))
+                    return false;
+                if (!state.selection.empty)
+                    return false;
+                const { tr, selection } = state;
+                dispatch(tr.split(selection.to));
+                return true;
+            },
         };
     }
     toMarkdown(state, node) {

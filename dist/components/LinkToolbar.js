@@ -29,7 +29,7 @@ const createAndInsertLink_1 = __importDefault(require("../commands/createAndInse
 function isActive(props) {
     const { view } = props;
     const { selection } = view.state;
-    const paragraph = view.domAtPos(selection.$from.pos);
+    const paragraph = view.domAtPos(selection.from);
     return props.isActive && !!paragraph.node;
 }
 class LinkToolbar extends React.Component {
@@ -88,8 +88,9 @@ class LinkToolbar extends React.Component {
     }
     render() {
         const _a = this.props, { onCreateLink, onClose } = _a, rest = __rest(_a, ["onCreateLink", "onClose"]);
-        const selection = this.props.view.state.selection;
-        return (React.createElement(FloatingToolbar_1.default, Object.assign({ ref: this.menuRef, active: isActive(this.props) }, rest), isActive(this.props) && (React.createElement(LinkEditor_1.default, Object.assign({ from: selection.from, to: selection.to, onCreateLink: onCreateLink ? this.handleOnCreateLink : undefined, onSelectLink: this.handleOnSelectLink, onRemoveLink: onClose }, rest)))));
+        const { selection } = this.props.view.state;
+        const active = isActive(this.props);
+        return (React.createElement(FloatingToolbar_1.default, Object.assign({ ref: this.menuRef, active: active }, rest), active && (React.createElement(LinkEditor_1.default, Object.assign({ from: selection.from, to: selection.to, onCreateLink: onCreateLink ? this.handleOnCreateLink : undefined, onSelectLink: this.handleOnSelectLink, onRemoveLink: onClose }, rest)))));
     }
 }
 exports.default = LinkToolbar;

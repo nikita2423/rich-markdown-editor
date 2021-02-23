@@ -7,6 +7,8 @@ declare type Props = {
     tooltip: typeof React.Component | React.FC<any>;
     isTemplate: boolean;
     commands: Record<string, any>;
+    onOpen: () => void;
+    onClose: () => void;
     onSearchLink?: (term: string) => Promise<SearchResult[]>;
     onClickLink: (href: string, event: MouseEvent) => void;
     onCreateLink?: (title: string) => Promise<string>;
@@ -14,6 +16,8 @@ declare type Props = {
     view: EditorView;
 };
 export default class SelectionToolbar extends React.Component<Props> {
+    isActive: boolean;
+    componentDidUpdate(): void;
     handleOnCreateLink: (title: string) => Promise<void>;
     handleOnSelectLink: ({ href, from, to, }: {
         href: string;

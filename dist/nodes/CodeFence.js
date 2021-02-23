@@ -30,6 +30,7 @@ const prosemirror_commands_1 = require("prosemirror-commands");
 const prosemirror_inputrules_1 = require("prosemirror-inputrules");
 const copy_to_clipboard_1 = __importDefault(require("copy-to-clipboard"));
 const Prism_1 = __importStar(require("../plugins/Prism"));
+const isInCode_1 = __importDefault(require("../queries/isInCode"));
 const Node_1 = __importDefault(require("./Node"));
 const types_1 = require("../types");
 [
@@ -129,6 +130,20 @@ class CodeFence extends Node_1.default {
     keys({ type }) {
         return {
             "Shift-Ctrl-\\": prosemirror_commands_1.setBlockType(type),
+            "Shift-Enter": (state, dispatch) => {
+                if (!isInCode_1.default(state))
+                    return false;
+                const { tr, selection } = state;
+                dispatch(tr.insertText("\n", selection.from, selection.to));
+                return true;
+            },
+            Tab: (state, dispatch) => {
+                if (!isInCode_1.default(state))
+                    return false;
+                const { tr, selection } = state;
+                dispatch(tr.insertText("  ", selection.from, selection.to));
+                return true;
+            },
         };
     }
     handleCopyToClipboard(node) {

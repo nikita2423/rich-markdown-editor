@@ -98,7 +98,7 @@ class Notice extends Node_1.default {
                     { class: `notice-block ${node.attrs.style}` },
                     icon,
                     ["div", { contentEditable: false }, select],
-                    ["div", 0],
+                    ["div", { class: "content" }, 0],
                 ];
             },
         };

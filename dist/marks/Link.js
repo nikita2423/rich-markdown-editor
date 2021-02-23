@@ -7,6 +7,7 @@ const prosemirror_commands_1 = require("prosemirror-commands");
 const prosemirror_state_1 = require("prosemirror-state");
 const prosemirror_inputrules_1 = require("prosemirror-inputrules");
 const Mark_1 = __importDefault(require("./Mark"));
+const isModKey_1 = __importDefault(require("../lib/isModKey"));
 const LINK_INPUT_REGEX = /\[(.+)]\((\S+)\)/;
 function isPlainURL(link, parent, index, side) {
     if (link.attrs.title || !/^\w+:/.test(link.attrs.href)) {
@@ -44,7 +45,7 @@ class Link extends Mark_1.default {
                     }),
                 },
             ],
-            toDOM: node => [
+            toDOM: (node) => [
                 "a",
                 Object.assign(Object.assign({}, node.attrs), { rel: "noopener noreferrer nofollow" }),
                 0,
@@ -93,8 +94,7 @@ class Link extends Mark_1.default {
                         },
                         click: (view, event) => {
                             if (view.props.editable &&
-                                view.props.editable(view.state) &&
-                                !event.metaKey) {
+                                view.props.editable(view.state)) {
                                 return false;
                             }
                             if (event.target instanceof HTMLAnchorElement) {
@@ -119,6 +119,14 @@ class Link extends Mark_1.default {
                             return false;
                         },
                     },
+                    handleKeyDown: (view, event) => {
+                        if (view.props.editable &&
+                            view.props.editable(view.state) &&
+                            !isModKey_1.default(event)) {
+                            return false;
+                        }
+                        return false;
+                    },
                 },
             }),
         ];
@@ -141,7 +149,7 @@ class Link extends Mark_1.default {
     parseMarkdown() {
         return {
             mark: "link",
-            getAttrs: tok => ({
+            getAttrs: (tok) => ({
                 href: tok.attrGet("href"),
                 title: tok.attrGet("title") || null,
             }),

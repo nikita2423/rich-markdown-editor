@@ -20,10 +20,12 @@ export default class Notice extends Node {
                 style: string | undefined;
             };
         }[];
-        toDOM: (node: any) => (string | (string | number)[] | HTMLDivElement | {
+        toDOM: (node: any) => (string | HTMLDivElement | {
             class: string;
         } | (string | HTMLSelectElement | {
             contentEditable: boolean;
+        })[] | (string | number | {
+            class: string;
         })[])[];
     };
     commands({ type }: {

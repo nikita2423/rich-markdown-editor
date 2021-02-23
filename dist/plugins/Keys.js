@@ -5,8 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const prosemirror_state_1 = require("prosemirror-state");
 const Extension_1 = __importDefault(require("../lib/Extension"));
-const SSR = typeof window === "undefined";
-const isMac = !SSR && window.navigator.platform === "MacIntel";
+const isModKey_1 = __importDefault(require("../lib/isModKey"));
 class Keys extends Extension_1.default {
     get name() {
         return "keys";
@@ -15,6 +14,10 @@ class Keys extends Extension_1.default {
         return [
             new prosemirror_state_1.Plugin({
                 props: {
+                    handleDOMEvents: {
+                        blur: this.options.onBlur,
+                        focus: this.options.onFocus,
+                    },
                     handleKeyDown: (view, event) => {
                         if (view.state.selection instanceof prosemirror_state_1.AllSelection) {
                             if (event.key === "ArrowUp") {
@@ -28,8 +31,7 @@ class Keys extends Extension_1.default {
                                 return true;
                             }
                         }
-                        const isModKey = isMac ? event.metaKey : event.ctrlKey;
-                        if (!isModKey) {
+                        if (!isModKey_1.default(event)) {
                             return false;
                         }
                         if (event.key === "s") {
