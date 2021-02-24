@@ -130,7 +130,6 @@ class RichMarkdownEditor extends React.PureComponent {
             });
         };
         this.value = () => {
-            console.log("this.view", this.serializer.serialize(this.view.state.doc));
             return this.serializer.serialize(this.view.state.doc);
         };
         this.handleChange = () => {
@@ -274,6 +273,7 @@ class RichMarkdownEditor extends React.PureComponent {
         this.render = () => {
             const { readOnly, readOnlyWriteCheckboxes, style, tooltip, className, onKeyDown, } = this.props;
             const dictionary = this.dictionary(this.props.dictionary);
+            console.log("Doc data", this.value());
             return (React.createElement(Flex_1.default, { onKeyDown: onKeyDown, style: style, className: className, align: "flex-start", justify: "center", column: true },
                 React.createElement(styled_components_1.ThemeProvider, { theme: this.theme() },
                     React.createElement(React.Fragment, null,
