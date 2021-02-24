@@ -57,6 +57,23 @@ export declare const base: {
     warningNotice: string;
     emoji: string;
     mention: string;
+    todoListDesc: string;
+    heading1Desc: string;
+    heading2Desc: string;
+    heading3Desc: string;
+    bulletedListDesc: string;
+    numberedListDesc: string;
+    tableDesc: string;
+    quoteDesc: string;
+    codeDesc: string;
+    dividerDesc: string;
+    linkDesc: string;
+    imageDesc: string;
+    emojiDesc: string;
+    mentionDesc: string;
+    hintInfoDesc: string;
+    warningDesc: string;
+    basicDesc: string;
 };
 export default base;
 //# sourceMappingURL=dictionary.d.ts.map

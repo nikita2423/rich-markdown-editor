@@ -57,6 +57,23 @@ export const base = {
   warningNotice: "Warning notice",
   emoji: "Emoji",
   mention: "Mention a person",
+  todoListDesc: "List of task you need to complete.",
+  heading1Desc: "For your dominant title or topic.",
+  heading2Desc: "For your secondary title or topic.",
+  heading3Desc: "For your tertiary title or topic.",
+  bulletedListDesc: "Series of items with bullet.",
+  numberedListDesc: "Series of items with numbers.",
+  tableDesc: "Arrangement of data in rows, columns.",
+  quoteDesc: "For highlighting important info.",
+  codeDesc: "For your code and logic.",
+  dividerDesc: "Visually separate sections on a page.",
+  linkDesc: "Add external link to page.",
+  imageDesc: "Upload a image or link.",
+  emojiDesc: "Use emoji in place of text.",
+  mentionDesc: "Tag someone so they get a alert.",
+  hintInfoDesc: "Use it to highlight important info.",
+  warningDesc: "Use it to highlight warnings.",
+  basicDesc: "Tag someone so they get a alert.",
 };
 
 export default base;

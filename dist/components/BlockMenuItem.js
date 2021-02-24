@@ -14,7 +14,7 @@ const React = __importStar(require("react"));
 const smooth_scroll_into_view_if_needed_1 = __importDefault(require("smooth-scroll-into-view-if-needed"));
 const styled_components_1 = __importStar(require("styled-components"));
 const theme_1 = __importDefault(require("../theme"));
-function BlockMenuItem({ selected, disabled, onClick, title, shortcut, icon, }) {
+function BlockMenuItem({ selected, disabled, onClick, title, shortcut, icon, description, }) {
     const Icon = icon;
     const ref = React.useCallback((node) => {
         if (selected && node) {
@@ -33,7 +33,7 @@ function BlockMenuItem({ selected, disabled, onClick, title, shortcut, icon, }) 
         React.createElement("div", { className: "text-container" },
             React.createElement("div", { style: { textAlign: "left" } },
                 React.createElement("div", null, title),
-                React.createElement("div", { style: { color: "#aaa", fontSize: "12px", marginTop: "4px" } }, "Start writing your new idea or topic.")),
+                React.createElement("div", { style: { color: "#aaa", fontSize: "12px", marginTop: "6px" } }, description)),
             React.createElement(Shortcut, null, shortcut))));
 }
 const MenuItem = styled_components_1.default.button `

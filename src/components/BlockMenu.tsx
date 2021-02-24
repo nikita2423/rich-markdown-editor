@@ -514,6 +514,7 @@ class BlockMenu extends React.Component<Props, State> {
                       selected={selected}
                       icon={item.icon}
                       title={item.title}
+                      description={item.description}
                       shortcut={item.shortcut}
                     ></BlockMenuItem>
                   </ListItem>

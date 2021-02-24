@@ -7,9 +7,10 @@ declare type Props = {
     theme: typeof theme;
     icon: typeof React.Component | React.FC<any>;
     title: string;
+    description?: string;
     shortcut?: string;
 };
-declare const _default: React.ForwardRefExoticComponent<Pick<Props, "disabled" | "title" | "icon" | "onClick" | "selected" | "shortcut"> & {
+declare const _default: React.ForwardRefExoticComponent<Pick<Props, "disabled" | "title" | "icon" | "onClick" | "selected" | "shortcut" | "description"> & {
     theme?: any;
 }>;
 export default _default;

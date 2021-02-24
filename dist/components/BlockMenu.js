@@ -376,7 +376,7 @@ class BlockMenu extends React.Component {
                             return null;
                         }
                         return (React.createElement(ListItem, { key: index },
-                            React.createElement(BlockMenuItem_1.default, { onClick: () => this.insertItem(item), selected: selected, icon: item.icon, title: item.title, shortcut: item.shortcut })));
+                            React.createElement(BlockMenuItem_1.default, { onClick: () => this.insertItem(item), selected: selected, icon: item.icon, title: item.title, description: item.description, shortcut: item.shortcut })));
                     }),
                     items.length === 0 && (React.createElement(ListItem, null,
                         React.createElement(Empty, null, dictionary.noResults))))),

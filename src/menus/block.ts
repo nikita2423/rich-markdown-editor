@@ -51,6 +51,7 @@ export default function blockMenuItems(
       keywords: "h1 heading1 title",
       icon: Heading1Icon,
       shortcut: "^ ⇧ 1",
+      description: dictionary.heading1Desc,
       attrs: { level: 1 },
     },
     {
@@ -58,12 +59,14 @@ export default function blockMenuItems(
       title: dictionary.h2,
       keywords: "h2 heading2",
       icon: Heading2Icon,
+      description: dictionary.heading2Desc,
       shortcut: "^ ⇧ 2",
       attrs: { level: 2 },
     },
     {
       name: "heading",
       title: dictionary.h3,
+      description: dictionary.heading3Desc,
       keywords: "h3 heading3",
       icon: Heading3Icon,
       shortcut: "^ ⇧ 3",
@@ -75,6 +78,7 @@ export default function blockMenuItems(
     {
       name: "checkbox_list",
       title: dictionary.checkboxList,
+      description: dictionary.todoListDesc,
       icon: TodoListIcon,
       keywords: "checklist checkbox task",
       shortcut: "^ ⇧ 7",
@@ -82,12 +86,14 @@ export default function blockMenuItems(
     {
       name: "bullet_list",
       title: dictionary.bulletList,
+      description: dictionary.bulletedListDesc,
       icon: BulletedListIcon,
       shortcut: "^ ⇧ 8",
     },
     {
       name: "ordered_list",
       title: dictionary.orderedList,
+      description: dictionary.numberedListDesc,
       icon: OrderedListIcon,
       shortcut: "^ ⇧ 9",
     },
@@ -97,18 +103,21 @@ export default function blockMenuItems(
     {
       name: "table",
       title: dictionary.table,
+      description: dictionary.tableDesc,
       icon: TableIcon,
       attrs: { rowsCount: 3, colsCount: 3 },
     },
     {
       name: "blockquote",
       title: dictionary.quote,
+      description: dictionary.quoteDesc,
       icon: BlockQuoteIcon,
       shortcut: `${mod} ]`,
     },
     {
       name: "code_block",
       title: dictionary.codeBlock,
+      description: dictionary.codeDesc,
       icon: CodeIcon,
       shortcut: "^ ⇧ \\",
       keywords: "script",
@@ -116,6 +125,7 @@ export default function blockMenuItems(
     {
       name: "hr",
       title: dictionary.hr,
+      description: dictionary.dividerDesc,
       icon: HorizontalRuleIcon,
       shortcut: `${mod} _`,
       keywords: "horizontal rule break line",
@@ -123,12 +133,14 @@ export default function blockMenuItems(
     {
       name: "image",
       title: dictionary.image,
+      description: dictionary.imageDesc,
       icon: ImageIcon,
       keywords: "picture photo",
     },
     {
       name: "link",
       title: dictionary.link,
+      description: dictionary.linkDesc,
       icon: LinkIcon,
       shortcut: `${mod} k`,
       keywords: "link url uri href",
@@ -139,6 +151,7 @@ export default function blockMenuItems(
     {
       name: "container_notice",
       title: dictionary.infoNotice,
+      description: dictionary.hintInfoDesc,
       icon: InfoIcon,
       keywords: "container_notice card information",
       attrs: { style: "info" },
@@ -146,6 +159,7 @@ export default function blockMenuItems(
     {
       name: "container_notice",
       title: dictionary.warningNotice,
+      description: dictionary.warningDesc,
       icon: WarningIcon,
       keywords: "container_notice card error",
       attrs: { style: "warning" },
@@ -153,6 +167,7 @@ export default function blockMenuItems(
     {
       name: "container_notice",
       title: dictionary.tipNotice,
+      description: dictionary.basicDesc,
       icon: StarredIcon,
       keywords: "container_notice card suggestion",
       attrs: { style: "tip" },

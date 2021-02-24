@@ -8,6 +8,7 @@ export declare type MenuItem = {
     icon?: typeof React.Component | React.FC<any>;
     name?: string;
     title?: string;
+    description?: string;
     shortcut?: string;
     keywords?: string;
     tooltip?: string;

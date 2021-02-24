@@ -10,6 +10,7 @@ type Props = {
   theme: typeof theme;
   icon: typeof React.Component | React.FC<any>;
   title: string;
+  description?: string;
   shortcut?: string;
 };
 
@@ -20,6 +21,7 @@ function BlockMenuItem({
   title,
   shortcut,
   icon,
+  description,
 }: Props) {
   const Icon = icon;
 
@@ -57,8 +59,8 @@ function BlockMenuItem({
         {/* &nbsp;&nbsp; */}
         <div style={{ textAlign: "left" }}>
           <div>{title}</div>
-          <div style={{ color: "#aaa", fontSize: "12px", marginTop: "4px" }}>
-            Start writing your new idea or topic.
+          <div style={{ color: "#aaa", fontSize: "12px", marginTop: "6px" }}>
+            {description}
           </div>
         </div>
 

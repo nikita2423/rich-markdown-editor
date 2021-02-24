@@ -31,6 +31,7 @@ function blockMenuItems(dictionary) {
             keywords: "h1 heading1 title",
             icon: H1Icon_1.default,
             shortcut: "^ ⇧ 1",
+            description: dictionary.heading1Desc,
             attrs: { level: 1 },
         },
         {
@@ -38,12 +39,14 @@ function blockMenuItems(dictionary) {
             title: dictionary.h2,
             keywords: "h2 heading2",
             icon: H2Icon_1.default,
+            description: dictionary.heading2Desc,
             shortcut: "^ ⇧ 2",
             attrs: { level: 2 },
         },
         {
             name: "heading",
             title: dictionary.h3,
+            description: dictionary.heading3Desc,
             keywords: "h3 heading3",
             icon: H3Icon_1.default,
             shortcut: "^ ⇧ 3",
@@ -52,6 +55,7 @@ function blockMenuItems(dictionary) {
         {
             name: "checkbox_list",
             title: dictionary.checkboxList,
+            description: dictionary.todoListDesc,
             icon: CheckListIcon_1.default,
             keywords: "checklist checkbox task",
             shortcut: "^ ⇧ 7",
@@ -59,30 +63,35 @@ function blockMenuItems(dictionary) {
         {
             name: "bullet_list",
             title: dictionary.bulletList,
+            description: dictionary.bulletedListDesc,
             icon: BulletIcon_1.default,
             shortcut: "^ ⇧ 8",
         },
         {
             name: "ordered_list",
             title: dictionary.orderedList,
+            description: dictionary.numberedListDesc,
             icon: OrderedIcon_1.default,
             shortcut: "^ ⇧ 9",
         },
         {
             name: "table",
             title: dictionary.table,
+            description: dictionary.tableDesc,
             icon: TableIcon_1.default,
             attrs: { rowsCount: 3, colsCount: 3 },
         },
         {
             name: "blockquote",
             title: dictionary.quote,
+            description: dictionary.quoteDesc,
             icon: QuoteIcon_1.default,
             shortcut: `${mod} ]`,
         },
         {
             name: "code_block",
             title: dictionary.codeBlock,
+            description: dictionary.codeDesc,
             icon: CodeBlockIcon_1.default,
             shortcut: "^ ⇧ \\",
             keywords: "script",
@@ -90,6 +99,7 @@ function blockMenuItems(dictionary) {
         {
             name: "hr",
             title: dictionary.hr,
+            description: dictionary.dividerDesc,
             icon: DividerIcon_1.default,
             shortcut: `${mod} _`,
             keywords: "horizontal rule break line",
@@ -97,12 +107,14 @@ function blockMenuItems(dictionary) {
         {
             name: "image",
             title: dictionary.image,
+            description: dictionary.imageDesc,
             icon: ImageIcon_1.default,
             keywords: "picture photo",
         },
         {
             name: "link",
             title: dictionary.link,
+            description: dictionary.linkDesc,
             icon: LinkIcon_1.default,
             shortcut: `${mod} k`,
             keywords: "link url uri href",
@@ -110,6 +122,7 @@ function blockMenuItems(dictionary) {
         {
             name: "container_notice",
             title: dictionary.infoNotice,
+            description: dictionary.hintInfoDesc,
             icon: InfoHintIcon_1.default,
             keywords: "container_notice card information",
             attrs: { style: "info" },
@@ -117,6 +130,7 @@ function blockMenuItems(dictionary) {
         {
             name: "container_notice",
             title: dictionary.warningNotice,
+            description: dictionary.warningDesc,
             icon: WarningIcon_1.default,
             keywords: "container_notice card error",
             attrs: { style: "warning" },
@@ -124,6 +138,7 @@ function blockMenuItems(dictionary) {
         {
             name: "container_notice",
             title: dictionary.tipNotice,
+            description: dictionary.basicDesc,
             icon: BasicIcon_1.default,
             keywords: "container_notice card suggestion",
             attrs: { style: "tip" },
