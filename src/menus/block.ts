@@ -178,12 +178,14 @@ export default function blockMenuItems(
     {
       name: "emoji",
       title: dictionary.emoji,
+      description: dictionary.emojiDesc,
       icon: EmojiIcon,
       shortcut: `:`,
     },
     {
       name: "mention",
       title: dictionary.mention,
+      description: dictionary.mentionDesc,
       icon: MentionIcon,
       shortcut: `@`,
     },

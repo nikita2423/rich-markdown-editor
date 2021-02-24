@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 // Custom Import..
 import { getSizeDimension } from "./utils";
 
-const QuoteIcon = ({
+const ItalicIcon = ({
   fill,
   size,
   style,
@@ -22,26 +22,32 @@ const QuoteIcon = ({
       onClick={onClick}
       className={className}
       style={{ ...sizeStyle, ...style }}
-      width="20"
-      height="15"
-      viewBox="0 0 20 15"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      width="14.224"
+      height="18"
+      viewBox="0 0 14.224 18"
     >
-      <path
-        d="M2.625 9.31269C2.625 7.95317 0 7.72659 0 4.35045C0 1.85801 1.64583 0 3.9375 0C6.39583 0 8 2.37915 8 4.89426C8 9.24471 4.25 15 1.91667 15C1.33333 15 0.270833 14.5468 0.270833 13.7764C0.270833 13.006 2.625 11.6692 2.625 9.31269Z"
-        fill={fill}
-      />
-      <path
-        d="M13.9608 9.32127C13.9608 7.94118 11 7.73756 11 4.34389C11 1.8552 12.8564 0 15.4413 0C18.1906 0.0226244 20 2.39819 20 4.9095C20 9.25339 15.7702 15 13.1384 15C12.4804 15 11.282 14.5475 11.282 13.7783C11.3055 13.009 13.9608 11.6742 13.9608 9.32127Z"
-        fill={fill}
-      />
+      <g id="italic" transform="translate(-13.65 -4)">
+        <g
+          id="Group_9712"
+          data-name="Group 9712"
+          transform="translate(13.65 4)"
+        >
+          <path
+            id="Path_3514"
+            data-name="Path 3514"
+            d="M27.874,5.174A1.175,1.175,0,0,1,26.7,6.348H25.16l-6.2,13.3h1.227a1.174,1.174,0,0,1,0,2.348H14.824a1.174,1.174,0,1,1,0-2.348h1.54l6.2-13.3H21.341a1.174,1.174,0,0,1,0-2.348H26.7A1.175,1.175,0,0,1,27.874,5.174Z"
+            transform="translate(-13.65 -4)"
+            fill={fill}
+          />
+        </g>
+      </g>
     </svg>
   );
 };
 
-QuoteIcon.defaultProps = {
-  fill: "black",
+ItalicIcon.defaultProps = {
+  fill: "#ccc",
   size: "tiny", // mini | tiny | small | medium | large | big | huge | massive
   style: {},
   className: null,
@@ -50,7 +56,7 @@ QuoteIcon.defaultProps = {
   id: "",
 };
 
-QuoteIcon.propTypes = {
+ItalicIcon.propTypes = {
   fill: PropTypes.string,
   size: PropTypes.string,
   style: PropTypes.object,
@@ -60,4 +66,4 @@ QuoteIcon.propTypes = {
   id: PropTypes.string,
 };
 
-export default QuoteIcon;
+export default ItalicIcon;

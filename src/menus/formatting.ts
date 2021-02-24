@@ -11,16 +11,16 @@
 //   HighlightIcon,
 // } from "outline-icons";
 
-import BoldIcon from "../icons/PlusIcon";
+import BoldIcon from "../icons/BoldIcon";
 import CodeIcon from "../icons/CodeBlockIcon";
 import Heading1Icon from "../icons/H1Icon";
 import Heading2Icon from "../icons/H2Icon";
-import ItalicIcon from "../icons/PlusIcon";
+import ItalicIcon from "../icons/ItalicIcon";
 import BlockQuoteIcon from "../icons/QuoteIcon";
 import LinkIcon from "../icons/LinkIcon";
-import StrikethroughIcon from "../icons/PlusIcon";
+import StrikethroughIcon from "../icons/StrikeThroughIcon";
 import InputIcon from "../icons/PlusIcon";
-import HighlightIcon from "../icons/PlusIcon";
+import HighlightIcon from "../icons/HighlighterIcon";
 
 import { isInTable } from "prosemirror-tables";
 import { EditorState } from "prosemirror-state";

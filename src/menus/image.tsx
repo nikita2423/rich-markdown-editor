@@ -5,10 +5,10 @@
 //   AlignImageCenterIcon,
 // } from "outline-icons";
 
-import TrashIcon from "../icons/PlusIcon";
-import AlignImageLeftIcon from "../icons/PlusIcon";
-import AlignImageRightIcon from "../icons/PlusIcon";
-import AlignImageCenterIcon from "../icons/PlusIcon";
+import TrashIcon from "../icons/TrashIcon";
+import AlignImageLeftIcon from "../icons/LeftImageIcon";
+import AlignImageRightIcon from "../icons/RightImageIcon";
+import AlignImageCenterIcon from "../icons/CenterImageIcon";
 
 import isNodeActive from "../queries/isNodeActive";
 import { MenuItem } from "../types";

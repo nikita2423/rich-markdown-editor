@@ -11,9 +11,9 @@ import { Mark } from "prosemirror-model";
 // } from "outline-icons";
 import PlusIcon from "../icons/PlusIcon";
 import DocumentIcon from "../icons/PlusIcon";
-import CloseIcon from "../icons/PlusIcon";
-import TrashIcon from "../icons/PlusIcon";
-import OpenIcon from "../icons/PlusIcon";
+import CloseIcon from "../icons/CloseIcon";
+import TrashIcon from "../icons/TrashIcon";
+import OpenIcon from "../icons/NewTabIcon";
 
 import styled, { withTheme } from "styled-components";
 import isUrl from "../lib/isUrl";

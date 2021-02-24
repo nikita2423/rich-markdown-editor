@@ -7,12 +7,12 @@
 //   InsertRightIcon,
 // } from "outline-icons";
 
-import TrashIcon from "../icons/PlusIcon";
-import AlignLeftIcon from "../icons/PlusIcon";
-import AlignRightIcon from "../icons/PlusIcon";
-import AlignCenterIcon from "../icons/PlusIcon";
-import InsertLeftIcon from "../icons/PlusIcon";
-import InsertRightIcon from "../icons/PlusIcon";
+import TrashIcon from "../icons/TrashIcon";
+import AlignLeftIcon from "../icons/LeftAlignIcon";
+import AlignRightIcon from "../icons/RightAlignIcon";
+import AlignCenterIcon from "../icons/CenterAlignIcon";
+import InsertLeftIcon from "../icons/TableInsertLeftIcon";
+import InsertRightIcon from "../icons/TableInsertRightIcon";
 
 import { EditorState } from "prosemirror-state";
 import isNodeActive from "../queries/isNodeActive";

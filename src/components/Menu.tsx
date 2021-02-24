@@ -45,7 +45,7 @@ class Menu extends React.Component<Props> {
               active={isActive}
             >
               <Tooltip tooltip={item.tooltip} placement="top">
-                <Icon color={this.props.theme.toolbarItem} />
+                <Icon fill={this.props.theme.toolbarItem} />
               </Tooltip>
             </ToolbarButton>
           );
