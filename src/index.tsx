@@ -585,7 +585,6 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
 
   value = (): string => {
     if (this.serializer) {
-      console.log("this.view", this.serializer.serialize(this.view.state.doc));
       return this.serializer.serialize(this.view.state.doc);
     }
     return "";
@@ -772,7 +771,6 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
       onKeyDown,
     } = this.props;
     const dictionary = this.dictionary(this.props.dictionary);
-    console.log("Doc data", this.value());
     return (
       <Flex
         onKeyDown={onKeyDown}
