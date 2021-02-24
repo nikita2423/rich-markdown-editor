@@ -11,15 +11,12 @@ import PropTypes from "prop-types";
 // Custom Import..
 import { getSizeDimension } from "./utils";
 
-const Close = ({ size, fill, style, className, onClick, id }) => {
+const Close = ({ fill }) => {
   const sizeStyle = getSizeDimension(size);
 
   return (
     <svg
-      onClick={onClick}
-      onMouseDown={onClick}
-      className={className}
-      style={{ ...sizeStyle, ...style }}
+      style={{ ...sizeStyle }}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 8 8"
     >

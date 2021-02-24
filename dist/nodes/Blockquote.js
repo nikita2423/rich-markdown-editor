@@ -29,6 +29,8 @@ class Blockquote extends Node_1.default {
         return {
             "Ctrl->": toggleWrap_1.default(type),
             "Mod-]": toggleWrap_1.default(type),
+            "Shift-Ctrl-7": toggleWrap_1.default(type),
+            "Shift-Cmd-7": toggleWrap_1.default(type),
         };
     }
     toMarkdown(state, node) {

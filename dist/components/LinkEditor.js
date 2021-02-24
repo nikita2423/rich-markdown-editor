@@ -14,9 +14,9 @@ const React = __importStar(require("react"));
 const prosemirror_utils_1 = require("prosemirror-utils");
 const PlusIcon_1 = __importDefault(require("../icons/PlusIcon"));
 const PlusIcon_2 = __importDefault(require("../icons/PlusIcon"));
-const PlusIcon_3 = __importDefault(require("../icons/PlusIcon"));
-const PlusIcon_4 = __importDefault(require("../icons/PlusIcon"));
-const PlusIcon_5 = __importDefault(require("../icons/PlusIcon"));
+const CloseIcon_1 = __importDefault(require("../icons/CloseIcon"));
+const TrashIcon_1 = __importDefault(require("../icons/TrashIcon"));
+const NewTabIcon_1 = __importDefault(require("../icons/NewTabIcon"));
 const styled_components_1 = __importStar(require("styled-components"));
 const isUrl_1 = __importDefault(require("../lib/isUrl"));
 const Flex_1 = __importDefault(require("./Flex"));
@@ -212,9 +212,9 @@ class LinkEditor extends React.Component {
                     : dictionary.searchOrPasteLink, onKeyDown: this.handleKeyDown, onChange: this.handleChange, autoFocus: this.href === "" }),
             React.createElement(ToolbarButton_1.default, { onClick: this.handleOpenLink, disabled: !value },
                 React.createElement(Tooltip, { tooltip: dictionary.openLink, placement: "top" },
-                    React.createElement(PlusIcon_5.default, null))),
+                    React.createElement(NewTabIcon_1.default, null))),
             React.createElement(ToolbarButton_1.default, { onClick: this.handleRemoveLink },
-                React.createElement(Tooltip, { tooltip: dictionary.removeLink, placement: "top" }, this.initialValue ? (React.createElement(PlusIcon_4.default, null)) : (React.createElement(PlusIcon_3.default, null)))),
+                React.createElement(Tooltip, { tooltip: dictionary.removeLink, placement: "top" }, this.initialValue ? (React.createElement(TrashIcon_1.default, null)) : (React.createElement(CloseIcon_1.default, null)))),
             showResults && (React.createElement(SearchResults, { id: "link-search-results" },
                 results.map((result, index) => (React.createElement(LinkSearchResult_1.default, { key: result.url, title: result.title, subtitle: result.subtitle, icon: React.createElement(PlusIcon_2.default, null), onMouseOver: () => this.handleFocusLink(index), onClick: this.handleSelectLink(result.url, result.title), selected: index === selectedIndex }))),
                 showCreateLink && (React.createElement(LinkSearchResult_1.default, { key: "create", title: suggestedLinkTitle, subtitle: dictionary.createNewDoc, icon: React.createElement(PlusIcon_1.default, null), onMouseOver: () => this.handleFocusLink(results.length), onClick: () => {

@@ -3,10 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const PlusIcon_1 = __importDefault(require("../icons/PlusIcon"));
-const PlusIcon_2 = __importDefault(require("../icons/PlusIcon"));
-const PlusIcon_3 = __importDefault(require("../icons/PlusIcon"));
-const PlusIcon_4 = __importDefault(require("../icons/PlusIcon"));
+const TrashIcon_1 = __importDefault(require("../icons/TrashIcon"));
+const LeftImageIcon_1 = __importDefault(require("../icons/LeftImageIcon"));
+const RightImageIcon_1 = __importDefault(require("../icons/RightImageIcon"));
+const CenterImageIcon_1 = __importDefault(require("../icons/CenterImageIcon"));
 const isNodeActive_1 = __importDefault(require("../queries/isNodeActive"));
 function imageMenuItems(state, dictionary) {
     const { schema } = state;
@@ -20,14 +20,14 @@ function imageMenuItems(state, dictionary) {
         {
             name: "alignLeft",
             tooltip: dictionary.alignLeft,
-            icon: PlusIcon_2.default,
+            icon: LeftImageIcon_1.default,
             visible: true,
             active: isLeftAligned,
         },
         {
             name: "alignCenter",
             tooltip: dictionary.alignCenter,
-            icon: PlusIcon_4.default,
+            icon: CenterImageIcon_1.default,
             visible: true,
             active: (state) => isNodeActive_1.default(schema.nodes.image)(state) &&
                 !isLeftAligned(state) &&
@@ -36,7 +36,7 @@ function imageMenuItems(state, dictionary) {
         {
             name: "alignRight",
             tooltip: dictionary.alignRight,
-            icon: PlusIcon_3.default,
+            icon: RightImageIcon_1.default,
             visible: true,
             active: isRightAligned,
         },
@@ -47,7 +47,7 @@ function imageMenuItems(state, dictionary) {
         {
             name: "deleteImage",
             tooltip: dictionary.deleteImage,
-            icon: PlusIcon_1.default,
+            icon: TrashIcon_1.default,
             visible: true,
             active: () => false,
         },

@@ -23,7 +23,8 @@ class BulletList extends Node_1.default {
     }
     keys({ type, schema }) {
         return {
-            "Shift-Ctrl-8": toggleList_1.default(type, schema.nodes.list_item),
+            "Shift-Ctrl-5": toggleList_1.default(type, schema.nodes.list_item),
+            "Shift-Cmd-5": toggleList_1.default(type, schema.nodes.list_item),
         };
     }
     inputRules({ type }) {

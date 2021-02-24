@@ -35,12 +35,12 @@ export default class Heading extends Node {
       group: "block",
       defining: true,
       draggable: false,
-      parseDOM: this.options.levels.map(level => ({
+      parseDOM: this.options.levels.map((level) => ({
         tag: `h${level}`,
         attrs: { level },
         contentElement: "span",
       })),
-      toDOM: node => {
+      toDOM: (node) => {
         const button = document.createElement("button");
         button.innerText = "#";
         button.type = "button";
@@ -78,7 +78,7 @@ export default class Heading extends Node {
   }
 
   handleCopyLink = () => {
-    return event => {
+    return (event) => {
       // this is unfortunate but appears to be the best way to grab the anchor
       // as it's added directly to the dom by a decoration.
       const anchor = event.currentTarget.parentNode.previousSibling;
@@ -107,6 +107,7 @@ export default class Heading extends Node {
         ...items,
         ...{
           [`Shift-Ctrl-${level}`]: setBlockType(type, { level }),
+          [`Shift-Cmd-${level}`]: setBlockType(type, { level }),
         },
       }),
       {}
@@ -119,7 +120,7 @@ export default class Heading extends Node {
   }
 
   get plugins() {
-    const getAnchors = doc => {
+    const getAnchors = (doc) => {
       const decorations: Decoration[] = [];
       const previouslySeen = {};
 
@@ -171,7 +172,7 @@ export default class Heading extends Node {
         },
       },
       props: {
-        decorations: state => plugin.getState(state),
+        decorations: (state) => plugin.getState(state),
       },
     });
 
@@ -179,7 +180,7 @@ export default class Heading extends Node {
   }
 
   inputRules({ type }: { type: NodeType }) {
-    return this.options.levels.map(level =>
+    return this.options.levels.map((level) =>
       textblockTypeInputRule(new RegExp(`^(#{1,${level}})\\s$`), type, () => ({
         level,
       }))

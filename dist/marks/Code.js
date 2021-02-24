@@ -41,6 +41,8 @@ class Code extends Mark_1.default {
     keys({ type }) {
         return {
             "Mod`": prosemirror_commands_1.toggleMark(type),
+            "Shift-Cmd-8": prosemirror_commands_1.toggleMark(type),
+            "Shift-Ctrl-8": prosemirror_commands_1.toggleMark(type),
         };
     }
     get toMarkdown() {

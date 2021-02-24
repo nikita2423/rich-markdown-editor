@@ -13,6 +13,7 @@ export default class Paragraph extends Node {
         type: any;
     }): {
         "Shift-Ctrl-0": (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
+        "Cmd-Shift-0": (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
     };
     commands({ type }: {
         type: any;

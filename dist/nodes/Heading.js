@@ -18,7 +18,7 @@ class Heading extends Node_1.default {
         super(...arguments);
         this.className = "heading-name";
         this.handleCopyLink = () => {
-            return event => {
+            return (event) => {
                 const anchor = event.currentTarget.parentNode.previousSibling;
                 if (!anchor.className.includes(this.className)) {
                     throw new Error("Did not find anchor as previous sibling of heading");
@@ -51,12 +51,12 @@ class Heading extends Node_1.default {
             group: "block",
             defining: true,
             draggable: false,
-            parseDOM: this.options.levels.map(level => ({
+            parseDOM: this.options.levels.map((level) => ({
                 tag: `h${level}`,
                 attrs: { level },
                 contentElement: "span",
             })),
-            toDOM: node => {
+            toDOM: (node) => {
                 const button = document.createElement("button");
                 button.innerText = "#";
                 button.type = "button";
@@ -91,11 +91,12 @@ class Heading extends Node_1.default {
     keys({ type }) {
         const options = this.options.levels.reduce((items, level) => (Object.assign(Object.assign({}, items), {
             [`Shift-Ctrl-${level}`]: prosemirror_commands_1.setBlockType(type, { level }),
+            [`Shift-Cmd-${level}`]: prosemirror_commands_1.setBlockType(type, { level }),
         })), {});
         return Object.assign(Object.assign({}, options), { Backspace: backspaceToParagraph_1.default(type) });
     }
     get plugins() {
-        const getAnchors = doc => {
+        const getAnchors = (doc) => {
             const decorations = [];
             const previouslySeen = {};
             doc.descendants((node, pos) => {
@@ -130,13 +131,13 @@ class Heading extends Node_1.default {
                 },
             },
             props: {
-                decorations: state => plugin.getState(state),
+                decorations: (state) => plugin.getState(state),
             },
         });
         return [plugin];
     }
     inputRules({ type }) {
-        return this.options.levels.map(level => prosemirror_inputrules_1.textblockTypeInputRule(new RegExp(`^(#{1,${level}})\\s$`), type, () => ({
+        return this.options.levels.map((level) => prosemirror_inputrules_1.textblockTypeInputRule(new RegExp(`^(#{1,${level}})\\s$`), type, () => ({
             level,
         })));
     }

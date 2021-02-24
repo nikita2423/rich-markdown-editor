@@ -22,6 +22,7 @@ class Paragraph extends Node_1.default {
     keys({ type }) {
         return {
             "Shift-Ctrl-0": prosemirror_commands_1.setBlockType(type),
+            "Cmd-Shift-0": prosemirror_commands_1.setBlockType(type),
         };
     }
     commands({ type }) {

@@ -45,6 +45,8 @@ export default class Code extends Mark {
     // https://github.com/ProseMirror/prosemirror/issues/515
     return {
       "Mod`": toggleMark(type),
+      "Shift-Cmd-8": toggleMark(type),
+      "Shift-Ctrl-8": toggleMark(type),
     };
   }
 

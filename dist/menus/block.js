@@ -146,12 +146,14 @@ function blockMenuItems(dictionary) {
         {
             name: "emoji",
             title: dictionary.emoji,
+            description: dictionary.emojiDesc,
             icon: EmojiIcon_1.default,
             shortcut: `:`,
         },
         {
             name: "mention",
             title: dictionary.mention,
+            description: dictionary.mentionDesc,
             icon: MentionIcon_1.default,
             shortcut: `@`,
         },

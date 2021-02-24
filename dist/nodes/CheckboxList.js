@@ -24,7 +24,8 @@ class CheckboxList extends Node_1.default {
     }
     keys({ type, schema }) {
         return {
-            "Shift-Ctrl-7": toggleList_1.default(type, schema.nodes.checkbox_item),
+            "Shift-Ctrl-4": toggleList_1.default(type, schema.nodes.checkbox_item),
+            "Shift-Cmd-4": toggleList_1.default(type, schema.nodes.checkbox_item),
         };
     }
     commands({ type, schema }) {

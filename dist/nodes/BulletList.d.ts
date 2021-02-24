@@ -17,7 +17,8 @@ export default class BulletList extends Node {
         type: any;
         schema: any;
     }): {
-        "Shift-Ctrl-8": (state: import("prosemirror-state").EditorState<any>, dispatch: (tr: import("prosemirror-state").Transaction<any>) => void) => boolean;
+        "Shift-Ctrl-5": (state: import("prosemirror-state").EditorState<any>, dispatch: (tr: import("prosemirror-state").Transaction<any>) => void) => boolean;
+        "Shift-Cmd-5": (state: import("prosemirror-state").EditorState<any>, dispatch: (tr: import("prosemirror-state").Transaction<any>) => void) => boolean;
     };
     inputRules({ type }: {
         type: any;

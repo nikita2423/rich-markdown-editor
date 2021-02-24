@@ -22,7 +22,8 @@ export default class BulletList extends Node {
 
   keys({ type, schema }) {
     return {
-      "Shift-Ctrl-8": toggleList(type, schema.nodes.list_item),
+      "Shift-Ctrl-5": toggleList(type, schema.nodes.list_item),
+      "Shift-Cmd-5": toggleList(type, schema.nodes.list_item),
     };
   }
 

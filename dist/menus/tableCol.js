@@ -3,12 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const PlusIcon_1 = __importDefault(require("../icons/PlusIcon"));
-const PlusIcon_2 = __importDefault(require("../icons/PlusIcon"));
-const PlusIcon_3 = __importDefault(require("../icons/PlusIcon"));
-const PlusIcon_4 = __importDefault(require("../icons/PlusIcon"));
-const PlusIcon_5 = __importDefault(require("../icons/PlusIcon"));
-const PlusIcon_6 = __importDefault(require("../icons/PlusIcon"));
+const TrashIcon_1 = __importDefault(require("../icons/TrashIcon"));
+const LeftAlignIcon_1 = __importDefault(require("../icons/LeftAlignIcon"));
+const RightAlignIcon_1 = __importDefault(require("../icons/RightAlignIcon"));
+const CenterAlignIcon_1 = __importDefault(require("../icons/CenterAlignIcon"));
+const TableInsertLeftIcon_1 = __importDefault(require("../icons/TableInsertLeftIcon"));
+const TableInsertRightIcon_1 = __importDefault(require("../icons/TableInsertRightIcon"));
 const isNodeActive_1 = __importDefault(require("../queries/isNodeActive"));
 function tableColMenuItems(state, index, dictionary) {
     const { schema } = state;
@@ -16,7 +16,7 @@ function tableColMenuItems(state, index, dictionary) {
         {
             name: "setColumnAttr",
             tooltip: dictionary.alignLeft,
-            icon: PlusIcon_2.default,
+            icon: LeftAlignIcon_1.default,
             attrs: { index, alignment: "left" },
             active: isNodeActive_1.default(schema.nodes.th, {
                 colspan: 1,
@@ -27,7 +27,7 @@ function tableColMenuItems(state, index, dictionary) {
         {
             name: "setColumnAttr",
             tooltip: dictionary.alignCenter,
-            icon: PlusIcon_4.default,
+            icon: CenterAlignIcon_1.default,
             attrs: { index, alignment: "center" },
             active: isNodeActive_1.default(schema.nodes.th, {
                 colspan: 1,
@@ -38,7 +38,7 @@ function tableColMenuItems(state, index, dictionary) {
         {
             name: "setColumnAttr",
             tooltip: dictionary.alignRight,
-            icon: PlusIcon_3.default,
+            icon: RightAlignIcon_1.default,
             attrs: { index, alignment: "right" },
             active: isNodeActive_1.default(schema.nodes.th, {
                 colspan: 1,
@@ -52,13 +52,13 @@ function tableColMenuItems(state, index, dictionary) {
         {
             name: "addColumnBefore",
             tooltip: dictionary.addColumnBefore,
-            icon: PlusIcon_5.default,
+            icon: TableInsertLeftIcon_1.default,
             active: () => false,
         },
         {
             name: "addColumnAfter",
             tooltip: dictionary.addColumnAfter,
-            icon: PlusIcon_6.default,
+            icon: TableInsertRightIcon_1.default,
             active: () => false,
         },
         {
@@ -67,7 +67,7 @@ function tableColMenuItems(state, index, dictionary) {
         {
             name: "deleteColumn",
             tooltip: dictionary.deleteColumn,
-            icon: PlusIcon_1.default,
+            icon: TrashIcon_1.default,
             active: () => false,
         },
     ];

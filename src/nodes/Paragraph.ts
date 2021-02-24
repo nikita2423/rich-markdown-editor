@@ -20,6 +20,7 @@ export default class Paragraph extends Node {
   keys({ type }) {
     return {
       "Shift-Ctrl-0": setBlockType(type),
+      "Cmd-Shift-0": setBlockType(type),
     };
   }
 

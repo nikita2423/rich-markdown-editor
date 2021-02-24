@@ -130,6 +130,8 @@ class CodeFence extends Node_1.default {
     keys({ type }) {
         return {
             "Shift-Ctrl-\\": prosemirror_commands_1.setBlockType(type),
+            "Shift-Cmd-9": prosemirror_commands_1.setBlockType(type),
+            "Shift-Ctrl-9": prosemirror_commands_1.setBlockType(type),
             "Shift-Enter": (state, dispatch) => {
                 if (!isInCode_1.default(state))
                     return false;

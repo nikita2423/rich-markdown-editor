@@ -15,7 +15,8 @@ export default class CheckboxList extends Node {
         type: any;
         schema: any;
     }): {
-        "Shift-Ctrl-7": (state: import("prosemirror-state").EditorState<any>, dispatch: (tr: import("prosemirror-state").Transaction<any>) => void) => boolean;
+        "Shift-Ctrl-4": (state: import("prosemirror-state").EditorState<any>, dispatch: (tr: import("prosemirror-state").Transaction<any>) => void) => boolean;
+        "Shift-Cmd-4": (state: import("prosemirror-state").EditorState<any>, dispatch: (tr: import("prosemirror-state").Transaction<any>) => void) => boolean;
     };
     commands({ type, schema }: {
         type: any;

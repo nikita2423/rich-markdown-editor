@@ -33,7 +33,7 @@ class Menu extends React.Component {
             const isActive = item.active ? item.active(state) : false;
             return (React.createElement(ToolbarButton_1.default, { key: index, onClick: () => item.name && this.props.commands[item.name](item.attrs), active: isActive },
                 React.createElement(Tooltip, { tooltip: item.tooltip, placement: "top" },
-                    React.createElement(Icon, { color: this.props.theme.toolbarItem }))));
+                    React.createElement(Icon, { fill: this.props.theme.toolbarItem }))));
         })));
     }
 }

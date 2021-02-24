@@ -29,7 +29,7 @@ class OrderedList extends Node_1.default {
                     }),
                 },
             ],
-            toDOM: node => node.attrs.order === 1
+            toDOM: (node) => node.attrs.order === 1
                 ? ["ol", 0]
                 : ["ol", { start: node.attrs.order }, 0],
         };
@@ -39,19 +39,20 @@ class OrderedList extends Node_1.default {
     }
     keys({ type, schema }) {
         return {
-            "Shift-Ctrl-9": toggleList_1.default(type, schema.nodes.list_item),
+            "Shift-Ctrl-6": toggleList_1.default(type, schema.nodes.list_item),
+            "Shift-Cmd-6": toggleList_1.default(type, schema.nodes.list_item),
         };
     }
     inputRules({ type }) {
         return [
-            prosemirror_inputrules_1.wrappingInputRule(/^(\d+)\.\s$/, type, match => ({ order: +match[1] }), (match, node) => node.childCount + node.attrs.order === +match[1]),
+            prosemirror_inputrules_1.wrappingInputRule(/^(\d+)\.\s$/, type, (match) => ({ order: +match[1] }), (match, node) => node.childCount + node.attrs.order === +match[1]),
         ];
     }
     toMarkdown(state, node) {
         const start = node.attrs.order || 1;
         const maxW = `${start + node.childCount - 1}`.length;
         const space = state.repeat(" ", maxW + 2);
-        state.renderList(node, space, i => {
+        state.renderList(node, space, (i) => {
             const nStr = `${start + i}`;
             return state.repeat(" ", maxW - nStr.length) + nStr + ". ";
         });

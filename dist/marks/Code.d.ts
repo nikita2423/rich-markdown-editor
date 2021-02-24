@@ -17,6 +17,8 @@ export default class Code extends Mark {
         type: any;
     }): {
         "Mod`": (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
+        "Shift-Cmd-8": (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
+        "Shift-Ctrl-8": (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
     };
     get toMarkdown(): {
         open(_state: any, _mark: any, parent: any, index: any): string;
