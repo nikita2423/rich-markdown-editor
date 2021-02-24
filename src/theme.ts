@@ -52,15 +52,15 @@ export const base = {
   blockToolbarHoverBackground: colors.greyLight,
   blockToolbarDivider: colors.greyMid,
 
-  noticeInfoBackground: "#CFE2FF",
-  noticeInfoText: "#084298",
-  noticeInfoStroke: "#B6D4FE",
-  noticeTipBackground: "#CFF4FC",
-  noticeTipStroke: "#B6EFFB",
-  noticeTipText: "#055160",
-  noticeWarningBackground: "#FF5C80",
-  noticeWarningStroke: "#FFECB5",
-  noticeWarningText: "#664D03",
+  noticeInfoBackground: "#d1ecf1",
+  noticeInfoText: "#0c5460",
+  noticeInfoStroke: "#bee5eb",
+  noticeTipBackground: "#cce5ff",
+  noticeTipStroke: "#b8daff",
+  noticeTipText: "#004085",
+  noticeWarningBackground: "#fff3cd",
+  noticeWarningStroke: "#ffeeba",
+  noticeWarningText: "#856404",
 };
 
 export const light = {

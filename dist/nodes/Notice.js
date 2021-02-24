@@ -82,13 +82,13 @@ class Notice extends Node_1.default {
                 });
                 let component;
                 if (node.attrs.style === "tip") {
-                    component = React.createElement(BasicIcon_1.default, { fill: "#055160" });
+                    component = React.createElement(BasicIcon_1.default, { fill: "#004085" });
                 }
                 else if (node.attrs.style === "warning") {
-                    component = React.createElement(WarningIcon_1.default, { fill: "#664D03" });
+                    component = React.createElement(WarningIcon_1.default, { fill: "#856404" });
                 }
                 else {
-                    component = React.createElement(InfoHintIcon_1.default, { fill: "#084298" });
+                    component = React.createElement(InfoHintIcon_1.default, { fill: "#0c5460" });
                 }
                 const icon = document.createElement("div");
                 icon.className = "icon";
