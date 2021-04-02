@@ -21,7 +21,7 @@ export const base = {
   fontFamilyMono:
     "'SFMono-Regular',Consolas,'Liberation Mono', Menlo, Courier,monospace",
   fontWeight: 400,
-  zIndex: 100,
+  zIndex: 900,
   link: colors.primary,
   placeholder: "#B1BECC",
   textSecondary: "#bbb",
