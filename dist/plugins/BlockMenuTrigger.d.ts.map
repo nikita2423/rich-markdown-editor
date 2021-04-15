@@ -1,1 +1,0 @@
-{"version":3,"file":"BlockMenuTrigger.d.ts","sourceRoot":"","sources":["../../src/plugins/BlockMenuTrigger.tsx"],"names":[],"mappings":"AACA,OAAO,EAAE,SAAS,EAAE,MAAM,wBAAwB,CAAC;AAEnD,OAAO,EAAE,MAAM,EAAE,MAAM,mBAAmB,CAAC;AAI3C,OAAO,SAAS,MAAM,kBAAkB,CAAC;AAmCzC,MAAM,CAAC,OAAO,OAAO,gBAAiB,SAAQ,SAAS;IACrD,IAAI,IAAI,WAEP;IAED,IAAI,OAAO,uBAkHV;IAED,UAAU;CA0BX"}
