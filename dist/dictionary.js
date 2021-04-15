@@ -32,6 +32,7 @@ exports.base = {
     heading: "Heading",
     hr: "Divider",
     image: "Image",
+    file: "File",
     imageUploadError: "Sorry, an error occurred uploading the image",
     info: "Info",
     infoNotice: "Info notice",

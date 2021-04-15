@@ -112,6 +112,13 @@ function blockMenuItems(dictionary) {
             keywords: "picture photo",
         },
         {
+            name: "file",
+            title: "File",
+            description: dictionary.imageDesc,
+            icon: ImageIcon_1.default,
+            keywords: "file doc pdf",
+        },
+        {
             name: "link",
             title: dictionary.link,
             description: dictionary.linkDesc,

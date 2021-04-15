@@ -32,6 +32,7 @@ declare const createAndInsertLink: (view: EditorView<any>, title: string, href: 
         heading: string;
         hr: string;
         image: string;
+        file: string;
         imageUploadError: string;
         info: string;
         infoNotice: string;

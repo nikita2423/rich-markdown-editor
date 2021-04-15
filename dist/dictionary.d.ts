@@ -30,6 +30,7 @@ export declare const base: {
     heading: string;
     hr: string;
     image: string;
+    file: string;
     imageUploadError: string;
     info: string;
     infoNotice: string;
