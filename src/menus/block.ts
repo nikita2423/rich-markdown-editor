@@ -32,8 +32,6 @@ import WarningIcon from "../icons/WarningIcon";
 import StarredIcon from "../icons/BasicIcon";
 import EmojiIcon from "../icons/EmojiIcon";
 import MentionIcon from "../icons/MentionIcon";
-import DangerIcon from "../icons/DangerIcon";
-import SuccessIcon from "../icons/SuccessIcon";
 
 import { MenuItem } from "../types";
 import baseDictionary from "../dictionary";
