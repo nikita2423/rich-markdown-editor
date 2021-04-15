@@ -42,7 +42,6 @@ function BlockMenuItem({
     },
     [selected]
   );
-
   return (
     <MenuItem
       selected={selected}
