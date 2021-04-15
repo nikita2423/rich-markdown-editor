@@ -1,0 +1,1 @@
+{"version":3,"file":"EmojiIconsTrigger.d.ts","sourceRoot":"","sources":["../../src/plugins/EmojiIconsTrigger.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,wBAAwB,CAAC;AACnD,OAAO,EAAE,MAAM,EAAE,MAAM,mBAAmB,CAAC;AAI3C,OAAO,SAAS,MAAM,kBAAkB,CAAC;AAgCzC,MAAM,CAAC,OAAO,OAAO,UAAW,SAAQ,SAAS;IAC/C,IAAI,IAAI,WAEP;IAED,IAAI,OAAO,uBA4GV;IAED,UAAU;CAsBX"}
