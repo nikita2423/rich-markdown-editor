@@ -26,6 +26,7 @@ import BlockQuoteIcon from "../icons/QuoteIcon";
 import CodeIcon from "../icons/CodeBlockIcon";
 import HorizontalRuleIcon from "../icons/DividerIcon";
 import ImageIcon from "../icons/ImageIcon";
+import FileIcon from "../icons/FileIcon";
 import LinkIcon from "../icons/LinkIcon";
 import InfoIcon from "../icons/InfoHintIcon";
 import WarningIcon from "../icons/WarningIcon";
@@ -137,9 +138,9 @@ export default function blockMenuItems(
     },
     {
       name: "file",
-      title: "File",
-      description: dictionary.imageDesc,
-      icon: ImageIcon,
+      title: "File Upload",
+      description: "Upload attachments, docs or pdfs.",
+      icon: FileIcon,
       keywords: "file doc pdf",
     },
     {

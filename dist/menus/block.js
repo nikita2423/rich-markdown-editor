@@ -14,6 +14,7 @@ const QuoteIcon_1 = __importDefault(require("../icons/QuoteIcon"));
 const CodeBlockIcon_1 = __importDefault(require("../icons/CodeBlockIcon"));
 const DividerIcon_1 = __importDefault(require("../icons/DividerIcon"));
 const ImageIcon_1 = __importDefault(require("../icons/ImageIcon"));
+const FileIcon_1 = __importDefault(require("../icons/FileIcon"));
 const LinkIcon_1 = __importDefault(require("../icons/LinkIcon"));
 const InfoHintIcon_1 = __importDefault(require("../icons/InfoHintIcon"));
 const WarningIcon_1 = __importDefault(require("../icons/WarningIcon"));
@@ -113,9 +114,9 @@ function blockMenuItems(dictionary) {
         },
         {
             name: "file",
-            title: "File",
-            description: dictionary.imageDesc,
-            icon: ImageIcon_1.default,
+            title: "File Upload",
+            description: "Upload attachments, docs or pdfs.",
+            icon: FileIcon_1.default,
             keywords: "file doc pdf",
         },
         {
