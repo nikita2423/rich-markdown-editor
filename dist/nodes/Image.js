@@ -143,11 +143,11 @@ class Image extends Node_1.default {
             const { alt, src, title, layoutClass } = props.node.attrs;
             const className = layoutClass ? `image image-${layoutClass}` : "image";
             return (React.createElement("div", { contentEditable: false, className: className },
-                React.createElement(ImageWrapper, { className: isSelected ? "ProseMirror-selectednode" : "", onClick: this.handleSelect(props) },
-                    !this.isImage(src) && (React.createElement("div", { style: { display: "flex", justifyContent: "center" } },
-                        React.createElement("a", { href: src, target: "__blank" },
-                            React.createElement(DocImage_1.default, { text: this.getExtension(src) })))),
-                    this.isImage(src) && (React.createElement(react_medium_image_zoom_1.default, { image: {
+                !this.isImage(src) && (React.createElement("div", { style: { display: "flex", justifyContent: "center" } },
+                    React.createElement("a", { href: src, target: "__blank" },
+                        React.createElement(DocImage_1.default, { text: this.getExtension(src) })))),
+                this.isImage(src) && (React.createElement(ImageWrapper, { className: isSelected ? "ProseMirror-selectednode" : "", onClick: this.handleSelect(props) },
+                    React.createElement(react_medium_image_zoom_1.default, { image: {
                             src,
                             alt,
                             title,

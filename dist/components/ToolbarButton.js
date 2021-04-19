@@ -17,6 +17,7 @@ exports.default = styled_components_1.default.button `
   padding: 0;
   opacity: 0.7;
   outline: none;
+  flex: 1 1 auto;
 
   &:first-child {
     margin-left: 0;
@@ -31,6 +32,6 @@ exports.default = styled_components_1.default.button `
     cursor: default;
   }
 
-  ${props => props.active && "opacity: 1;"};
+  ${(props) => props.active && "opacity: 1;"};
 `;
 //# sourceMappingURL=ToolbarButton.js.map
