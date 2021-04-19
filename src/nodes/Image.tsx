@@ -8,6 +8,7 @@ import getDataTransferFiles from "../lib/getDataTransferFiles";
 import uploadPlaceholderPlugin from "../lib/uploadPlaceholder";
 import insertFiles from "../commands/insertFiles";
 import Node from "./Node";
+import DocImage from "../icons/DocImage";
 
 /**
  * Matches following attributes in Markdown-typed image: [, alt, src, class]
@@ -212,6 +213,23 @@ export default class Image extends Node {
     view.dispatch(transaction);
   };
 
+  getExtension = (url) => {
+    const spilttedString = url.split(".");
+    const extension = spilttedString[spilttedString.length - 1];
+    return extension ? extension.toUpperCase() : "";
+  };
+
+  isImage = (url) => {
+    if (
+      /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|png|PNG|JPG|JPEG|GIF|gif)/g.test(
+        url
+      )
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   component = (props) => {
     const { theme, isSelected } = props;
     const { alt, src, title, layoutClass } = props.node.attrs;
@@ -223,19 +241,28 @@ export default class Image extends Node {
           className={isSelected ? "ProseMirror-selectednode" : ""}
           onClick={this.handleSelect(props)}
         >
-          <ImageZoom
-            image={{
-              src,
-              alt,
-              title,
-            }}
-            defaultStyles={{
-              overlay: {
-                backgroundColor: theme.background,
-              },
-            }}
-            shouldRespectMaxDimension
-          />
+          {!this.isImage(src) && (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <a href={src} target="__blank">
+                <DocImage text={this.getExtension(src)} />
+              </a>
+            </div>
+          )}
+          {this.isImage(src) && (
+            <ImageZoom
+              image={{
+                src,
+                alt,
+                title,
+              }}
+              defaultStyles={{
+                overlay: {
+                  backgroundColor: theme.background,
+                },
+              }}
+              shouldRespectMaxDimension
+            />
+          )}
         </ImageWrapper>
         <Caption
           onKeyDown={this.handleKeyDown(props)}

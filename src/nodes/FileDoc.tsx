@@ -166,7 +166,7 @@ export default class File extends Node {
     return (
       <div className="file" contentEditable={false}>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <a href={src}>
+          <a href={src} target="__blank">
             <DocImage text={this.getExtension(src)} />
           </a>
         </div>

@@ -1453,6 +1453,9 @@ const StyledEditor = styled("div")<{
   .token.entity {
     cursor: help;
   }
+  p {
+    margin-bottom: 0px;
+  }
 
   table {
     width: 100%;

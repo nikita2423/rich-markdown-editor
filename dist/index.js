@@ -1174,6 +1174,9 @@ const StyledEditor = styled_components_1.default("div") `
   .token.entity {
     cursor: help;
   }
+  p {
+    margin-bottom: 0px;
+  }
 
   table {
     width: 100%;

@@ -47,6 +47,8 @@ export default class Image extends Node {
     handleSelect: ({ getPos }: {
         getPos: any;
     }) => (event: any) => void;
+    getExtension: (url: any) => any;
+    isImage: (url: any) => boolean;
     component: (props: any) => JSX.Element;
     toMarkdown(state: any, node: any): void;
     parseMarkdown(): {

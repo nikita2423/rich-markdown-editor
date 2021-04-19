@@ -20,6 +20,7 @@ const getDataTransferFiles_1 = __importDefault(require("../lib/getDataTransferFi
 const uploadPlaceholder_1 = __importDefault(require("../lib/uploadPlaceholder"));
 const insertFiles_1 = __importDefault(require("../commands/insertFiles"));
 const Node_1 = __importDefault(require("./Node"));
+const DocImage_1 = __importDefault(require("../icons/DocImage"));
 const IMAGE_INPUT_REGEX = /!\[(?<alt>.*?)]\((?<filename>.*?)(?=\“|\))\“?(?<layoutclass>[^\”]+)?\”?\)/;
 const uploadPlugin = (options) => new prosemirror_state_1.Plugin({
     props: {
@@ -126,13 +127,27 @@ class Image extends Node_1.default {
             const transaction = view.state.tr.setSelection(new prosemirror_state_1.NodeSelection($pos));
             view.dispatch(transaction);
         };
+        this.getExtension = (url) => {
+            const spilttedString = url.split(".");
+            const extension = spilttedString[spilttedString.length - 1];
+            return extension ? extension.toUpperCase() : "";
+        };
+        this.isImage = (url) => {
+            if (/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|png|PNG|JPG|JPEG|GIF|gif)/g.test(url)) {
+                return true;
+            }
+            return false;
+        };
         this.component = (props) => {
             const { theme, isSelected } = props;
             const { alt, src, title, layoutClass } = props.node.attrs;
             const className = layoutClass ? `image image-${layoutClass}` : "image";
             return (React.createElement("div", { contentEditable: false, className: className },
                 React.createElement(ImageWrapper, { className: isSelected ? "ProseMirror-selectednode" : "", onClick: this.handleSelect(props) },
-                    React.createElement(react_medium_image_zoom_1.default, { image: {
+                    !this.isImage(src) && (React.createElement("div", { style: { display: "flex", justifyContent: "center" } },
+                        React.createElement("a", { href: src, target: "__blank" },
+                            React.createElement(DocImage_1.default, { text: this.getExtension(src) })))),
+                    this.isImage(src) && (React.createElement(react_medium_image_zoom_1.default, { image: {
                             src,
                             alt,
                             title,
@@ -140,7 +155,7 @@ class Image extends Node_1.default {
                             overlay: {
                                 backgroundColor: theme.background,
                             },
-                        }, shouldRespectMaxDimension: true })),
+                        }, shouldRespectMaxDimension: true }))),
                 React.createElement(Caption, { onKeyDown: this.handleKeyDown(props), onBlur: this.handleBlur(props), className: "caption", tabIndex: -1, contentEditable: true, suppressContentEditableWarning: true }, alt)));
         };
     }
