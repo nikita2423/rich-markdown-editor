@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 // Custom Import..
 import { getSizeDimension } from "./utils";
 
-const Close = ({ fill }) => {
+const Close = ({ fill, size }) => {
   const sizeStyle = getSizeDimension(size);
 
   return (

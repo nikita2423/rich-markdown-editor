@@ -1,6 +1,7 @@
 export default Close;
-declare function Close({ fill }: {
+declare function Close({ fill, size }: {
     fill: any;
+    size: any;
 }): JSX.Element;
 declare namespace Close {
     export namespace defaultProps {
