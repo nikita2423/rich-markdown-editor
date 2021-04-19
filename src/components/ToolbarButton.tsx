@@ -15,6 +15,7 @@ export default styled.button<Props>`
   padding: 0;
   opacity: 0.7;
   outline: none;
+  flex: 1 1 auto;
 
   &:first-child {
     margin-left: 0;
@@ -29,5 +30,5 @@ export default styled.button<Props>`
     cursor: default;
   }
 
-  ${props => props.active && "opacity: 1;"};
+  ${(props) => props.active && "opacity: 1;"};
 `;

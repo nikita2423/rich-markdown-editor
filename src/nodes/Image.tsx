@@ -237,18 +237,18 @@ export default class Image extends Node {
 
     return (
       <div contentEditable={false} className={className}>
-        <ImageWrapper
-          className={isSelected ? "ProseMirror-selectednode" : ""}
-          onClick={this.handleSelect(props)}
-        >
-          {!this.isImage(src) && (
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <a href={src} target="__blank">
-                <DocImage text={this.getExtension(src)} />
-              </a>
-            </div>
-          )}
-          {this.isImage(src) && (
+        {!this.isImage(src) && (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <a href={src} target="__blank">
+              <DocImage text={this.getExtension(src)} />
+            </a>
+          </div>
+        )}
+        {this.isImage(src) && (
+          <ImageWrapper
+            className={isSelected ? "ProseMirror-selectednode" : ""}
+            onClick={this.handleSelect(props)}
+          >
             <ImageZoom
               image={{
                 src,
@@ -262,8 +262,9 @@ export default class Image extends Node {
               }}
               shouldRespectMaxDimension
             />
-          )}
-        </ImageWrapper>
+          </ImageWrapper>
+        )}
+
         <Caption
           onKeyDown={this.handleKeyDown(props)}
           onBlur={this.handleBlur(props)}
