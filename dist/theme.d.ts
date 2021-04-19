@@ -53,7 +53,7 @@ export declare const base: {
     grey: string;
     greyMid: string;
     greyDark: string;
-    trasparent: string;
+    transparent: string;
 };
 export declare const light: {
     background: string;
@@ -129,7 +129,7 @@ export declare const light: {
     grey: string;
     greyMid: string;
     greyDark: string;
-    trasparent: string;
+    transparent: string;
 };
 export declare const dark: {
     background: string;
@@ -205,7 +205,7 @@ export declare const dark: {
     grey: string;
     greyMid: string;
     greyDark: string;
-    trasparent: string;
+    transparent: string;
 };
 export default light;
 //# sourceMappingURL=theme.d.ts.map
