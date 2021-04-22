@@ -1,4 +1,5 @@
 import { Fragment } from "prosemirror-model";
+export declare const MAX_CAPTION_LIMIT = 128;
 export declare function markdownSerializer(): (state: any, node: any) => void;
 export declare function markdownParser(): {
     node: string;

@@ -20,6 +20,7 @@ const uploadFilePlaceholder_1 = __importDefault(require("../lib/uploadFilePlaceh
 const insertAllFiles_1 = __importDefault(require("../commands/insertAllFiles"));
 const DocImage_1 = __importDefault(require("../icons/DocImage"));
 const Node_1 = __importDefault(require("./Node"));
+const helper_1 = require("../helper");
 const FILE_INPUT_REGEX = /!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\)/;
 const uploadPlugin = (options) => new prosemirror_state_1.Plugin({
     props: {
@@ -71,12 +72,25 @@ class File extends Node_1.default {
     constructor() {
         super(...arguments);
         this.handleKeyDown = ({ node, getPos }) => (event) => {
+            if (event.target.innerText.length > helper_1.MAX_CAPTION_LIMIT &&
+                event.key !== "Backspace") {
+                event.preventDefault();
+                return false;
+            }
             if (event.key === "Enter") {
                 event.preventDefault();
                 const { view } = this.editor;
                 const pos = getPos() + node.nodeSize;
                 view.focus();
                 view.dispatch(prosemirror_utils_1.setTextSelection(pos)(view.state.tr));
+                return;
+            }
+            if (event.key === "Backspace" && event.target.innerText === "") {
+                const { view } = this.editor;
+                const $pos = view.state.doc.resolve(getPos());
+                const tr = view.state.tr.setSelection(new prosemirror_state_1.NodeSelection($pos));
+                view.dispatch(tr.deleteSelection());
+                view.focus();
                 return;
             }
         };
@@ -94,6 +108,13 @@ class File extends Node_1.default {
             });
             view.dispatch(transaction);
         };
+        this.handlePaste = ({ node, getPos }) => (event) => {
+            if (event.target.innerText.length > helper_1.MAX_CAPTION_LIMIT &&
+                event.key !== "Backspace") {
+                event.preventDefault();
+                return false;
+            }
+        };
         this.getExtension = (url) => {
             const spilttedString = url.split(".");
             const extension = spilttedString[spilttedString.length - 1];
@@ -106,7 +127,7 @@ class File extends Node_1.default {
                 React.createElement("div", { style: { display: "flex", justifyContent: "center" } },
                     React.createElement("a", { href: src, target: "__blank" },
                         React.createElement(DocImage_1.default, { text: this.getExtension(src) }))),
-                (options.isEditable || alt) && (React.createElement(Caption, { onKeyDown: this.handleKeyDown(options), onBlur: this.handleBlur(options), tabIndex: -1, contentEditable: options.isEditable, suppressContentEditableWarning: true }, alt))));
+                (options.isEditable || alt) && (React.createElement(Caption, { onKeyDown: this.handleKeyDown(options), onBlur: this.handleBlur(options), tabIndex: -1, contentEditable: options.isEditable, suppressContentEditableWarning: true, onPaste: this.handlePaste(options) }, alt))));
         };
     }
     get name() {
@@ -203,7 +224,6 @@ const Caption = styled_components_1.default.p `
   display: block;
   font-size: 13px;
   font-style: italic;
-  color: ${(props) => props.theme.textSecondary};
   padding: 2px 0;
   line-height: 16px;
   text-align: center;

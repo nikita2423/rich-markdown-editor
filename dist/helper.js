@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const prosemirror_model_1 = require("prosemirror-model");
 const HTTP_LINK_REGEX = /\bhttps?:\/\/[\w_\/\.]+/g;
+exports.MAX_CAPTION_LIMIT = 128;
 function markdownSerializer() {
     return (state, node) => {
         const label = state.esc(node.attrs.label || "");

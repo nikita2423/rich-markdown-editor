@@ -30,11 +30,15 @@ export default class File extends Node {
     handleKeyDown: ({ node, getPos }: {
         node: any;
         getPos: any;
-    }) => (event: any) => void;
+    }) => (event: any) => false | undefined;
     handleBlur: ({ node, getPos }: {
         node: any;
         getPos: any;
     }) => (event: any) => void;
+    handlePaste: ({ node, getPos }: {
+        node: any;
+        getPos: any;
+    }) => (event: any) => false | undefined;
     getExtension: (url: any) => any;
     component: (options: any) => JSX.Element;
     toMarkdown(state: any, node: any): void;

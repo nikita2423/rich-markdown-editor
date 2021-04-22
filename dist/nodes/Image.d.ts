@@ -39,7 +39,11 @@ export default class Image extends Node {
     handleKeyDown: ({ node, getPos }: {
         node: any;
         getPos: any;
-    }) => (event: any) => void;
+    }) => (event: any) => false | undefined;
+    handlePaste: ({ node, getPos }: {
+        node: any;
+        getPos: any;
+    }) => (event: any) => false | undefined;
     handleBlur: ({ node, getPos }: {
         node: any;
         getPos: any;

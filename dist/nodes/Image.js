@@ -21,6 +21,7 @@ const uploadPlaceholder_1 = __importDefault(require("../lib/uploadPlaceholder"))
 const insertFiles_1 = __importDefault(require("../commands/insertFiles"));
 const Node_1 = __importDefault(require("./Node"));
 const DocImage_1 = __importDefault(require("../icons/DocImage"));
+const helper_1 = require("../helper");
 const IMAGE_INPUT_REGEX = /!\[(?<alt>.*?)]\((?<filename>.*?)(?=\“|\))\“?(?<layoutclass>[^\”]+)?\”?\)/;
 const uploadPlugin = (options) => new prosemirror_state_1.Plugin({
     props: {
@@ -87,6 +88,11 @@ class Image extends Node_1.default {
     constructor() {
         super(...arguments);
         this.handleKeyDown = ({ node, getPos }) => (event) => {
+            if (event.target.innerText.length > helper_1.MAX_CAPTION_LIMIT &&
+                event.key !== "Backspace") {
+                event.preventDefault();
+                return false;
+            }
             if (event.key === "Enter") {
                 event.preventDefault();
                 const { view } = this.editor;
@@ -102,6 +108,13 @@ class Image extends Node_1.default {
                 view.dispatch(tr.deleteSelection());
                 view.focus();
                 return;
+            }
+        };
+        this.handlePaste = ({ node, getPos }) => (event) => {
+            if (event.target.innerText.length > helper_1.MAX_CAPTION_LIMIT &&
+                event.key !== "Backspace") {
+                event.preventDefault();
+                return false;
             }
         };
         this.handleBlur = ({ node, getPos }) => (event) => {
@@ -156,7 +169,7 @@ class Image extends Node_1.default {
                                 backgroundColor: theme.background,
                             },
                         }, shouldRespectMaxDimension: true }))),
-                React.createElement(Caption, { onKeyDown: this.handleKeyDown(props), onBlur: this.handleBlur(props), className: "caption", tabIndex: -1, contentEditable: true, suppressContentEditableWarning: true }, alt)));
+                React.createElement(Caption, { onKeyDown: this.handleKeyDown(props), onBlur: this.handleBlur(props), className: "caption", tabIndex: -1, contentEditable: true, suppressContentEditableWarning: true, onPaste: this.handlePaste(props) }, alt)));
         };
     }
     get name() {

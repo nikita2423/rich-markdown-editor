@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Plugin } from "prosemirror-state";
+import { Plugin, NodeSelection } from "prosemirror-state";
 import { InputRule } from "prosemirror-inputrules";
 import { setTextSelection } from "prosemirror-utils";
 import styled from "styled-components";
