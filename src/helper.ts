@@ -1,6 +1,7 @@
 import { Fragment, Node } from "prosemirror-model";
 
 const HTTP_LINK_REGEX = /\bhttps?:\/\/[\w_\/\.]+/g;
+export const MAX_CAPTION_LIMIT = 128;
 export function markdownSerializer() {
   return (state, node) => {
     const label = state.esc(node.attrs.label || "");

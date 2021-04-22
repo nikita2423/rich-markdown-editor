@@ -10,6 +10,8 @@ import insertFiles from "../commands/insertFiles";
 import Node from "./Node";
 import DocImage from "../icons/DocImage";
 
+import { MAX_CAPTION_LIMIT } from "../helper";
+
 /**
  * Matches following attributes in Markdown-typed image: [, alt, src, class]
  *
@@ -162,6 +164,14 @@ export default class Image extends Node {
   handleKeyDown = ({ node, getPos }) => (event) => {
     // Pressing Enter in the caption field should move the cursor/selection
     // below the image
+    if (
+      event.target.innerText.length > MAX_CAPTION_LIMIT &&
+      event.key !== "Backspace"
+    ) {
+      event.preventDefault();
+      return false;
+    }
+
     if (event.key === "Enter") {
       event.preventDefault();
 
@@ -181,6 +191,17 @@ export default class Image extends Node {
       view.dispatch(tr.deleteSelection());
       view.focus();
       return;
+    }
+  };
+
+  handlePaste = ({ node, getPos }) => (event) => {
+    // console.log("On paster", event.target.innerHTML);
+    if (
+      event.target.innerText.length > MAX_CAPTION_LIMIT &&
+      event.key !== "Backspace"
+    ) {
+      event.preventDefault();
+      return false;
     }
   };
 
@@ -272,6 +293,7 @@ export default class Image extends Node {
           tabIndex={-1}
           contentEditable
           suppressContentEditableWarning
+          onPaste={this.handlePaste(props)}
         >
           {alt}
         </Caption>

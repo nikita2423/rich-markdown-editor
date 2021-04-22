@@ -9,6 +9,8 @@ import insertAllFiles from "../commands/insertAllFiles";
 import DocImage from "../icons/DocImage";
 import Node from "./Node";
 
+import { MAX_CAPTION_LIMIT } from "../helper";
+
 /**
  * Matches following attributes in Markdown-typed file: [, alt, src, title]
  *
@@ -126,6 +128,13 @@ export default class File extends Node {
   }
 
   handleKeyDown = ({ node, getPos }) => (event) => {
+    if (
+      event.target.innerText.length > MAX_CAPTION_LIMIT &&
+      event.key !== "Backspace"
+    ) {
+      event.preventDefault();
+      return false;
+    }
     if (event.key === "Enter") {
       event.preventDefault();
 
@@ -133,6 +142,16 @@ export default class File extends Node {
       const pos = getPos() + node.nodeSize;
       view.focus();
       view.dispatch(setTextSelection(pos)(view.state.tr));
+      return;
+    }
+    // Pressing Backspace in an an empty caption field should remove the entire
+    // image, leaving an empty paragraph
+    if (event.key === "Backspace" && event.target.innerText === "") {
+      const { view } = this.editor;
+      const $pos = view.state.doc.resolve(getPos());
+      const tr = view.state.tr.setSelection(new NodeSelection($pos));
+      view.dispatch(tr.deleteSelection());
+      view.focus();
       return;
     }
   };
@@ -152,6 +171,17 @@ export default class File extends Node {
       alt,
     });
     view.dispatch(transaction);
+  };
+
+  handlePaste = ({ node, getPos }) => (event) => {
+    // console.log("On paster", event.target.innerHTML);
+    if (
+      event.target.innerText.length > MAX_CAPTION_LIMIT &&
+      event.key !== "Backspace"
+    ) {
+      event.preventDefault();
+      return false;
+    }
   };
 
   getExtension = (url) => {
@@ -178,6 +208,7 @@ export default class File extends Node {
             tabIndex={-1}
             contentEditable={options.isEditable}
             suppressContentEditableWarning
+            onPaste={this.handlePaste(options)}
           >
             {alt}
           </Caption>
@@ -251,7 +282,6 @@ const Caption = styled.p`
   display: block;
   font-size: 13px;
   font-style: italic;
-  color: ${(props) => props.theme.textSecondary};
   padding: 2px 0;
   line-height: 16px;
   text-align: center;
