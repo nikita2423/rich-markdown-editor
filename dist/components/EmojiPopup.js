@@ -56,11 +56,11 @@ class EmojiPopup extends React.Component {
         this.getAllEmojis = () => {
             const { emojiData } = this.props;
             if (emojiData && emojiData.length) {
-                return map_1.default(emojiData, (emoji) => {
+                return map_1.default(emojiData, (emoji, index) => {
                     const onSelect = () => {
                         this.insertItem(emoji);
                     };
-                    return (React.createElement("div", { className: "editor-emoji-item", onClick: onSelect }, emoji));
+                    return (React.createElement("div", { className: "editor-emoji-item", onClick: onSelect, key: index }, emoji));
                 });
             }
         };

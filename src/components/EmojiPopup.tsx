@@ -171,7 +171,7 @@ class EmojiPopup extends React.Component<Props, State> {
   getAllEmojis = () => {
     const { emojiData } = this.props;
     if (emojiData && emojiData.length) {
-      return map(emojiData, (emoji) => {
+      return map(emojiData, (emoji, index) => {
         const onSelect = () => {
           this.insertItem(emoji);
         };
@@ -180,6 +180,7 @@ class EmojiPopup extends React.Component<Props, State> {
             className="editor-emoji-item"
             // style={{ marginBottom: "5px", height: "20px" }}
             onClick={onSelect}
+            key={index}
           >
             {emoji}
           </div>
