@@ -87,7 +87,7 @@ function blockMenuItems(dictionary) {
             title: dictionary.quote,
             description: dictionary.quoteDesc,
             icon: QuoteIcon_1.default,
-            shortcut: `ctrl+shift+7`,
+            shortcut: `ctrl shift 7`,
         },
         {
             name: "code_block",

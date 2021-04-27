@@ -111,7 +111,7 @@ export default function blockMenuItems(
       title: dictionary.quote,
       description: dictionary.quoteDesc,
       icon: BlockQuoteIcon,
-      shortcut: `ctrl+shift+7`,
+      shortcut: `ctrl shift 7`,
     },
     {
       name: "code_block",
