@@ -37,7 +37,7 @@ class Heading extends Node_1.default {
     }
     get defaultOptions() {
         return {
-            levels: [1, 2, 3, 4],
+            levels: [1, 2, 3],
         };
     }
     get schema() {
