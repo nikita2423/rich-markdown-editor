@@ -13,6 +13,7 @@ import insertFiles from "../commands/insertFiles";
 import insertAllFiles from "../commands/insertAllFiles";
 import getMenuItems from "../menus/block";
 import baseDictionary from "../dictionary";
+import CustomScrollbar from "../CustomScrollbar";
 
 const SSR = typeof window === "undefined";
 
@@ -548,6 +549,7 @@ class BlockMenu extends React.Component<Props, State> {
               />
             </LinkInputWrapper>
           ) : (
+            // <CustomScrollbar>
             <List>
               {items.map((item, index) => {
                 // if (item.name === "separator") {
@@ -582,6 +584,7 @@ class BlockMenu extends React.Component<Props, State> {
                 </ListItem>
               )}
             </List>
+            // </CustomScrollbar>
           )}
           {uploadImage && (
             <VisuallyHidden>
@@ -678,6 +681,25 @@ export const Wrapper = styled.div<{
 
   * {
     box-sizing: border-box;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #fff;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 
   hr {

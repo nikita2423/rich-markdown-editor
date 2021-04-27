@@ -39,6 +39,7 @@
     "prosemirror-transform": "1.2.5",
     "prosemirror-utils": "^0.9.6",
     "prosemirror-view": "^1.17.6",
+    "react-custom-scrollbars": "^4.2.1",
     "react-medium-image-zoom": "^3.0.16",
     "react-portal": "^4.2.1",
     "refractor": "^3.3.1",
