@@ -79,6 +79,7 @@ export default class Mention extends Node {
     // const markdown = "@(" + label + ")(" + uri + ")";
     const markdown = "@" + node.attrs.name;
     state.write(markdown);
+    state.closeBlock(node);
     // state.text(node.text);
     // state.closeBlock(node);.
     // state.write("\n:::" + (node.attrs.style || "info") + "\n");

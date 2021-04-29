@@ -57,6 +57,7 @@ class Mention extends Node_1.default {
         const uri = state.esc(`mention://${node.attrs.name}/${node.attrs.id}`);
         const markdown = "@" + node.attrs.name;
         state.write(markdown);
+        state.closeBlock(node);
     }
     parseMarkdown() {
         return {
