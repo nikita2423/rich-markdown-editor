@@ -136,6 +136,7 @@ export type Props = {
   tooltip: typeof React.Component | React.FC<any>;
   className?: string;
   emojiData: string[];
+  mentionUsers?: any;
   style?: Record<string, string>;
 };
 
@@ -168,6 +169,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
     embeds: [],
     extensions: [],
     tooltip: Tooltip,
+    mentionUsers: [],
   };
 
   state = {
@@ -473,6 +475,8 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
   };
 
   importMentionPlugin = () => {
+    const { mentionUsers } = this.props;
+    console.log("mention User List", mentionUsers)
     return getMentionsPlugin({
       getSuggestions: (type, text, done) => {
         setTimeout(() => {
