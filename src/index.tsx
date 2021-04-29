@@ -19,7 +19,7 @@ import { keymap } from "prosemirror-keymap";
 import { baseKeymap } from "prosemirror-commands";
 import { selectColumn, selectRow, selectTable } from "prosemirror-utils";
 import styled, { ThemeProvider } from "styled-components";
-import { getMentionsPlugin } from "prosemirror-mentions";
+// import { getMentionsPlugin, addMentionNodes } from "prosemirror-mentions";
 
 import { light as lightTheme, dark as darkTheme } from "./theme";
 import baseDictionary from "./dictionary";
@@ -83,6 +83,7 @@ import SmartText from "./plugins/SmartText";
 import TrailingNode from "./plugins/TrailingNode";
 import MarkdownPaste from "./plugins/MarkdownPaste";
 import EmojiIconsTrigger from "./plugins/EmojiIconsTrigger";
+import { getMentionsPlugin } from "./plugins/MentionPlugin";
 
 import { linkify } from "./helper";
 
@@ -483,6 +484,10 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
           if (type === "mention") {
             // pass dummy mention suggestions
             done(mentionUsers);
+            // done([
+            //   { name: "John Doe", id: "1011", email: "joe@gmail.com" },
+            //   { name: "Joe Lewis", id: "1012", email: "lewis@gmail.com" },
+            // ]);
           }
         }, 0);
       },
@@ -598,6 +603,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
   }
 
   value = (): string => {
+    console.log("This view stte doc", this.view.state.doc);
     if (this.serializer) {
       return this.serializer.serialize(this.view.state.doc);
     }
@@ -1705,6 +1711,35 @@ const StyledEditor = styled("div")<{
     blockquote {
       font-family: "SF Pro Text", ${(props) => props.theme.fontFamily};
     }
+  }
+  .suggestion-item-active {
+    background: #08c;
+    color: #fff;
+  }
+
+  .prosemirror-mention-node {
+    color: #08c;
+  }
+
+  .prosemirror-tag-node {
+    color: #08c;
+  }
+
+  .prosemirror-suggestion {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid #999;
+  }
+
+  .suggestion-item-list {
+    background: #fff;
+    border: 1px solid #999;
+  }
+
+  .suggestion-item {
+    padding: 5px;
+  }
+  .suggestion-item:before {
+    border-top: 1px solid;
   }
 `;
 

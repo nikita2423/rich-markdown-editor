@@ -22,7 +22,6 @@ const prosemirror_keymap_1 = require("prosemirror-keymap");
 const prosemirror_commands_1 = require("prosemirror-commands");
 const prosemirror_utils_1 = require("prosemirror-utils");
 const styled_components_1 = __importStar(require("styled-components"));
-const prosemirror_mentions_1 = require("prosemirror-mentions");
 const theme_1 = require("./theme");
 const dictionary_1 = __importDefault(require("./dictionary"));
 const Flex_1 = __importDefault(require("./components/Flex"));
@@ -75,6 +74,7 @@ const SmartText_1 = __importDefault(require("./plugins/SmartText"));
 const TrailingNode_1 = __importDefault(require("./plugins/TrailingNode"));
 const MarkdownPaste_1 = __importDefault(require("./plugins/MarkdownPaste"));
 const EmojiIconsTrigger_1 = __importDefault(require("./plugins/EmojiIconsTrigger"));
+const MentionPlugin_1 = require("./plugins/MentionPlugin");
 const helper_1 = require("./helper");
 var server_1 = require("./server");
 exports.schema = server_1.schema;
@@ -105,7 +105,7 @@ class RichMarkdownEditor extends React.PureComponent {
         this.importMentionPlugin = () => {
             const { mentionUsers } = this.props;
             console.log("mention User List", mentionUsers);
-            return prosemirror_mentions_1.getMentionsPlugin({
+            return MentionPlugin_1.getMentionsPlugin({
                 getSuggestions: (type, text, done) => {
                     setTimeout(() => {
                         if (type === "mention") {
@@ -130,6 +130,7 @@ class RichMarkdownEditor extends React.PureComponent {
             });
         };
         this.value = () => {
+            console.log("This view stte doc", this.view.state.doc);
             if (this.serializer) {
                 return this.serializer.serialize(this.view.state.doc);
             }
@@ -1425,6 +1426,35 @@ const StyledEditor = styled_components_1.default("div") `
     blockquote {
       font-family: "SF Pro Text", ${(props) => props.theme.fontFamily};
     }
+  }
+  .suggestion-item-active {
+    background: #08c;
+    color: #fff;
+  }
+
+  .prosemirror-mention-node {
+    color: #08c;
+  }
+
+  .prosemirror-tag-node {
+    color: #08c;
+  }
+
+  .prosemirror-suggestion {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid #999;
+  }
+
+  .suggestion-item-list {
+    background: #fff;
+    border: 1px solid #999;
+  }
+
+  .suggestion-item {
+    padding: 5px;
+  }
+  .suggestion-item:before {
+    border-top: 1px solid;
   }
 `;
 exports.default = RichMarkdownEditor;

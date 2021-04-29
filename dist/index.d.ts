@@ -211,7 +211,7 @@ declare class RichMarkdownEditor extends React.PureComponent<Props, State> {
     createSerializer(): import("./lib/markdown/serializer").MarkdownSerializer;
     createParser(): MarkdownParser<any>;
     getMentionSuggestionsHTML: (items: any) => string;
-    importMentionPlugin: () => any;
+    importMentionPlugin: () => Plugin<any, any>;
     importLinkifyPlugin: () => Plugin<any, any>;
     createState(value?: string): EditorState<any>;
     createDocument(content: string): Node<any>;

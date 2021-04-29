@@ -18,14 +18,12 @@ class Mention extends Node_1.default {
                 name: "",
                 email: "",
             },
-            content: "text*",
             selectable: false,
             draggable: false,
             parseDOM: [
                 {
                     tag: "span[data-mention-id][data-mention-name][data-mention-email]",
                     getAttrs: (dom) => {
-                        console.log("Parse Dome gettinh called");
                         const id = dom.getAttribute("data-mention-id");
                         const name = dom.getAttribute("data-mention-name");
                         const email = dom.getAttribute("data-mention-email");
@@ -38,7 +36,6 @@ class Mention extends Node_1.default {
                 },
             ],
             toDOM: (node) => {
-                console.log("Mention Node to dom", node);
                 return [
                     "span",
                     {

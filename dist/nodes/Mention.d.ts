@@ -9,7 +9,6 @@ export default class Mention extends Node {
             name: string;
             email: string;
         };
-        content: string;
         selectable: boolean;
         draggable: boolean;
         parseDOM: {

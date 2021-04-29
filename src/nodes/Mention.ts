@@ -16,7 +16,6 @@ export default class Mention extends Node {
         name: "",
         email: "",
       },
-      content: "text*",
 
       selectable: false,
       draggable: false,
@@ -26,7 +25,6 @@ export default class Mention extends Node {
           tag: "span[data-mention-id][data-mention-name][data-mention-email]",
 
           getAttrs: (dom) => {
-            console.log("Parse Dome gettinh called");
             const id = dom.getAttribute("data-mention-id");
             const name = dom.getAttribute("data-mention-name");
             const email = dom.getAttribute("data-mention-email");
@@ -39,7 +37,7 @@ export default class Mention extends Node {
         },
       ],
       toDOM: (node) => {
-        console.log("Mention Node to dom", node);
+        // console.log("Mention Node to dom", node);
         return [
           "span",
           {
@@ -75,6 +73,7 @@ export default class Mention extends Node {
   }
 
   toMarkdown(state, node) {
+    // console.log("To amrkdown getting called");
     const label = state.esc(node.attrs.email || "");
     const uri = state.esc(`mention://${node.attrs.name}/${node.attrs.id}`);
     const markdown = "@(" + label + ")(" + uri + ")";
