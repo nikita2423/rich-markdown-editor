@@ -511,7 +511,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
     const doc = this.createDocument(value || this.props.defaultValue);
     if (this.plugins) {
       this.plugins.unshift(this.importLinkifyPlugin());
-      // this.plugins.unshift(this.importMentionPlugin());
+      this.plugins.unshift(this.importMentionPlugin());
     }
     return EditorState.create({
       schema: this.schema,
