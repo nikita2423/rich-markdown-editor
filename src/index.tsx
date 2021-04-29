@@ -476,16 +476,13 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
 
   importMentionPlugin = () => {
     const { mentionUsers } = this.props;
-    console.log("mention User List", mentionUsers)
+    console.log("mention User List", mentionUsers);
     return getMentionsPlugin({
       getSuggestions: (type, text, done) => {
         setTimeout(() => {
           if (type === "mention") {
             // pass dummy mention suggestions
-            done([
-              { name: "John Doe", id: "101", email: "joe@gmail.com" },
-              { name: "Joe Lewis", id: "102", email: "lewis@gmail.com" },
-            ]);
+            done(mentionUsers);
           }
         }, 0);
       },
