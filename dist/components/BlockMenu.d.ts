@@ -49,7 +49,7 @@ declare class BlockMenu extends React.Component<Props, State> {
     triggerLinkInput: (item: any) => void;
     handleImagePicked: (event: any) => void;
     handleFilePicked: (event: any) => void;
-    clearSearch(): void;
+    clearSearch(removeSlash: boolean | undefined): void;
     insertBlock(item: any): void;
     get caretPosition(): {
         top: number;

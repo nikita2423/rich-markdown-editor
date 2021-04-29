@@ -103,6 +103,8 @@ class RichMarkdownEditor extends React.PureComponent {
                 "</div>");
         };
         this.importMentionPlugin = () => {
+            const { mentionUsers } = this.props;
+            console.log("mention User List", mentionUsers);
             return prosemirror_mentions_1.getMentionsPlugin({
                 getSuggestions: (type, text, done) => {
                     setTimeout(() => {
@@ -509,6 +511,7 @@ class RichMarkdownEditor extends React.PureComponent {
         const doc = this.createDocument(value || this.props.defaultValue);
         if (this.plugins) {
             this.plugins.unshift(this.importLinkifyPlugin());
+            this.plugins.unshift(this.importMentionPlugin());
         }
         return prosemirror_state_1.EditorState.create({
             schema: this.schema,
@@ -585,6 +588,7 @@ RichMarkdownEditor.defaultProps = {
     embeds: [],
     extensions: [],
     tooltip: Tooltip_1.default,
+    mentionUsers: [],
 };
 const StyledMention = styled_components_1.default("div") `
   z-index: 200;

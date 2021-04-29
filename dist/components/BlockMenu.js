@@ -107,7 +107,7 @@ class BlockMenu extends React.Component {
                 case "embed":
                     return this.triggerLinkInput(item);
                 case "link": {
-                    this.clearSearch();
+                    this.clearSearch(true);
                     this.props.onClose();
                     this.props.onLinkToolbarOpen();
                     return;
@@ -127,6 +127,7 @@ class BlockMenu extends React.Component {
             this.props.view.focus();
         };
         this.handleEmojiClick = () => {
+            this.clearSearch(false);
             const { view, onOpenEmoji } = this.props;
             const { dispatch, state } = view;
             const { from, to } = state.selection;
@@ -138,6 +139,7 @@ class BlockMenu extends React.Component {
             }
         };
         this.handleMentionClick = () => {
+            this.clearSearch(false);
             const { view } = this.props;
             const { dispatch, state } = view;
             const { from, to } = state.selection;
@@ -269,15 +271,25 @@ class BlockMenu extends React.Component {
             window.removeEventListener("keydown", this.handleKeyDown);
         }
     }
-    clearSearch() {
+    clearSearch(removeSlash) {
+        const { search } = this.props;
         const { state, dispatch } = this.props.view;
         const parent = prosemirror_utils_1.findParentNode((node) => !!node)(state.selection);
+        const searchlength = search && search.length ? search.length : 0;
         if (parent) {
-            dispatch(state.tr.insertText("", parent.pos, parent.pos + parent.node.textContent.length + 1));
+            let startPosition = parent.pos + parent.node.textContent.length - searchlength;
+            if (removeSlash) {
+                dispatch(state.tr.insertText("", startPosition, parent.pos + parent.node.textContent.length + 1));
+            }
+            else {
+                startPosition =
+                    parent.pos + parent.node.textContent.length - searchlength + 1;
+                dispatch(state.tr.insertText("", startPosition, parent.pos + parent.node.textContent.length + 1));
+            }
         }
     }
     insertBlock(item) {
-        this.clearSearch();
+        this.clearSearch(true);
         const command = this.props.commands[item.name];
         if (command) {
             command(item.attrs);

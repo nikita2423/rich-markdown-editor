@@ -145,6 +145,7 @@ export declare type Props = {
     tooltip: typeof React.Component | React.FC<any>;
     className?: string;
     emojiData: string[];
+    mentionUsers?: any;
     style?: Record<string, string>;
 };
 declare type State = {
@@ -165,6 +166,7 @@ declare class RichMarkdownEditor extends React.PureComponent<Props, State> {
         embeds: never[];
         extensions: never[];
         tooltip: typeof Tooltip;
+        mentionUsers: never[];
     };
     state: {
         isEditorFocused: boolean;

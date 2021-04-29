@@ -188,6 +188,7 @@ class BlockMenu extends React.Component<Props, State> {
   };
 
   handleEmojiClick = () => {
+    this.clearSearch(false);
     const { view, onOpenEmoji } = this.props;
     const { dispatch, state } = view;
     const { from, to } = state.selection;
@@ -200,7 +201,7 @@ class BlockMenu extends React.Component<Props, State> {
   };
 
   handleMentionClick = () => {
-    this.clearSearch();
+    this.clearSearch(false);
     const { view } = this.props;
     const { dispatch, state } = view;
     const { from, to } = state.selection;
@@ -357,7 +358,7 @@ class BlockMenu extends React.Component<Props, State> {
     this.props.onClose();
   };
 
-  clearSearch(removeSlash) {
+  clearSearch(removeSlash: boolean | undefined) {
     const { search } = this.props;
     const { state, dispatch } = this.props.view;
     const parent = findParentNode((node) => !!node)(state.selection);
