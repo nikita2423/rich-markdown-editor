@@ -76,10 +76,11 @@ export default class Mention extends Node {
     // console.log("To amrkdown getting called");
     const label = state.esc(node.attrs.email || "");
     const uri = state.esc(`mention://${node.attrs.name}/${node.attrs.id}`);
-    const markdown = "@(" + label + ")(" + uri + ")";
+    // const markdown = "@(" + label + ")(" + uri + ")";
+    const markdown = "@" + node.attrs.name;
     state.write(markdown);
     // state.text(node.text);
-    // state.closeBlock(node);
+    // state.closeBlock(node);.
     // state.write("\n:::" + (node.attrs.style || "info") + "\n");
     // state.renderContent(node);
     // state.ensureNewLine();

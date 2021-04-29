@@ -55,7 +55,7 @@ class Mention extends Node_1.default {
     toMarkdown(state, node) {
         const label = state.esc(node.attrs.email || "");
         const uri = state.esc(`mention://${node.attrs.name}/${node.attrs.id}`);
-        const markdown = "@(" + label + ")(" + uri + ")";
+        const markdown = "@" + node.attrs.name;
         state.write(markdown);
     }
     parseMarkdown() {
