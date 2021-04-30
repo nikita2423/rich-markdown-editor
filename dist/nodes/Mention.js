@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const prosemirror_inputrules_1 = require("prosemirror-inputrules");
 const Node_1 = __importDefault(require("./Node"));
-const MENTION_INPUT_REGEX = /^@\[(.+)]\((\S+)\)/;
+const MENTION_INPUT_REGEX = /^\@\[(.+)]\((\S+)\)/;
 class Mention extends Node_1.default {
     get name() {
         return "mention";
@@ -23,7 +23,7 @@ class Mention extends Node_1.default {
             draggable: false,
             parseDOM: [
                 {
-                    tag: "span[type=mention]",
+                    tag: "span[data-mention-id][data-mention-name][data-mention-email]",
                     getAttrs: (dom) => {
                         const id = dom.getAttribute("data-mention-id");
                         const name = dom.getAttribute("data-mention-name");
@@ -40,7 +40,6 @@ class Mention extends Node_1.default {
                 return [
                     "span",
                     {
-                        type: "mention",
                         "data-mention-id": node.attrs.id,
                         "data-mention-name": node.attrs.name,
                         "data-mention-email": node.attrs.email,
@@ -52,16 +51,8 @@ class Mention extends Node_1.default {
         };
     }
     inputRules({ type }) {
-        return [
-            new prosemirror_inputrules_1.InputRule(MENTION_INPUT_REGEX, (state, match, start, end) => {
-                const [okay, alt, href] = match;
-                const { tr } = state;
-                if (okay) {
-                    tr.replaceWith(start, end, this.editor.schema.text(alt)).addMark(start, start + alt.length, type.create({ href }));
-                }
-                return tr;
-            }),
-        ];
+        console.log("Input rules", type);
+        return [prosemirror_inputrules_1.wrappingInputRule(MENTION_INPUT_REGEX, type)];
     }
     toMarkdown(state, node) {
         const label = state.esc(node.attrs.name || "");

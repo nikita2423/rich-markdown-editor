@@ -8,7 +8,7 @@ const prosemirror_state_1 = require("prosemirror-state");
 const prosemirror_inputrules_1 = require("prosemirror-inputrules");
 const Mark_1 = __importDefault(require("./Mark"));
 const isModKey_1 = __importDefault(require("../lib/isModKey"));
-const LINK_INPUT_REGEX = /\[(.+)]\((\S+)\)/;
+const LINK_INPUT_REGEX = /^\[(.+)]\((\S+)\)/;
 function isPlainURL(link, parent, index, side) {
     if (link.attrs.title || !/^\w+:/.test(link.attrs.href)) {
         return false;

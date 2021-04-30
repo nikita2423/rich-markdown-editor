@@ -2,7 +2,7 @@ import { wrappingInputRule, InputRule } from "prosemirror-inputrules";
 import markInputRule from "../lib/markInputRule";
 import Node from "./Node";
 
-const MENTION_INPUT_REGEX = /^@\[(.+)]\((\S+)\)/;
+const MENTION_INPUT_REGEX = /^\@\[(.+)]\((\S+)\)/;
 
 export default class Mention extends Node {
   get name() {
@@ -24,8 +24,8 @@ export default class Mention extends Node {
       parseDOM: [
         {
           // match tag with following CSS Selector
-          // tag: "span[data-mention-id][data-mention-name][data-mention-email]",
-          tag: "span[type=mention]",
+          tag: "span[data-mention-id][data-mention-name][data-mention-email]",
+          //tag: "span[type=mention]",
 
           getAttrs: (dom) => {
             const id = dom.getAttribute("data-mention-id");
@@ -44,7 +44,6 @@ export default class Mention extends Node {
         return [
           "span",
           {
-            type: "mention",
             "data-mention-id": node.attrs.id,
             "data-mention-name": node.attrs.name,
             "data-mention-email": node.attrs.email,
@@ -72,28 +71,29 @@ export default class Mention extends Node {
   //   };
   // }
 
-  // inputRules({ type }) {
-  //   return [wrappingInputRule(/^@$/, type)];
-  // }
-
   inputRules({ type }) {
-    return [
-      new InputRule(MENTION_INPUT_REGEX, (state, match, start, end) => {
-        const [okay, alt, href] = match;
-        const { tr } = state;
-
-        if (okay) {
-          tr.replaceWith(start, end, this.editor.schema.text(alt)).addMark(
-            start,
-            start + alt.length,
-            type.create({ href })
-          );
-        }
-
-        return tr;
-      }),
-    ];
+    console.log("Input rules", type);
+    return [wrappingInputRule(MENTION_INPUT_REGEX, type)];
   }
+
+  // inputRules({ type }) {
+  //   return [
+  //     new InputRule(MENTION_INPUT_REGEX, (state, match, start, end) => {
+  //       const [okay, alt, href] = match;
+  //       const { tr } = state;
+
+  //       if (okay) {
+  //         tr.replaceWith(start, end, this.editor.schema.text(alt)).addMark(
+  //           start,
+  //           start + alt.length,
+  //           type.create({ href })
+  //         );
+  //       }
+
+  //       return tr;
+  //     }),
+  //   ];
+  // }
 
   toMarkdown(state, node) {
     // console.log("To amrkdown getting called");
