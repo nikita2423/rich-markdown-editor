@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const prosemirror_inputrules_1 = require("prosemirror-inputrules");
+const markInputRule_1 = __importDefault(require("../lib/markInputRule"));
 const Node_1 = __importDefault(require("./Node"));
 class Mention extends Node_1.default {
     get name() {
@@ -22,7 +22,7 @@ class Mention extends Node_1.default {
             draggable: false,
             parseDOM: [
                 {
-                    tag: "span[data-mention-id][data-mention-name][data-mention-email]",
+                    tag: "span[type=mention]",
                     getAttrs: (dom) => {
                         const id = dom.getAttribute("data-mention-id");
                         const name = dom.getAttribute("data-mention-name");
@@ -39,6 +39,7 @@ class Mention extends Node_1.default {
                 return [
                     "span",
                     {
+                        type: "mention",
                         "data-mention-id": node.attrs.id,
                         "data-mention-name": node.attrs.name,
                         "data-mention-email": node.attrs.email,
@@ -50,14 +51,13 @@ class Mention extends Node_1.default {
         };
     }
     inputRules({ type }) {
-        return [prosemirror_inputrules_1.wrappingInputRule(/^@$/, type)];
+        return [markInputRule_1.default(/^@$/, type)];
     }
     toMarkdown(state, node) {
-        const label = state.esc(node.attrs.email || "");
-        const uri = state.esc(`mention://${node.attrs.name}/${node.attrs.id}`);
+        const label = state.esc(node.attrs.name || "");
+        const uri = state.esc(`mention://${node.attrs.email}/${node.attrs.id}`);
         const markdown = "@" + node.attrs.name;
-        state.write(markdown);
-        state.closeBlock(node);
+        state.write(`@[${label}](${uri})`);
     }
     parseMarkdown() {
         return {

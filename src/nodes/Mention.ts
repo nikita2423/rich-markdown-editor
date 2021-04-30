@@ -22,7 +22,8 @@ export default class Mention extends Node {
       parseDOM: [
         {
           // match tag with following CSS Selector
-          tag: "span[data-mention-id][data-mention-name][data-mention-email]",
+          // tag: "span[data-mention-id][data-mention-name][data-mention-email]",
+          tag: "span[type=mention]",
 
           getAttrs: (dom) => {
             const id = dom.getAttribute("data-mention-id");
@@ -41,6 +42,7 @@ export default class Mention extends Node {
         return [
           "span",
           {
+            type: "mention",
             "data-mention-id": node.attrs.id,
             "data-mention-name": node.attrs.name,
             "data-mention-email": node.attrs.email,
@@ -69,17 +71,17 @@ export default class Mention extends Node {
   // }
 
   inputRules({ type }) {
-    return [wrappingInputRule(/^@$/, type)];
+    return [markInputRule(/^@$/, type)];
   }
 
   toMarkdown(state, node) {
     // console.log("To amrkdown getting called");
-    const label = state.esc(node.attrs.email || "");
-    const uri = state.esc(`mention://${node.attrs.name}/${node.attrs.id}`);
+    const label = state.esc(node.attrs.name || "");
+    const uri = state.esc(`mention://${node.attrs.email}/${node.attrs.id}`);
     // const markdown = "@(" + label + ")(" + uri + ")";
     const markdown = "@" + node.attrs.name;
-    state.write(markdown);
-    state.closeBlock(node);
+    state.write(`@[${label}](${uri})`);
+    // state.closeBlock(node);
     // state.text(node.text);
     // state.closeBlock(node);.
     // state.write("\n:::" + (node.attrs.style || "info") + "\n");
