@@ -1,6 +1,8 @@
-import { wrappingInputRule } from "prosemirror-inputrules";
+import { wrappingInputRule, InputRule } from "prosemirror-inputrules";
 import markInputRule from "../lib/markInputRule";
 import Node from "./Node";
+
+const MENTION_INPUT_REGEX = /^@\[(.+)]\((\S+)\)/;
 
 export default class Mention extends Node {
   get name() {
@@ -70,17 +72,37 @@ export default class Mention extends Node {
   //   };
   // }
 
+  // inputRules({ type }) {
+  //   return [wrappingInputRule(/^@$/, type)];
+  // }
+
   inputRules({ type }) {
-    return [wrappingInputRule(/^@$/, type)];
+    return [
+      new InputRule(MENTION_INPUT_REGEX, (state, match, start, end) => {
+        const [okay, alt, href] = match;
+        const { tr } = state;
+
+        if (okay) {
+          tr.replaceWith(start, end, this.editor.schema.text(alt)).addMark(
+            start,
+            start + alt.length,
+            type.create({ href })
+          );
+        }
+
+        return tr;
+      }),
+    ];
   }
 
   toMarkdown(state, node) {
     // console.log("To amrkdown getting called");
     const label = state.esc(node.attrs.name || "");
     const uri = state.esc(`mention://${node.attrs.email}/${node.attrs.id}`);
-    // const markdown = "@(" + label + ")(" + uri + ")";
-    const markdown = "@" + node.attrs.name;
+    const markdown = "@(" + label + ")(" + uri + ")";
+    // const markdown = "@" + node.attrs.name;
     state.write(`@[${label}](${uri})`);
+    // state.write(markdown);
     // state.closeBlock(node);
     // state.text(node.text);
     // state.closeBlock(node);.
@@ -96,7 +118,11 @@ export default class Mention extends Node {
   parseMarkdown() {
     return {
       node: "mention",
-      getAttrs: ({ mention: { name, id, email } }) => ({ name, id, email }),
+      getAttrs: ({ mention: { name, id, email } }) => ({
+        name,
+        id,
+        email,
+      }),
     };
   }
 }

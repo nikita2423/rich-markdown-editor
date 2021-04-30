@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const prosemirror_inputrules_1 = require("prosemirror-inputrules");
 const Node_1 = __importDefault(require("./Node"));
+const MENTION_INPUT_REGEX = /^@\[(.+)]\((\S+)\)/;
 class Mention extends Node_1.default {
     get name() {
         return "mention";
@@ -51,18 +52,31 @@ class Mention extends Node_1.default {
         };
     }
     inputRules({ type }) {
-        return [prosemirror_inputrules_1.wrappingInputRule(/^@$/, type)];
+        return [
+            new prosemirror_inputrules_1.InputRule(MENTION_INPUT_REGEX, (state, match, start, end) => {
+                const [okay, alt, href] = match;
+                const { tr } = state;
+                if (okay) {
+                    tr.replaceWith(start, end, this.editor.schema.text(alt)).addMark(start, start + alt.length, type.create({ href }));
+                }
+                return tr;
+            }),
+        ];
     }
     toMarkdown(state, node) {
         const label = state.esc(node.attrs.name || "");
         const uri = state.esc(`mention://${node.attrs.email}/${node.attrs.id}`);
-        const markdown = "@" + node.attrs.name;
+        const markdown = "@(" + label + ")(" + uri + ")";
         state.write(`@[${label}](${uri})`);
     }
     parseMarkdown() {
         return {
             node: "mention",
-            getAttrs: ({ mention: { name, id, email } }) => ({ name, id, email }),
+            getAttrs: ({ mention: { name, id, email } }) => ({
+                name,
+                id,
+                email,
+            }),
         };
     }
 }
