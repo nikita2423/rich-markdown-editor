@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const markInputRule_1 = __importDefault(require("../lib/markInputRule"));
+const prosemirror_inputrules_1 = require("prosemirror-inputrules");
 const Node_1 = __importDefault(require("./Node"));
 class Mention extends Node_1.default {
     get name() {
@@ -51,7 +51,7 @@ class Mention extends Node_1.default {
         };
     }
     inputRules({ type }) {
-        return [markInputRule_1.default(/^@$/, type)];
+        return [prosemirror_inputrules_1.wrappingInputRule(/^@$/, type)];
     }
     toMarkdown(state, node) {
         const label = state.esc(node.attrs.name || "");

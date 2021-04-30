@@ -71,7 +71,7 @@ export default class Mention extends Node {
   // }
 
   inputRules({ type }) {
-    return [markInputRule(/^@$/, type)];
+    return [wrappingInputRule(/^@$/, type)];
   }
 
   toMarkdown(state, node) {

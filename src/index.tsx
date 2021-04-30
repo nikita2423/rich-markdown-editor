@@ -483,11 +483,11 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
         setTimeout(() => {
           if (type === "mention") {
             // pass dummy mention suggestions
-            done(mentionUsers);
-            // done([
-            //   { name: "John Doe", id: "1011", email: "joe@gmail.com" },
-            //   { name: "Joe Lewis", id: "1012", email: "lewis@gmail.com" },
-            // ]);
+            // done(mentionUsers);
+            done([
+              { name: "John Doe", id: "1011", email: "joe@gmail.com" },
+              { name: "Joe Lewis", id: "1012", email: "lewis@gmail.com" },
+            ]);
           }
         }, 0);
       },
