@@ -50,7 +50,6 @@ export default class Mention extends Node {
         },
       ],
       toDOM: (node) => {
-        console.log("Mention Node to dom", node);
         return [
           "span",
           {
@@ -65,80 +64,14 @@ export default class Mention extends Node {
     };
   }
 
-  // commands({ type }) {
-  //   return () => (state, dispatch) => {
-  //     dispatch(state.tr.replaceSelectionWith(type.create()).scrollIntoView());
-  //     return true;
-  //   };
-  // }
-
-  // keys({ type }) {
-  //   return {
-  //     "Mod-_": (state, dispatch) => {
-  //       dispatch(state.tr.replaceSelectionWith(type.create()).scrollIntoView());
-  //       return true;
-  //     },
-  //   };
-  // }
-
   inputRules({ type }) {
     return [wrappingInputRule(/^@$/, type)];
   }
 
-  // inputRules({ type }) {
-  //   return [
-  //     new InputRule(MENTION_INPUT_REGEX, (state, match, start, end) => {
-  //       const [okay, email] = match;
-  //       console.log("State", state);
-  //       console.log("Macth", match);
-  //       const { tr } = state;
-  //       console.log("I ma n", email, okay);
-  //       console.log("Start", start);
-  //       console.log("End", end);
-  //       console.log("Type", type);
-  //       if (okay) {
-  //         console.log("Rep;ace wioth");
-  //         tr.replaceWith(
-  //           start - 1,
-  //           end,
-  //           type.create({
-  //             email,
-  //           })
-  //         );
-  //       }
-  //       // if (okay) {
-  //       //   tr.replaceWith(start, end, this.editor.schema.text(alt)).addMark(
-  //       //     start,
-  //       //     start + alt.length,
-  //       //     type.create({ href })
-  //       //   );
-  //       // }
-
-  //       return tr;
-  //     }),
-  //   ];
-  // }
-
   toMarkdown(state, node) {
-    // console.log("To amrkdown getting called");
     const label = state.esc(node.attrs.name || "");
     const uri = state.esc(`mention://${node.attrs.type}/${node.attrs.id}`);
-    // const markdown = "@(" + label + ")(" + uri + ")";
-    // const markdown = "@" + node.attrs.name;
     state.write(`@[${label}](${uri})`);
-    //const markdown = "@(" + label + ")";
-    // state.write(markdown);
-    // state.renderContent(node);
-    // state.closeBlock(node);
-    // state.text(node.text);
-    // state.closeBlock(node);.
-    // state.write("\n:::" + (node.attrs.style || "info") + "\n");
-    // state.renderContent(node);
-    // state.ensureNewLine();
-    // state.write(":::");
-    // state.closeBlock(node);
-    // state.write(node.attrs.markup || "\n---");
-    // state.closeBlock(node);
   }
 
   parseMarkdown() {

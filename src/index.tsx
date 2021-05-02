@@ -468,7 +468,14 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
       // </StyledMention>
       '<div class="suggestion-item-list">' +
       items
-        .map((i) => '<div class="suggestion-item">' + i.name + "</div>")
+        .map(
+          (i) =>
+            '<div class="suggestion-item">' +
+            i.type +
+            '<span class="suggestion-item-name">(' +
+            i.name +
+            ")</span></div>"
+        )
         .join("") +
       "</div>"
     );
@@ -481,7 +488,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
         setTimeout(() => {
           if (type === "mention") {
             // pass dummy mention suggestions
-            done(mentionUsers);
+             done(mentionUsers);
             // done([
             //   { name: "John Doe", id: "1011", type: "joe", email: "joe" },
             //   { name: "Joe Lewis", id: "1012", type: "lewis", email: "lewis" },

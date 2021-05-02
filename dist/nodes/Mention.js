@@ -37,7 +37,6 @@ class Mention extends Node_1.default {
                 },
             ],
             toDOM: (node) => {
-                console.log("Mention Node to dom", node);
                 return [
                     "span",
                     {
