@@ -12,6 +12,7 @@ export default class Text extends Node {
   }
 
   toMarkdown(state, node) {
+    // console.log("To text");
     state.text(node.text);
   }
 }

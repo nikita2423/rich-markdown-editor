@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const prosemirror_inputrules_1 = require("prosemirror-inputrules");
 const Node_1 = __importDefault(require("./Node"));
-const MENTION_INPUT_REGEX = /^\@\[(.+)]\((\S+)\)/;
+const MENTION_INPUT_REGEX = /^\@(.+)$/;
 class Mention extends Node_1.default {
     get name() {
         return "mention";
@@ -16,57 +16,54 @@ class Mention extends Node_1.default {
             inline: true,
             attrs: {
                 id: "",
-                name: "",
-                email: "",
+                type: "",
             },
+            atom: true,
             selectable: false,
             draggable: false,
             parseDOM: [
                 {
-                    tag: "span[data-mention-id][data-mention-name][data-mention-email]",
+                    tag: "span[data-id][data-type]",
                     getAttrs: (dom) => {
-                        const id = dom.getAttribute("data-mention-id");
-                        const name = dom.getAttribute("data-mention-name");
-                        const email = dom.getAttribute("data-mention-email");
+                        console.log("Mention dom", dom);
+                        const name = "";
+                        const id = dom.getAttribute("data-id");
+                        const email = dom.getAttribute("data-type");
                         return {
                             id: id,
-                            name: name,
-                            email: email,
+                            type: email,
                         };
                     },
                 },
             ],
             toDOM: (node) => {
+                console.log("Mention Node to dom", node);
                 return [
                     "span",
                     {
-                        "data-mention-id": node.attrs.id,
-                        "data-mention-name": node.attrs.name,
-                        "data-mention-email": node.attrs.email,
-                        class: "prosemirror-mention-node",
+                        "data-id": node.attrs.id,
+                        "data-type": node.attrs.type,
+                        class: "mention",
                     },
-                    "@" + node.attrs.name || node.attrs.email,
+                    "@" + node.attrs.type,
                 ];
             },
         };
     }
     inputRules({ type }) {
-        console.log("Input rules", type);
-        return [prosemirror_inputrules_1.wrappingInputRule(MENTION_INPUT_REGEX, type)];
+        return [prosemirror_inputrules_1.wrappingInputRule(/^@$/, type)];
     }
     toMarkdown(state, node) {
         const label = state.esc(node.attrs.name || "");
-        const uri = state.esc(`mention://${node.attrs.email}/${node.attrs.id}`);
-        const markdown = "@(" + label + ")(" + uri + ")";
+        const uri = state.esc(`mention://${node.attrs.type}/${node.attrs.id}`);
         state.write(`@[${label}](${uri})`);
     }
     parseMarkdown() {
         return {
             node: "mention",
-            getAttrs: ({ mention: { name, id, email } }) => ({
-                name,
+            getAttrs: ({ mention: { type, id, name } }) => ({
                 id,
-                email,
+                type,
             }),
         };
     }

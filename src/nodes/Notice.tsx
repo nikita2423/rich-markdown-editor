@@ -48,6 +48,7 @@ export default class Notice extends Node {
         },
       ],
       toDOM: (node) => {
+        console.log("Hint Node to dom", node);
         const select = document.createElement("select");
         select.addEventListener("change", this.handleStyleChange);
 

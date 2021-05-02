@@ -1,0 +1,1 @@
+{"version":3,"file":"mention.js","sourceRoot":"","sources":["../../../src/lib/markdown/mention.ts"],"names":[],"mappings":";;;;;AAAA,gFAAiD;AAEjD,SAAwB,OAAO,CAAC,EAAE;IAChC,OAAO,8BAAa,CAAC,EAAE,EAAE,SAAS,EAAE;QAClC,MAAM,EAAE,GAAG;QACX,QAAQ,EAAE,GAAG,EAAE,CAAC,IAAI;KACrB,CAAC,CAAC;AACL,CAAC;AALD,0BAKC"}

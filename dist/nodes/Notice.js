@@ -71,6 +71,7 @@ class Notice extends Node_1.default {
                 },
             ],
             toDOM: (node) => {
+                console.log("Hint Node to dom", node);
                 const select = document.createElement("select");
                 select.addEventListener("change", this.handleStyleChange);
                 this.styleOptions.forEach(([key, label]) => {

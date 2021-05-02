@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const markdown_it_1 = __importDefault(require("markdown-it"));
+const markdown_it_mentions_1 = __importDefault(require("@quartzy/markdown-it-mentions"));
 const mark_1 = __importDefault(require("./mark"));
 const checkboxes_1 = __importDefault(require("./checkboxes"));
 const embeds_1 = __importDefault(require("./embeds"));
@@ -23,6 +24,7 @@ function rules({ embeds }) {
         .use(mark_1.default({ delim: "!!", mark: "placeholder" }))
         .use(underlines_1.default)
         .use(tables_1.default)
+        .use(markdown_it_mentions_1.default)
         .use(notices_1.default);
 }
 exports.default = rules;

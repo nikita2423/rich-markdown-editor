@@ -104,15 +104,11 @@ class RichMarkdownEditor extends React.PureComponent {
         };
         this.importMentionPlugin = () => {
             const { mentionUsers } = this.props;
-            console.log("mention User List", mentionUsers);
             return MentionPlugin_1.getMentionsPlugin({
                 getSuggestions: (type, text, done) => {
                     setTimeout(() => {
                         if (type === "mention") {
-                            done([
-                                { name: "John Doe", id: "1011", email: "joe@gmail.com" },
-                                { name: "Joe Lewis", id: "1012", email: "lewis@gmail.com" },
-                            ]);
+                            done(mentionUsers);
                         }
                     }, 0);
                 },
@@ -133,7 +129,6 @@ class RichMarkdownEditor extends React.PureComponent {
             });
         };
         this.value = () => {
-            console.log("This view stte doc", this.view.state.doc);
             if (this.serializer) {
                 return this.serializer.serialize(this.view.state.doc);
             }
@@ -357,10 +352,10 @@ class RichMarkdownEditor extends React.PureComponent {
             new Doc_1.default(),
             new Text_1.default(),
             new Emoji_1.default(),
-            new Mention_1.default(),
             new HardBreak_1.default(),
             new Paragraph_1.default(),
             new Blockquote_1.default(),
+            new Mention_1.default(),
             new CodeBlock_1.default({
                 dictionary,
                 initialReadOnly: this.props.readOnly,
@@ -1435,7 +1430,7 @@ const StyledEditor = styled_components_1.default("div") `
     color: #fff;
   }
 
-  .prosemirror-mention-node {
+  .mention {
     color: #08c;
   }
 

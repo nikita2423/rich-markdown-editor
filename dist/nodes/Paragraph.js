@@ -15,6 +15,7 @@ class Paragraph extends Node_1.default {
             group: "block",
             parseDOM: [{ tag: "p" }],
             toDOM() {
+                console.log("Paragraph to dom");
                 return ["p", 0];
             },
         };

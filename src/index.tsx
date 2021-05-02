@@ -289,10 +289,10 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
         new Doc(),
         new Text(),
         new Emoji(),
-        new Mention(),
         new HardBreak(),
         new Paragraph(),
         new Blockquote(),
+        new Mention(),
         new CodeBlock({
           dictionary,
           initialReadOnly: this.props.readOnly,
@@ -417,7 +417,6 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
             decorations,
           });
         };
-
         return {
           ...nodeViews,
           [extension.name]: nodeView,
@@ -482,11 +481,11 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
         setTimeout(() => {
           if (type === "mention") {
             // pass dummy mention suggestions
-            //  done(mentionUsers);
-            done([
-              { name: "John Doe", id: "1011", email: "joe@gmail.com" },
-              { name: "Joe Lewis", id: "1012", email: "lewis@gmail.com" },
-            ]);
+            done(mentionUsers);
+            // done([
+            //   { name: "John Doe", id: "1011", type: "joe", email: "joe" },
+            //   { name: "Joe Lewis", id: "1012", type: "lewis", email: "lewis" },
+            // ]);
           }
         }, 0);
       },
@@ -602,7 +601,6 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
   }
 
   value = (): string => {
-    console.log("This view stte doc", this.view.state.doc);
     if (this.serializer) {
       return this.serializer.serialize(this.view.state.doc);
     }
@@ -1716,7 +1714,7 @@ const StyledEditor = styled("div")<{
     color: #fff;
   }
 
-  .prosemirror-mention-node {
+  .mention {
     color: #08c;
   }
 
