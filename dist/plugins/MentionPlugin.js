@@ -88,6 +88,7 @@ function getMentionsPlugin(opts) {
     var opts = Object.assign({}, defaultOpts, opts);
     var showListTimeoutId = null;
     var el = document.createElement("div");
+    el.style.zIndex = "200";
     var index = 0;
     var showList = function (view, state, suggestions, opts) {
         el.innerHTML = opts.getSuggestionsHTML(suggestions, state.type);

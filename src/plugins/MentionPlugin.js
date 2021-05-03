@@ -138,6 +138,7 @@ export function getMentionsPlugin(opts) {
 
   // dropdown element
   var el = document.createElement("div");
+  el.style.zIndex = "200";
 
   // current Idx
   var index = 0;
