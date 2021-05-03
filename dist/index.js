@@ -113,7 +113,7 @@ class RichMarkdownEditor extends React.PureComponent {
                             ")</span></div>");
                     }
                     if (icon) {
-                        return ('<div class="suggestion-item"><span suggestion-item-icon>' +
+                        return ('<div class="suggestion-item"><span class="suggestion-item-icon">' +
                             i.icon +
                             "</span>" +
                             i.type +
