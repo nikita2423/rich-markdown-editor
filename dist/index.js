@@ -98,11 +98,30 @@ class RichMarkdownEditor extends React.PureComponent {
         this.getMentionSuggestionsHTML = (items) => {
             return ('<div class="suggestion-item-list">' +
                 items
-                    .map((i) => '<div class="suggestion-item">' +
-                    i.type +
-                    '<span class="suggestion-item-name">(' +
-                    i.name +
-                    ")</span></div>")
+                    .map((i) => {
+                    const icon = i.icon;
+                    const imageUrl = i.imageUrl;
+                    if (imageUrl) {
+                        return ('<div class="suggestion-item"><span class="suggestion-item-image"><img src=' +
+                            i.imageUrl +
+                            " alt=" +
+                            i.imageUrl +
+                            "/></span>" +
+                            i.type +
+                            '<span class="suggestion-item-name">(' +
+                            i.name +
+                            ")</span></div>");
+                    }
+                    if (icon) {
+                        return ('<div class="suggestion-item"><span suggestion-item-icon>' +
+                            i.icon +
+                            "</span>" +
+                            i.type +
+                            '<span class="suggestion-item-name">(' +
+                            i.name +
+                            ")</span></div>");
+                    }
+                })
                     .join("") +
                 "</div>");
         };

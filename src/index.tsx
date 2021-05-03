@@ -468,14 +468,34 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
       // </StyledMention>
       '<div class="suggestion-item-list">' +
       items
-        .map(
-          (i) =>
-            '<div class="suggestion-item">' +
-            i.type +
-            '<span class="suggestion-item-name">(' +
-            i.name +
-            ")</span></div>"
-        )
+        .map((i) => {
+          const icon = i.icon;
+          const imageUrl = i.imageUrl;
+          if (imageUrl) {
+            return (
+              '<div class="suggestion-item"><span class="suggestion-item-image"><img src=' +
+              i.imageUrl +
+              " alt=" +
+              i.imageUrl +
+              "/></span>" +
+              i.type +
+              '<span class="suggestion-item-name">(' +
+              i.name +
+              ")</span></div>"
+            );
+          }
+          if (icon) {
+            return (
+              '<div class="suggestion-item"><span suggestion-item-icon>' +
+              i.icon +
+              "</span>" +
+              i.type +
+              '<span class="suggestion-item-name">(' +
+              i.name +
+              ")</span></div>"
+            );
+          }
+        })
         .join("") +
       "</div>"
     );
@@ -490,8 +510,21 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
             // pass dummy mention suggestions
              done(mentionUsers);
             // done([
-            //   { name: "John Doe", id: "1011", type: "joe", email: "joe" },
-            //   { name: "Joe Lewis", id: "1012", type: "lewis", email: "lewis" },
+            //   {
+            //     name: "John Doe",
+            //     id: "1011",
+            //     type: "joe",
+            //     email: "joe",
+            //     imageUrl:
+            //       "https://static.due.work/templates/avatars/48x48/avatar_27.png",
+            //   },
+            //   {
+            //     name: "Joe Lewis",
+            //     id: "1012",
+            //     type: "lewis",
+            //     email: "lewis",
+            //     icon: "#",
+            //   },
             // ]);
           }
         }, 0);
