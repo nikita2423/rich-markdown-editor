@@ -76,19 +76,16 @@ function Example(props) {
                     }, 1500);
                 });
             }, onSearchLink: async (term) => {
-                console.log("Searched link: ", term);
                 return new Promise((resolve) => {
                     setTimeout(() => {
                         resolve(docSearchResults.filter((result) => result.title.toLowerCase().includes(term.toLowerCase())));
                     }, Math.random() * 500);
                 });
             }, uploadImage: (file) => {
-                console.log("File upload triggered: ", file);
                 return new Promise((resolve) => {
                     setTimeout(() => resolve("https://picsum.photos/600/600"), 1500);
                 });
             }, uploadFile: (file) => {
-                console.log("File upload triggered: ", file);
                 return new Promise((resolve) => {
                     setTimeout(() => resolve("https://static.due.work/HO-v6EQZ1/documents/84p04VWklC_JYvBlJliI.xlsx"), 1500);
                 });

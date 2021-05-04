@@ -93,7 +93,6 @@ class CodeFence extends Node_1.default {
                     preserveWhitespace: "full",
                     contentElement: "code",
                     getAttrs: (dom) => {
-                        console.log("Code aprse Doem");
                         return {
                             language: dom.dataset.language,
                         };

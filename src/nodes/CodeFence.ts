@@ -69,7 +69,6 @@ export default class CodeFence extends Node {
           preserveWhitespace: "full",
           contentElement: "code",
           getAttrs: (dom: HTMLDivElement) => {
-            console.log("Code aprse Doem");
             return {
               language: dom.dataset.language,
             };

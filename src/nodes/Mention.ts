@@ -36,7 +36,6 @@ export default class Mention extends Node {
           // tag: "span[data-mention-email]",
 
           getAttrs: (dom) => {
-            console.log("Mention dom", dom);
             const name = "";
             const id = dom.getAttribute("data-id");
             // const name = dom.getAttribute("data-name");

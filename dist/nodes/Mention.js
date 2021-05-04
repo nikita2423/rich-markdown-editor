@@ -25,7 +25,6 @@ class Mention extends Node_1.default {
                 {
                     tag: "span[data-id][data-type]",
                     getAttrs: (dom) => {
-                        console.log("Mention dom", dom);
                         const name = "";
                         const id = dom.getAttribute("data-id");
                         const email = dom.getAttribute("data-type");

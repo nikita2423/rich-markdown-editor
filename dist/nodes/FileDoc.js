@@ -122,7 +122,6 @@ class File extends Node_1.default {
         };
         this.component = (options) => {
             const { alt, src } = options.node.attrs;
-            console.log("in file", options);
             return (React.createElement("div", { className: "file", contentEditable: false },
                 React.createElement("div", { style: { display: "flex", justifyContent: "center" } },
                     React.createElement("a", { href: src, target: "__blank" },

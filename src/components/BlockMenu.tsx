@@ -297,7 +297,6 @@ class BlockMenu extends React.Component<Props, State> {
     const parent = findParentNode((node) => !!node)(state.selection);
 
     if (parent) {
-      console.log(" text content", parent.node);
       dispatch(
         state.tr.insertText(
           "",

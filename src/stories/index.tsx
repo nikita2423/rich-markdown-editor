@@ -82,8 +82,6 @@ export default function Example(props) {
           });
         }}
         onSearchLink={async (term) => {
-          console.log("Searched link: ", term);
-
           // Delay to simulate time taken for remote API request to complete
           return new Promise((resolve) => {
             setTimeout(() => {
@@ -96,16 +94,12 @@ export default function Example(props) {
           });
         }}
         uploadImage={(file) => {
-          console.log("File upload triggered: ", file);
-
           // Delay to simulate time taken to upload
           return new Promise((resolve) => {
             setTimeout(() => resolve("https://picsum.photos/600/600"), 1500);
           });
         }}
         uploadFile={(file) => {
-          console.log("File upload triggered: ", file);
-
           // Delay to simulate time taken to upload
           return new Promise((resolve) => {
             setTimeout(

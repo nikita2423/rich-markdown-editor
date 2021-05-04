@@ -192,7 +192,6 @@ export default class File extends Node {
 
   component = (options) => {
     const { alt, src } = options.node.attrs;
-    console.log("in file", options);
     return (
       <div className="file" contentEditable={false}>
         <div style={{ display: "flex", justifyContent: "center" }}>
