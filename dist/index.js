@@ -131,7 +131,22 @@ class RichMarkdownEditor extends React.PureComponent {
                 getSuggestions: (type, text, done) => {
                     setTimeout(() => {
                         if (type === "mention") {
-                            done(mentionUsers);
+                            done([
+                                {
+                                    name: "John Doe",
+                                    id: "1011",
+                                    type: "joe",
+                                    email: "joe",
+                                    icon: "#",
+                                },
+                                {
+                                    name: "Joe Lewis",
+                                    id: "1012",
+                                    type: "lewis",
+                                    email: "lewis",
+                                    icon: "#",
+                                },
+                            ]);
                         }
                     }, 0);
                 },

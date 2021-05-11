@@ -512,7 +512,7 @@ exports.Wrapper = styled_components_1.default.div `
 
   ${({ active, isAbove }) => active &&
     `
-    transform: translateY(${isAbove ? "6px" : "-6px"}) scale(1);
+     transform: translateY(${isAbove ? "6px" : "-6px"}) scale(1);
     pointer-events: all;
     opacity: 1;
   `};

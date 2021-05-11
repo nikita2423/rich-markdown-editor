@@ -90,6 +90,22 @@ function getMentionsPlugin(opts) {
     var el = document.createElement("div");
     el.style.zIndex = "200";
     var index = 0;
+    var caretPosition = function () {
+        const selection = window.document.getSelection();
+        console.log("Selection", selection);
+        if (!selection || !selection.anchorNode || !selection.focusNode) {
+            return {
+                top: 0,
+                left: 0,
+            };
+        }
+        else {
+            return {
+                left: -1000,
+                top: 0,
+            };
+        }
+    };
     var showList = function (view, state, suggestions, opts) {
         el.innerHTML = opts.getSuggestionsHTML(suggestions, state.type);
         el.querySelectorAll(".suggestion-item").forEach(function (itemNode, index) {
@@ -110,14 +126,30 @@ function getMentionsPlugin(opts) {
         var textDOM = paraDOM.querySelector("." + opts.suggestionTextClass);
         var offset = textDOM.getBoundingClientRect();
         document.body.appendChild(el);
-        el.style.position = "fixed";
-        el.style.left = offset.left + "px";
-        var top = textDOM.offsetHeight + offset.top;
-        el.style.top = top + "px";
+        el.style.position = "absolute";
         el.style.display = "block";
+        el.style.left = offset.left + "px";
+        const margin = 24;
+        const elOffsetHeight = el.offsetHeight;
+        const startPos = view.coordsAtPos(view.state.selection.$from.pos);
+        const paragraph = view.domAtPos(view.state.selection.$from.pos);
+        const { top, bottom } = paragraph.node.getBoundingClientRect();
+        if (startPos.top - elOffsetHeight > margin) {
+            console.log("is below");
+            var bottomValue = window.innerHeight - top - window.scrollY;
+            el.style.bottom = bottomValue + "px";
+        }
+        else {
+            console.log("is above");
+            var topValue = bottom + window.scrollY;
+            el.style.top = topValue + "px";
+        }
     };
     var hideList = function () {
+        console.log("Hide list getting called");
         el.style.display = "none";
+        el.style.top = 0;
+        el.style.bottom = 0;
     };
     var removeClassAtIndex = function (index, className) {
         var itemList = el.querySelector(".suggestion-item-list").childNodes;
