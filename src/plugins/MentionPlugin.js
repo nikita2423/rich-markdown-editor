@@ -205,7 +205,7 @@ export function getMentionsPlugin(opts) {
     const paragraph = view.domAtPos(view.state.selection.$from.pos);
     const { top, bottom } = paragraph.node.getBoundingClientRect();
     // if (startPos.top - elOffsetHeight > margin) {
-    var bottomValue = offset.top - textDOM.offsetHeight - 16;
+    var bottomValue = offset.top - (textDOM.offsetHeight + el.offsetHeight);
     console.log("Offset Top", offset.top);
     console.log("El offset ", elOffsetHeight);
     el.style.top = bottomValue + "px";
