@@ -199,13 +199,9 @@ export function getMentionsPlugin(opts) {
     el.style.position = "absolute";
     el.style.display = "block";
     el.style.left = offset.left + "px";
-    const margin = 24;
     const elOffsetHeight = el.offsetHeight;
-    const startPos = view.coordsAtPos(view.state.selection.$from.pos);
-    const paragraph = view.domAtPos(view.state.selection.$from.pos);
-    const { top, bottom } = paragraph.node.getBoundingClientRect();
-    // if (startPos.top - elOffsetHeight > margin) {
-    var bottomValue = offset.top - (textDOM.offsetHeight + el.offsetHeight);
+
+    var bottomValue = offset.top - el.offsetHeight;
     console.log("Offset Top", offset.top);
     console.log("El offset ", elOffsetHeight);
     el.style.top = bottomValue + "px";
