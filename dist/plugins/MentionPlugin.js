@@ -131,8 +131,6 @@ function getMentionsPlugin(opts) {
         el.style.left = offset.left + "px";
         const elOffsetHeight = el.offsetHeight;
         var bottomValue = offset.top - el.offsetHeight;
-        console.log("Offset Top", offset.top);
-        console.log("El offset ", elOffsetHeight);
         el.style.top = bottomValue + "px";
     };
     var hideList = function () {
