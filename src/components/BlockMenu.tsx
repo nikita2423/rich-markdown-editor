@@ -456,7 +456,6 @@ class BlockMenu extends React.Component<Props, State> {
     const { left } = this.caretPosition;
     const { top, bottom } = paragraph.node.getBoundingClientRect();
     const margin = 24;
-
     if (startPos.top - offsetHeight > margin) {
       return {
         left: left + window.scrollX,
@@ -727,7 +726,7 @@ export const Wrapper = styled.div<{
   ${({ active, isAbove }) =>
     active &&
     `
-    transform: translateY(${isAbove ? "6px" : "-6px"}) scale(1);
+     transform: translateY(${isAbove ? "6px" : "-6px"}) scale(1);
     pointer-events: all;
     opacity: 1;
   `};
