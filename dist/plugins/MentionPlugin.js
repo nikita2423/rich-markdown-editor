@@ -134,22 +134,13 @@ function getMentionsPlugin(opts) {
         const startPos = view.coordsAtPos(view.state.selection.$from.pos);
         const paragraph = view.domAtPos(view.state.selection.$from.pos);
         const { top, bottom } = paragraph.node.getBoundingClientRect();
-        if (startPos.top - elOffsetHeight > margin) {
-            console.log("is below");
-            var bottomValue = window.innerHeight - top - window.scrollY;
-            el.style.bottom = bottomValue + "px";
-        }
-        else {
-            console.log("is above");
-            var topValue = bottom + window.scrollY;
-            el.style.top = topValue + "px";
-        }
+        var bottomValue = offset.top - textDOM.offsetHeight - 16;
+        console.log("Offset Top", offset.top);
+        console.log("El offset ", elOffsetHeight);
+        el.style.top = bottomValue + "px";
     };
     var hideList = function () {
-        console.log("Hide list getting called");
         el.style.display = "none";
-        el.style.top = 0;
-        el.style.bottom = 0;
     };
     var removeClassAtIndex = function (index, className) {
         var itemList = el.querySelector(".suggestion-item-list").childNodes;

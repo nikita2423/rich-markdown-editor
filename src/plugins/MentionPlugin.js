@@ -196,38 +196,6 @@ export function getMentionsPlugin(opts) {
     // TODO: think about outsourcing this positioning logic as options
     document.body.appendChild(el);
 
-    // const { selection } = view.state;
-    // const startPos = view.coordsAtPos(selection.$from.pos);
-    // const offsetHeight = textDOM ? textDOM.offsetHeight : 0;
-    // const paragraph = view.domAtPos(selection.$from.pos);
-
-    // const { left } = caretPosition();
-    // const { top, bottom } = paragraph.node.getBoundingClientRect();
-    // const margin = 24;
-    // el.style.position = "absolute";
-    // el.style.display = "block";
-    // if (startPos.top - offsetHeight > margin) {
-    //   el.style.left = left + window.scrollX;
-    //   el.style.top = undefined;
-    //   el.style.bottom = window.innerHeight - top - window.scrollY;
-    //   // return {
-    //   //   left: left + window.scrollX,
-    //   //   top: undefined,
-    //   //   bottom: window.innerHeight - top - window.scrollY,
-    //   //   isAbove: false,
-    //   // };
-    // } else {
-    //   el.style.left = left + window.scrollX;
-    //   el.style.top = bottom + window.scrollY;
-    //   el.style.bottom = undefined;
-    //   // return {
-    //   //   left: left + window.scrollX,
-    //   //   top: bottom + window.scrollY,
-    //   //   bottom: undefined,
-    //   //   isAbove: true,
-    //   // };
-    // }
-
     el.style.position = "absolute";
     el.style.display = "block";
     el.style.left = offset.left + "px";
@@ -236,15 +204,16 @@ export function getMentionsPlugin(opts) {
     const startPos = view.coordsAtPos(view.state.selection.$from.pos);
     const paragraph = view.domAtPos(view.state.selection.$from.pos);
     const { top, bottom } = paragraph.node.getBoundingClientRect();
-    if (startPos.top - elOffsetHeight > margin) {
-      console.log("is below");
-      var bottomValue = window.innerHeight - top - window.scrollY;
-      el.style.bottom = bottomValue + "px";
-    } else {
-      console.log("is above");
-      var topValue = bottom + window.scrollY;
-      el.style.top = topValue + "px";
-    }
+    // if (startPos.top - elOffsetHeight > margin) {
+    var bottomValue = offset.top - textDOM.offsetHeight - 16;
+    console.log("Offset Top", offset.top);
+    console.log("El offset ", elOffsetHeight);
+    el.style.top = bottomValue + "px";
+    // } else {
+    //   console.log("is above");
+    //   var topValue = bottom + window.scrollY;
+    //   el.style.top = topValue + "px";
+    // }
     // var top = textDOM.offsetHeight + offset.top;
     // console.log("Start Position", paragraph.node.getBoundingClientRect());
     // console.log("Element offset hight", el.offsetHeight);
@@ -256,10 +225,7 @@ export function getMentionsPlugin(opts) {
   };
 
   var hideList = function() {
-    console.log("Hide list getting called");
     el.style.display = "none";
-    el.style.top = 0;
-    el.style.bottom = 0;
   };
 
   var removeClassAtIndex = function(index, className) {
