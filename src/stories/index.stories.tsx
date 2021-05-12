@@ -1,5 +1,5 @@
 import Editor from "./index";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 import { Props } from "..";
 import React from "react";
 import { Story, Meta } from "@storybook/react/types-6-0";
@@ -166,6 +166,12 @@ export const Placeholder = Template.bind({});
 Placeholder.args = {
   defaultValue: "",
   placeholder: "This is a custom placeholder…",
+};
+
+export const Images = Template.bind({});
+Images.args = {
+  defaultValue: `# Images
+![A caption](https://upload.wikimedia.org/wikipedia/commons/0/06/Davide-ragusa-gcDwzUGuUoI-unsplash.jpg)`,
 };
 
 export const Focused = Template.bind({});

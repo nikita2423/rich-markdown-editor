@@ -86,7 +86,7 @@ import { getMentionsPlugin } from "./plugins/MentionPlugin";
 
 import { linkify } from "./helper";
 
-export { schema, parser, serializer } from "./server";
+export { schema, parser, serializer, renderToHtml } from "./server";
 
 export { default as Extension } from "./lib/Extension";
 
@@ -294,12 +294,10 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
         new Mention(),
         new CodeBlock({
           dictionary,
-          initialReadOnly: this.props.readOnly,
           onShowToast: this.props.onShowToast,
         }),
         new CodeFence({
           dictionary,
-          initialReadOnly: this.props.readOnly,
           onShowToast: this.props.onShowToast,
         }),
         new CheckboxList(),
@@ -1019,6 +1017,8 @@ const StyledEditor = styled("div")<{
   .image.placeholder {
     position: relative;
     background: ${(props) => props.theme.background};
+    margin-bottom: calc(28px + 1.2em);
+
     img {
       opacity: 0.5;
     }
@@ -1311,12 +1311,12 @@ const StyledEditor = styled("div")<{
 
   ul,
   ol {
-    margin: 0 0.1em;
-    padding: 0 0 0 1.2em;
+    margin: 0 0.1em 0 -26px;
+    padding: 0 0 0 44px;
 
     ul,
     ol {
-      margin: 0;
+      margin-right: -24px;
     }
   }
 
@@ -1331,16 +1331,60 @@ const StyledEditor = styled("div")<{
   ul.checkbox_list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 0 0 -24px;
+  }
+
+  ul li,
+  ol li {
+    position: relative;
+    white-space: initial;
+
+    p {
+      white-space: pre-wrap;
+    }
+
+    > div {
+      width: 100%;
+    }
   }
 
   ul.checkbox_list li {
     display: flex;
+    padding-left: 24px;
   }
 
   ul.checkbox_list li.checked > div > p {
     color: ${(props) => props.theme.textSecondary};
     text-decoration: line-through;
+  }
+
+  ul li::before,
+  ol li::before {
+    background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iOCIgeT0iNyIgd2lkdGg9IjMiIGhlaWdodD0iMiIgcng9IjEiIGZpbGw9IiM0RTVDNkUiLz4KPHJlY3QgeD0iOCIgeT0iMTEiIHdpZHRoPSIzIiBoZWlnaHQ9IjIiIHJ4PSIxIiBmaWxsPSIjNEU1QzZFIi8+CjxyZWN0IHg9IjgiIHk9IjE1IiB3aWR0aD0iMyIgaGVpZ2h0PSIyIiByeD0iMSIgZmlsbD0iIzRFNUM2RSIvPgo8cmVjdCB4PSIxMyIgeT0iNyIgd2lkdGg9IjMiIGhlaWdodD0iMiIgcng9IjEiIGZpbGw9IiM0RTVDNkUiLz4KPHJlY3QgeD0iMTMiIHk9IjExIiB3aWR0aD0iMyIgaGVpZ2h0PSIyIiByeD0iMSIgZmlsbD0iIzRFNUM2RSIvPgo8cmVjdCB4PSIxMyIgeT0iMTUiIHdpZHRoPSIzIiBoZWlnaHQ9IjIiIHJ4PSIxIiBmaWxsPSIjNEU1QzZFIi8+Cjwvc3ZnPgo=");
+    content: "";
+    display: ${(props) => (props.readOnly ? "none" : "inline-block")};
+    cursor: move;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: -40px;
+    top: 2px;
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+  }
+
+  ul > li.hovering::before,
+  ol li.hovering::before {
+    opacity: 0.5;
+  }
+
+  ul li.ProseMirror-selectednode::after,
+  ol li.ProseMirror-selectednode::after {
+    display: none;
+  }
+
+  ul.checkbox_list li::before {
+    left: 0;
   }
 
   ul.checkbox_list li input {
@@ -1360,9 +1404,27 @@ const StyledEditor = styled("div")<{
   }
 
   hr {
-    height: 0;
+    position: relative;
+    height: 1em;
     border: 0;
+  }
+
+  hr:before {
+    content: "";
+    display: block;
+    position: absolute;
     border-top: 1px solid ${(props) => props.theme.horizontalRule};
+    top: 0.5em;
+    left: 0;
+    right: 0;
+  }
+
+  hr.page-break {
+    page-break-after: always;
+  }
+
+  hr.page-break:before {
+    border-top: 1px dashed ${(props) => props.theme.horizontalRule};
   }
 
   code {
@@ -1770,6 +1832,10 @@ const StyledEditor = styled("div")<{
   @media print {
     .block-menu-trigger {
       display: none;
+    }
+
+    .page-break {
+      opacity: 0;
     }
   }
 

@@ -1,20 +1,3 @@
-// import {
-//   BlockQuoteIcon,
-//   BulletedListIcon,
-//   CodeIcon,
-//   Heading1Icon,
-//   Heading2Icon,
-//   Heading3Icon,
-//   HorizontalRuleIcon,
-//   OrderedListIcon,
-//   TableIcon,
-//   TodoListIcon,
-//   ImageIcon,
-//   StarredIcon,
-//   WarningIcon,
-//   InfoIcon,
-//   LinkIcon,
-// } from "outline-icons";
 import Heading1Icon from "../icons/H1Icon";
 import Heading2Icon from "../icons/H2Icon";
 import Heading3Icon from "../icons/H3Icon";
@@ -128,6 +111,14 @@ export default function blockMenuItems(
       icon: HorizontalRuleIcon,
       shortcut: `ctrl _`,
       keywords: "horizontal rule break line",
+    },
+    {
+      name: "hr",
+      title: dictionary.pageBreak,
+      description: dictionary.dividerDesc,
+      icon: HorizontalRuleIcon,
+      keywords: "page print break line",
+      attrs: { markup: "***" },
     },
     {
       name: "image",

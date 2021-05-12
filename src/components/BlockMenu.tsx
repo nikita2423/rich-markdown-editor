@@ -17,6 +17,13 @@ import CustomScrollbar from "../CustomScrollbar";
 
 const SSR = typeof window === "undefined";
 
+const defaultPosition = {
+  left: -1000,
+  top: 0,
+  bottom: undefined,
+  isAbove: false,
+};
+
 type Props = {
   isActive: boolean;
   commands: Record<string, any>;
@@ -434,10 +441,17 @@ class BlockMenu extends React.Component<Props, State> {
   calculatePosition(props) {
     const { view } = props;
     const { selection } = view.state;
-    const startPos = view.coordsAtPos(selection.$from.pos);
+    let startPos;
+    try {
+      startPos = view.coordsAtPos(selection.from);
+    } catch (err) {
+      console.warn(err);
+      return defaultPosition;
+    }
+
     const ref = this.menuRef.current;
     const offsetHeight = ref ? ref.offsetHeight : 0;
-    const paragraph = view.domAtPos(selection.$from.pos);
+    const paragraph = view.domAtPos(selection.from);
 
     if (
       !props.isActive ||
@@ -445,12 +459,7 @@ class BlockMenu extends React.Component<Props, State> {
       !paragraph.node.getBoundingClientRect ||
       SSR
     ) {
-      return {
-        left: -1000,
-        top: 0,
-        bottom: undefined,
-        isAbove: false,
-      };
+      return defaultPosition;
     }
 
     const { left } = this.caretPosition;
@@ -506,8 +515,8 @@ class BlockMenu extends React.Component<Props, State> {
       // If no image upload callback has been passed, filter the image block out
       if (!uploadImage && item.name === "image") return false;
 
-      // If no file upload callback has been passed, filter the file block out
-      if (!uploadFile && item.name === "file") return false;
+      // some items (defaultHidden) are not visible until a search query exists
+      if (!search) return !item.defaultHidden;
 
       const n = search.toLowerCase();
       return (

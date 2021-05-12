@@ -57,6 +57,28 @@ class YoutubeEmbed extends React.Component<{
   }
 }
 
+const embeds = [
+  {
+    title: "YouTube",
+    keywords: "youtube video tube google",
+    defaultHidden: true,
+    // eslint-disable-next-line react/display-name
+    icon: () => (
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/7/75/YouTube_social_white_squircle_%282017%29.svg"
+        width={24}
+        height={24}
+      />
+    ),
+    matcher: url => {
+      return !!url.match(
+        /(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/?.*(?:watch|embed)?(?:.*v=|v\/|\/)([a-zA-Z0-9_-]{11})$/i
+      );
+    },
+    component: YoutubeEmbed,
+  },
+];
+
 export default function Example(props) {
   const { body } = document;
   if (body)
@@ -95,42 +117,11 @@ export default function Example(props) {
         }}
         uploadImage={(file) => {
           // Delay to simulate time taken to upload
-          return new Promise((resolve) => {
-            setTimeout(() => resolve("https://picsum.photos/600/600"), 1500);
+          return new Promise(resolve => {
+            setTimeout(() => resolve(URL.createObjectURL(file)), 1500);
           });
         }}
-        uploadFile={(file) => {
-          // Delay to simulate time taken to upload
-          return new Promise((resolve) => {
-            setTimeout(
-              () =>
-                resolve(
-                  "https://static.due.work/HO-v6EQZ1/documents/84p04VWklC_JYvBlJliI.xlsx"
-                ),
-              1500
-            );
-          });
-        }}
-        embeds={[
-          {
-            title: "YouTube",
-            keywords: "youtube video tube google",
-            // eslint-disable-next-line react/display-name
-            icon: () => (
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/7/75/YouTube_social_white_squircle_%282017%29.svg"
-                width={24}
-                height={24}
-              />
-            ),
-            matcher: (url) => {
-              return !!url.match(
-                /(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/?.*(?:watch|embed)?(?:.*v=|v\/|\/)([a-zA-Z0-9_-]{11})$/i
-              );
-            },
-            component: YoutubeEmbed,
-          },
-        ]}
+        embeds={embeds}
         {...props}
       />
     </div>

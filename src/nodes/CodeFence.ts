@@ -14,6 +14,7 @@ import powershell from "refractor/lang/powershell";
 import ruby from "refractor/lang/ruby";
 import sql from "refractor/lang/sql";
 import typescript from "refractor/lang/typescript";
+import yaml from "refractor/lang/yaml";
 import { setBlockType } from "prosemirror-commands";
 import { textblockTypeInputRule } from "prosemirror-inputrules";
 import copy from "copy-to-clipboard";
@@ -38,6 +39,7 @@ import { ToastType } from "../types";
   ruby,
   sql,
   typescript,
+  yaml,
 ].forEach(refractor.register);
 
 export default class CodeFence extends Node {
@@ -79,7 +81,7 @@ export default class CodeFence extends Node {
         const button = document.createElement("button");
         button.innerText = "Copy";
         button.type = "button";
-        button.addEventListener("click", this.handleCopyToClipboard(node));
+        button.addEventListener("click", this.handleCopyToClipboard);
 
         const select = document.createElement("select");
         select.addEventListener("change", this.handleLanguageChange);
@@ -129,17 +131,25 @@ export default class CodeFence extends Node {
     };
   }
 
-  handleCopyToClipboard(node) {
-    return () => {
-      copy(node.textContent);
-      if (this.options.onShowToast) {
-        this.options.onShowToast(
-          this.options.dictionary.codeCopied,
-          ToastType.Info
-        );
+  handleCopyToClipboard = event => {
+    const { view } = this.editor;
+    const element = event.target;
+    const { top, left } = element.getBoundingClientRect();
+    const result = view.posAtCoords({ top, left });
+
+    if (result) {
+      const node = view.state.doc.nodeAt(result.pos);
+      if (node) {
+        copy(node.textContent);
+        if (this.options.onShowToast) {
+          this.options.onShowToast(
+            this.options.dictionary.codeCopied,
+            ToastType.Info
+          );
+        }
       }
-    };
-  }
+    }
+  };
 
   handleLanguageChange = (event) => {
     const { view } = this.editor;
@@ -157,12 +167,7 @@ export default class CodeFence extends Node {
   };
 
   get plugins() {
-    return [
-      Prism({
-        name: this.name,
-        deferred: !this.options.initialReadOnly,
-      }),
-    ];
+    return [Prism({ name: this.name })];
   }
 
   inputRules({ type }) {
