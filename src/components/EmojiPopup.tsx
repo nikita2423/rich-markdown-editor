@@ -172,7 +172,6 @@ class EmojiPopup extends React.Component<Props, State> {
   getAllEmojis = () => {
     const { emojiData } = this.props;
     if (emojiData && emojiData.length) {
-      console.log("emoji data", emojiData.length);
       return map(emojiData, (emoji, index) => {
         const onSelect = () => {
           this.insertItem(emoji);
@@ -200,7 +199,6 @@ class EmojiPopup extends React.Component<Props, State> {
     // const items = this.filtered;
     const { ...positioning } = this.state;
     const items: (EmbedDescriptor | MenuItem)[] = getMenuItems(dictionary);
-    console.log("EMoji getting called", isActive);
     return (
       <Portal>
         <Wrapper

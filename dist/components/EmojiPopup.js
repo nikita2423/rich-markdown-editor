@@ -56,7 +56,6 @@ class EmojiPopup extends React.Component {
         this.getAllEmojis = () => {
             const { emojiData } = this.props;
             if (emojiData && emojiData.length) {
-                console.log("emoji data", emojiData.length);
                 return map_1.default(emojiData, (emoji, index) => {
                     const onSelect = () => {
                         this.insertItem(emoji);
@@ -150,7 +149,6 @@ class EmojiPopup extends React.Component {
         const { dictionary, isActive } = this.props;
         const positioning = __rest(this.state, []);
         const items = block_1.default(dictionary);
-        console.log("EMoji getting called", isActive);
         return (React.createElement(react_portal_1.Portal, null,
             React.createElement(exports.Wrapper, Object.assign({ id: "block-menu-container", active: isActive, ref: this.menuRef }, positioning), isActive && (React.createElement("div", { className: "editor-emoji-container" }, this.getAllEmojis())))));
     }
