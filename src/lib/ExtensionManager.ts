@@ -1,7 +1,6 @@
 import { Schema } from "prosemirror-model";
 import { keymap } from "prosemirror-keymap";
 import { MarkdownParser } from "prosemirror-markdown";
-// import { markdownParser, markdownSerializer } from "prosemirror-mentions";
 import { MarkdownSerializer } from "./markdown/serializer";
 import Editor from "../";
 import Extension from "./Extension";

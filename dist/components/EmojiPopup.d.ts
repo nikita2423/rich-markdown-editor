@@ -42,6 +42,7 @@ declare class EmojiPopup extends React.Component<Props, State> {
         isAbove: boolean;
     };
     getAllEmojis: () => JSX.Element[] | undefined;
+    onEmojiClick: (event: any, emojiObject: any) => void;
     render(): JSX.Element;
 }
 export declare const Wrapper: import("styled-components").StyledComponent<"div", any, {

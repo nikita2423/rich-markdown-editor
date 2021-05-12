@@ -2,6 +2,7 @@ import * as React from "react";
 import { Portal } from "react-portal";
 import { EditorView } from "prosemirror-view";
 import { findParentNode } from "prosemirror-utils";
+import Picker from "emoji-picker-react";
 import styled from "styled-components";
 import { EmbedDescriptor, MenuItem } from "../types";
 
@@ -189,11 +190,16 @@ class EmojiPopup extends React.Component<Props, State> {
     }
   };
 
+  onEmojiClick = (event, emojiObject) => {
+    this.insertItem(emojiObject.emoji);
+  };
+
   render() {
     const { dictionary, isActive } = this.props;
     // const items = this.filtered;
     const { ...positioning } = this.state;
     const items: (EmbedDescriptor | MenuItem)[] = getMenuItems(dictionary);
+    console.log("EMoji getting called", isActive);
     return (
       <Portal>
         <Wrapper
@@ -202,57 +208,13 @@ class EmojiPopup extends React.Component<Props, State> {
           ref={this.menuRef}
           {...positioning}
         >
-          <div className="editor-emoji-container">
-            {this.getAllEmojis()}
-            {/* <div
-              style={{ marginBottom: "5px", height: "20px" }}
-              onClick={() => this.insertItem(items[19], "😀")}
-            >
-              😀
-            </div>
-            <div
-              style={{ marginBottom: "5px", height: "20px" }}
-              onClick={() => this.insertItem(items[19], "😃")}
-            >
-              😃
-            </div>
-            <div
-              style={{ marginBottom: "5px", height: "20px" }}
-              onClick={() => this.insertItem(items[19], "😄")}
-            >
-              😄
-            </div>
-            <div
-              style={{ marginBottom: "5px", height: "20px" }}
-              onClick={() => this.insertItem(items[19], "😁")}
-            >
-              😁
-            </div>
-            <div
-              style={{ marginBottom: "5px", height: "20px" }}
-              onClick={() => this.insertItem(items[19], "😆")}
-            >
-              😆
-            </div>
-            <div
-              style={{ marginBottom: "5px", height: "20px" }}
-              onClick={() => this.insertItem(items[19], "😅")}
-            >
-              😅
-            </div>
-            <div
-              style={{ marginBottom: "5px", height: "20px" }}
-              onClick={() => this.insertItem(items[19], "😂")}
-            >
-              😂
-            </div>
-            <div
-              style={{ marginBottom: "5px", height: "20px" }}
-              onClick={() => this.insertItem(items[19], "🤣")}
-            >
-              🤣
-            </div> */}
-          </div>
+          {isActive && (
+            <Picker onEmojiClick={this.onEmojiClick} disableSearchBar native />
+          )}
+
+          {/* <div className="editor-emoji-container"> */}
+          {/* {this.getAllEmojis()} */}
+          {/* </div> */}
         </Wrapper>
       </Portal>
     );
@@ -289,10 +251,9 @@ export const Wrapper = styled.div<{
   pointer-events: none;
   white-space: nowrap;
   width: 277px;
-  max-height: 224px;
   overflow: hidden;
   overflow-y: auto;
-  padding: 0px 0px 0 14px;
+  padding: 0;
 
   * {
     box-sizing: border-box;
@@ -329,7 +290,6 @@ export const Wrapper = styled.div<{
     transform: translateY(${isAbove ? "6px" : "-6px"}) scale(1);
     pointer-events: all;
     opacity: 1;
-    min-height: 100px
   `};
 
   .editor-emoji-container {

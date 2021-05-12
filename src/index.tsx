@@ -19,7 +19,6 @@ import { keymap } from "prosemirror-keymap";
 import { baseKeymap } from "prosemirror-commands";
 import { selectColumn, selectRow, selectTable } from "prosemirror-utils";
 import styled, { ThemeProvider } from "styled-components";
-// import { getMentionsPlugin, addMentionNodes } from "prosemirror-mentions";
 
 import { light as lightTheme, dark as darkTheme } from "./theme";
 import baseDictionary from "./dictionary";

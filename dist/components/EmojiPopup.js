@@ -24,6 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const React = __importStar(require("react"));
 const react_portal_1 = require("react-portal");
 const prosemirror_utils_1 = require("prosemirror-utils");
+const emoji_picker_react_1 = __importDefault(require("emoji-picker-react"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const block_1 = __importDefault(require("../menus/block"));
 const map_1 = __importDefault(require("lodash/map"));
@@ -63,6 +64,9 @@ class EmojiPopup extends React.Component {
                     return (React.createElement("div", { className: "editor-emoji-item", onClick: onSelect, key: index }, emoji));
                 });
             }
+        };
+        this.onEmojiClick = (event, emojiObject) => {
+            this.insertItem(emojiObject.emoji);
         };
     }
     shouldComponentUpdate(nextProps, nextState) {
@@ -146,9 +150,9 @@ class EmojiPopup extends React.Component {
         const { dictionary, isActive } = this.props;
         const positioning = __rest(this.state, []);
         const items = block_1.default(dictionary);
+        console.log("EMoji getting called", isActive);
         return (React.createElement(react_portal_1.Portal, null,
-            React.createElement(exports.Wrapper, Object.assign({ id: "block-menu-container", active: isActive, ref: this.menuRef }, positioning),
-                React.createElement("div", { className: "editor-emoji-container" }, this.getAllEmojis()))));
+            React.createElement(exports.Wrapper, Object.assign({ id: "block-menu-container", active: isActive, ref: this.menuRef }, positioning), isActive && (React.createElement(emoji_picker_react_1.default, { onEmojiClick: this.onEmojiClick, disableSearchBar: true, native: true })))));
     }
 }
 exports.Wrapper = styled_components_1.default.div `
@@ -175,10 +179,9 @@ exports.Wrapper = styled_components_1.default.div `
   pointer-events: none;
   white-space: nowrap;
   width: 277px;
-  max-height: 224px;
   overflow: hidden;
   overflow-y: auto;
-  padding: 0px 0px 0 14px;
+  padding: 0;
 
   * {
     box-sizing: border-box;
@@ -214,7 +217,6 @@ exports.Wrapper = styled_components_1.default.div `
     transform: translateY(${isAbove ? "6px" : "-6px"}) scale(1);
     pointer-events: all;
     opacity: 1;
-    min-height: 100px
   `};
 
   .editor-emoji-container {
