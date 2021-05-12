@@ -172,6 +172,7 @@ class EmojiPopup extends React.Component<Props, State> {
   getAllEmojis = () => {
     const { emojiData } = this.props;
     if (emojiData && emojiData.length) {
+      console.log("emoji data", emojiData.length);
       return map(emojiData, (emoji, index) => {
         const onSelect = () => {
           this.insertItem(emoji);
@@ -211,8 +212,9 @@ class EmojiPopup extends React.Component<Props, State> {
           {/* {isActive && !SSR && (
             <Picker onEmojiClick={this.onEmojiClick} disableSearchBar native />
           )} */}
-
-          <div className="editor-emoji-container">{this.getAllEmojis()}</div>
+          {isActive && (
+            <div className="editor-emoji-container">{this.getAllEmojis()}</div>
+          )}
         </Wrapper>
       </Portal>
     );
@@ -251,7 +253,7 @@ export const Wrapper = styled.div<{
   width: 277px;
   overflow: hidden;
   overflow-y: auto;
-  padding: 0;
+  padding-left: 14px;
 
   * {
     box-sizing: border-box;

@@ -56,6 +56,7 @@ class EmojiPopup extends React.Component {
         this.getAllEmojis = () => {
             const { emojiData } = this.props;
             if (emojiData && emojiData.length) {
+                console.log("emoji data", emojiData.length);
                 return map_1.default(emojiData, (emoji, index) => {
                     const onSelect = () => {
                         this.insertItem(emoji);
@@ -151,8 +152,7 @@ class EmojiPopup extends React.Component {
         const items = block_1.default(dictionary);
         console.log("EMoji getting called", isActive);
         return (React.createElement(react_portal_1.Portal, null,
-            React.createElement(exports.Wrapper, Object.assign({ id: "block-menu-container", active: isActive, ref: this.menuRef }, positioning),
-                React.createElement("div", { className: "editor-emoji-container" }, this.getAllEmojis()))));
+            React.createElement(exports.Wrapper, Object.assign({ id: "block-menu-container", active: isActive, ref: this.menuRef }, positioning), isActive && (React.createElement("div", { className: "editor-emoji-container" }, this.getAllEmojis())))));
     }
 }
 exports.Wrapper = styled_components_1.default.div `
@@ -181,7 +181,7 @@ exports.Wrapper = styled_components_1.default.div `
   width: 277px;
   overflow: hidden;
   overflow-y: auto;
-  padding: 0;
+  padding-left: 14px;
 
   * {
     box-sizing: border-box;
