@@ -180,6 +180,7 @@ exports.Wrapper = styled_components_1.default.div `
   overflow: hidden;
   overflow-y: auto;
   padding-left: 14px;
+  height: 244px;
 
   * {
     box-sizing: border-box;
@@ -215,6 +216,7 @@ exports.Wrapper = styled_components_1.default.div `
     transform: translateY(${isAbove ? "6px" : "-6px"}) scale(1);
     pointer-events: all;
     opacity: 1;
+    min-height: 100px;
   `};
 
   .editor-emoji-container {

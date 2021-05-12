@@ -252,6 +252,7 @@ export const Wrapper = styled.div<{
   overflow: hidden;
   overflow-y: auto;
   padding-left: 14px;
+  height: 244px;
 
   * {
     box-sizing: border-box;
@@ -288,6 +289,7 @@ export const Wrapper = styled.div<{
     transform: translateY(${isAbove ? "6px" : "-6px"}) scale(1);
     pointer-events: all;
     opacity: 1;
+    min-height: 100px;
   `};
 
   .editor-emoji-container {
