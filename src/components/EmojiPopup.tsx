@@ -2,7 +2,7 @@ import * as React from "react";
 import { Portal } from "react-portal";
 import { EditorView } from "prosemirror-view";
 import { findParentNode } from "prosemirror-utils";
-import Picker from "emoji-picker-react";
+// import Picker from "emoji-picker-react";
 import styled from "styled-components";
 import { EmbedDescriptor, MenuItem } from "../types";
 
@@ -208,13 +208,11 @@ class EmojiPopup extends React.Component<Props, State> {
           ref={this.menuRef}
           {...positioning}
         >
-          {isActive && (
+          {/* {isActive && !SSR && (
             <Picker onEmojiClick={this.onEmojiClick} disableSearchBar native />
-          )}
+          )} */}
 
-          {/* <div className="editor-emoji-container"> */}
-          {/* {this.getAllEmojis()} */}
-          {/* </div> */}
+          <div className="editor-emoji-container">{this.getAllEmojis()}</div>
         </Wrapper>
       </Portal>
     );

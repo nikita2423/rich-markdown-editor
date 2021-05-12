@@ -23,7 +23,6 @@
     "@quartzy/markdown-it-mentions": "^0.2.0",
     "assert": "^2.0.0",
     "copy-to-clipboard": "^3.0.8",
-    "emoji-picker-react": "^3.4.4",
     "lodash": "^4.17.11",
     "markdown-it-container": "^3.0.0",
     "prosemirror-commands": "^1.1.6",

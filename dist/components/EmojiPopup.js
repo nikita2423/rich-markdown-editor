@@ -24,7 +24,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const React = __importStar(require("react"));
 const react_portal_1 = require("react-portal");
 const prosemirror_utils_1 = require("prosemirror-utils");
-const emoji_picker_react_1 = __importDefault(require("emoji-picker-react"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const block_1 = __importDefault(require("../menus/block"));
 const map_1 = __importDefault(require("lodash/map"));
@@ -152,7 +151,8 @@ class EmojiPopup extends React.Component {
         const items = block_1.default(dictionary);
         console.log("EMoji getting called", isActive);
         return (React.createElement(react_portal_1.Portal, null,
-            React.createElement(exports.Wrapper, Object.assign({ id: "block-menu-container", active: isActive, ref: this.menuRef }, positioning), isActive && (React.createElement(emoji_picker_react_1.default, { onEmojiClick: this.onEmojiClick, disableSearchBar: true, native: true })))));
+            React.createElement(exports.Wrapper, Object.assign({ id: "block-menu-container", active: isActive, ref: this.menuRef }, positioning),
+                React.createElement("div", { className: "editor-emoji-container" }, this.getAllEmojis()))));
     }
 }
 exports.Wrapper = styled_components_1.default.div `
