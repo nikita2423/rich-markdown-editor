@@ -35,6 +35,12 @@ const insertFiles_1 = __importDefault(require("../commands/insertFiles"));
 const insertAllFiles_1 = __importDefault(require("../commands/insertAllFiles"));
 const block_1 = __importDefault(require("../menus/block"));
 const SSR = typeof window === "undefined";
+const defaultPosition = {
+    left: -1000,
+    top: 0,
+    bottom: undefined,
+    isAbove: false,
+};
 class BlockMenu extends React.Component {
     constructor() {
         super(...arguments);
@@ -324,20 +330,22 @@ class BlockMenu extends React.Component {
     calculatePosition(props) {
         const { view } = props;
         const { selection } = view.state;
-        const startPos = view.coordsAtPos(selection.$from.pos);
+        let startPos;
+        try {
+            startPos = view.coordsAtPos(selection.from);
+        }
+        catch (err) {
+            console.warn(err);
+            return defaultPosition;
+        }
         const ref = this.menuRef.current;
         const offsetHeight = ref ? ref.offsetHeight : 0;
-        const paragraph = view.domAtPos(selection.$from.pos);
+        const paragraph = view.domAtPos(selection.from);
         if (!props.isActive ||
             !paragraph.node ||
             !paragraph.node.getBoundingClientRect ||
             SSR) {
-            return {
-                left: -1000,
-                top: 0,
-                bottom: undefined,
-                isAbove: false,
-            };
+            return defaultPosition;
         }
         const { left } = this.caretPosition;
         const { top, bottom } = paragraph.node.getBoundingClientRect();
@@ -379,8 +387,8 @@ class BlockMenu extends React.Component {
                 return true;
             if (!uploadImage && item.name === "image")
                 return false;
-            if (!uploadFile && item.name === "file")
-                return false;
+            if (!search)
+                return !item.defaultHidden;
             const n = search.toLowerCase();
             return ((item.title || "").toLowerCase().includes(n) ||
                 (item.keywords || "").toLowerCase().includes(n));

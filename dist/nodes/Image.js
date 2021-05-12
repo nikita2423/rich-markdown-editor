@@ -169,7 +169,7 @@ class Image extends Node_1.default {
                                 backgroundColor: theme.background,
                             },
                         }, shouldRespectMaxDimension: true }))),
-                React.createElement(Caption, { onKeyDown: this.handleKeyDown(props), onBlur: this.handleBlur(props), className: "caption", tabIndex: -1, contentEditable: true, suppressContentEditableWarning: true, onPaste: this.handlePaste(props) }, alt)));
+                React.createElement(Caption, { onKeyDown: this.handleKeyDown(props), onBlur: this.handleBlur(props), className: "caption", tabIndex: -1, role: "textbox", contentEditable: true, suppressContentEditableWarning: true, onPaste: this.handlePaste(props) }, alt)));
         };
     }
     get name() {
@@ -260,19 +260,19 @@ class Image extends Node_1.default {
             alignRight: () => (state, dispatch) => {
                 const attrs = Object.assign(Object.assign({}, state.selection.node.attrs), { title: null, layoutClass: "right-50" });
                 const { selection } = state;
-                dispatch(state.tr.setNodeMarkup(selection.$from.pos, undefined, attrs));
+                dispatch(state.tr.setNodeMarkup(selection.from, undefined, attrs));
                 return true;
             },
             alignLeft: () => (state, dispatch) => {
                 const attrs = Object.assign(Object.assign({}, state.selection.node.attrs), { title: null, layoutClass: "left-50" });
                 const { selection } = state;
-                dispatch(state.tr.setNodeMarkup(selection.$from.pos, undefined, attrs));
+                dispatch(state.tr.setNodeMarkup(selection.from, undefined, attrs));
                 return true;
             },
             alignCenter: () => (state, dispatch) => {
                 const attrs = Object.assign(Object.assign({}, state.selection.node.attrs), { layoutClass: null });
                 const { selection } = state;
-                dispatch(state.tr.setNodeMarkup(selection.$from.pos, undefined, attrs));
+                dispatch(state.tr.setNodeMarkup(selection.from, undefined, attrs));
                 return true;
             },
             createImage: (attrs) => (state, dispatch) => {

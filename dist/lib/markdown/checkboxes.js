@@ -16,6 +16,18 @@ function looksLikeChecklist(tokens, index) {
         matches(tokens[index]));
 }
 function markdownItCheckbox(md) {
+    function render(tokens, idx) {
+        const token = tokens[idx];
+        const checked = !!token.attrGet("checked");
+        if (token.nesting === 1) {
+            return `<li><span class="checkbox">${checked ? "[x]" : "[ ]"}</span>`;
+        }
+        else {
+            return "</li>\n";
+        }
+    }
+    md.renderer.rules.checkbox_item_open = render;
+    md.renderer.rules.checkbox_item_close = render;
     md.core.ruler.after("inline", "checkboxes", state => {
         const tokens = state.tokens;
         for (let i = tokens.length - 1; i > 0; i--) {

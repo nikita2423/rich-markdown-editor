@@ -46,6 +46,7 @@ class BlockMenuTrigger extends Extension_1.default {
     get plugins() {
         const button = document.createElement("button");
         button.className = "block-menu-trigger";
+        button.type = "button";
         react_dom_1.default.render(React.createElement(PlusIcon_1.default, { fill: "currentColor" }), button);
         return [
             new prosemirror_state_1.Plugin({

@@ -25,7 +25,9 @@ exports.LANGUAGES = {
     ruby: "Ruby",
     sql: "SQL",
     typescript: "TypeScript",
+    yaml: "YAML",
 };
+const cache = {};
 function getDecorations({ doc, name }) {
     const decorations = [];
     const blocks = prosemirror_utils_1.findBlockNodes(doc).filter(item => item.node.type.name === name);
@@ -47,43 +49,62 @@ function getDecorations({ doc, name }) {
         if (!language || language === "none" || !core_1.default.registered(language)) {
             return;
         }
-        const nodes = core_1.default.highlight(block.node.textContent, language);
-        flattenDeep_1.default(parseNodes(nodes))
-            .map((node) => {
-            const from = startPos;
-            const to = from + node.text.length;
-            startPos = to;
-            return Object.assign(Object.assign({}, node), { from,
-                to });
-        })
-            .forEach(node => {
-            const decoration = prosemirror_view_1.Decoration.inline(node.from, node.to, {
-                class: (node.classes || []).join(" "),
-            });
+        if (!cache[block.pos] || !cache[block.pos].node.eq(block.node)) {
+            const nodes = core_1.default.highlight(block.node.textContent, language);
+            const _decorations = flattenDeep_1.default(parseNodes(nodes))
+                .map((node) => {
+                const from = startPos;
+                const to = from + node.text.length;
+                startPos = to;
+                return Object.assign(Object.assign({}, node), { from,
+                    to });
+            })
+                .filter(node => node.classes && node.classes.length)
+                .map(node => prosemirror_view_1.Decoration.inline(node.from, node.to, {
+                class: node.classes.join(" "),
+            }));
+            cache[block.pos] = {
+                node: block.node,
+                decorations: _decorations,
+            };
+        }
+        cache[block.pos].decorations.forEach(decoration => {
             decorations.push(decoration);
         });
     });
+    Object.keys(cache)
+        .filter(pos => !blocks.find(block => block.pos === Number(pos)))
+        .forEach(pos => {
+        delete cache[Number(pos)];
+    });
     return prosemirror_view_1.DecorationSet.create(doc, decorations);
 }
-function Prism({ name, deferred = true }) {
+function Prism({ name }) {
+    let highlighted = false;
     return new prosemirror_state_1.Plugin({
         key: new prosemirror_state_1.PluginKey("prism"),
         state: {
             init: (_, { doc }) => {
-                if (deferred)
-                    return;
-                return getDecorations({ doc, name });
+                return prosemirror_view_1.DecorationSet.create(doc, []);
             },
             apply: (transaction, decorationSet, oldState, state) => {
-                const deferredInit = !decorationSet;
                 const nodeName = state.selection.$head.parent.type.name;
                 const previousNodeName = oldState.selection.$head.parent.type.name;
                 const codeBlockChanged = transaction.docChanged && [nodeName, previousNodeName].includes(name);
-                if (deferredInit || codeBlockChanged) {
+                if (!highlighted || codeBlockChanged) {
+                    highlighted = true;
                     return getDecorations({ doc: transaction.doc, name });
                 }
                 return decorationSet.map(transaction.mapping, transaction.doc);
             },
+        },
+        view: view => {
+            if (!highlighted) {
+                setTimeout(() => {
+                    view.dispatch(view.state.tr.setMeta("prism", { loaded: true }));
+                }, 10);
+            }
+            return {};
         },
         props: {
             decorations(state) {

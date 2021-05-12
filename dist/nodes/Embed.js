@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __importStar(require("react"));
 const Node_1 = __importDefault(require("./Node"));
+const cache = {};
 class Embed extends Node_1.default {
     get name() {
         return "embed";
@@ -23,12 +24,11 @@ class Embed extends Node_1.default {
             atom: true,
             attrs: {
                 href: {},
-                component: {},
                 matches: {},
             },
             parseDOM: [
                 {
-                    tag: "iframe",
+                    tag: "iframe[class=embed]",
                     getAttrs: (dom) => {
                         const { embeds } = this.editor.props;
                         const href = dom.getAttribute("src") || "";
@@ -38,7 +38,6 @@ class Embed extends Node_1.default {
                                 if (matches) {
                                     return {
                                         href,
-                                        component: embed.component,
                                         matches,
                                     };
                                 }
@@ -50,13 +49,25 @@ class Embed extends Node_1.default {
             ],
             toDOM: node => [
                 "iframe",
-                { src: node.attrs.href, contentEditable: false },
+                { class: "embed", src: node.attrs.href, contentEditable: false },
                 0,
             ],
         };
     }
     component({ isEditable, isSelected, theme, node }) {
-        const Component = node.attrs.component;
+        const { embeds } = this.editor.props;
+        let Component = cache[node.attrs.href];
+        if (!Component) {
+            for (const embed of embeds) {
+                const matches = embed.matcher(node.attrs.href);
+                if (matches) {
+                    Component = cache[node.attrs.href] = embed.component;
+                }
+            }
+        }
+        if (!Component) {
+            return null;
+        }
         return (React.createElement(Component, { attrs: node.attrs, isEditable: isEditable, isSelected: isSelected, theme: theme }));
     }
     commands({ type }) {
@@ -76,7 +87,6 @@ class Embed extends Node_1.default {
             getAttrs: token => ({
                 href: token.attrGet("href"),
                 matches: token.attrGet("matches"),
-                component: token.attrGet("component"),
             }),
         };
     }

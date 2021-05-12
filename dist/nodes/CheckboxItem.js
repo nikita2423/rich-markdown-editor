@@ -33,7 +33,7 @@ class CheckboxItem extends Node_1.default {
             },
             content: "paragraph block*",
             defining: true,
-            draggable: false,
+            draggable: true,
             parseDOM: [
                 {
                     tag: `li[data-type="${this.name}"]`,

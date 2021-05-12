@@ -29,7 +29,10 @@ export declare const base: {
     blockToolbarTrigger: string;
     blockToolbarTriggerIcon: string;
     blockToolbarItem: string;
+    blockToolbarIcon: undefined;
+    blockToolbarIconSelected: string;
     blockToolbarText: string;
+    blockToolbarTextSelected: string;
     blockToolbarHoverBackground: string;
     blockToolbarDivider: string;
     noticeInfoBackground: string;
@@ -105,7 +108,10 @@ export declare const light: {
     blockToolbarTrigger: string;
     blockToolbarTriggerIcon: string;
     blockToolbarItem: string;
+    blockToolbarIcon: undefined;
+    blockToolbarIconSelected: string;
     blockToolbarText: string;
+    blockToolbarTextSelected: string;
     blockToolbarHoverBackground: string;
     blockToolbarDivider: string;
     noticeInfoBackground: string;
@@ -181,7 +187,10 @@ export declare const dark: {
     blockToolbarTrigger: string;
     blockToolbarTriggerIcon: string;
     blockToolbarItem: string;
+    blockToolbarIcon: undefined;
+    blockToolbarIconSelected: string;
     blockToolbarText: string;
+    blockToolbarTextSelected: string;
     blockToolbarHoverBackground: string;
     blockToolbarDivider: string;
     noticeInfoBackground: string;

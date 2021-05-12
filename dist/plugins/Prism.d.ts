@@ -16,9 +16,9 @@ export declare const LANGUAGES: {
     ruby: string;
     sql: string;
     typescript: string;
+    yaml: string;
 };
-export default function Prism({ name, deferred }: {
+export default function Prism({ name }: {
     name: any;
-    deferred?: boolean | undefined;
 }): Plugin<any, any>;
 //# sourceMappingURL=Prism.d.ts.map

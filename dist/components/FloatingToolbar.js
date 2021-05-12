@@ -47,8 +47,16 @@ function usePosition({ menuRef, isSelectingText, props }) {
     if (!active || !menuWidth || !menuHeight || SSR || isSelectingText) {
         return defaultPosition;
     }
-    const fromPos = view.coordsAtPos(selection.$from.pos);
-    const toPos = view.coordsAtPos(selection.$to.pos);
+    let fromPos;
+    let toPos;
+    try {
+        fromPos = view.coordsAtPos(selection.from);
+        toPos = view.coordsAtPos(selection.to, -1);
+    }
+    catch (err) {
+        console.warn(err);
+        return defaultPosition;
+    }
     const selectionBounds = {
         top: Math.min(fromPos.top, toPos.top),
         bottom: Math.max(fromPos.bottom, toPos.bottom),
@@ -58,7 +66,7 @@ function usePosition({ menuRef, isSelectingText, props }) {
     const isColSelection = selection.isColSelection && selection.isColSelection();
     const isRowSelection = selection.isRowSelection && selection.isRowSelection();
     if (isColSelection) {
-        const { node: element } = view.domAtPos(selection.$from.pos);
+        const { node: element } = view.domAtPos(selection.from);
         const { width } = element.getBoundingClientRect();
         selectionBounds.top -= 20;
         selectionBounds.right = selectionBounds.left + width;

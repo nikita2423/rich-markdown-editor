@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const prosemirror_model_1 = require("prosemirror-model");
 const ExtensionManager_1 = __importDefault(require("./lib/ExtensionManager"));
+const renderToHtml_1 = __importDefault(require("./lib/renderToHtml"));
 const Doc_1 = __importDefault(require("./nodes/Doc"));
 const Text_1 = __importDefault(require("./nodes/Text"));
 const Blockquote_1 = __importDefault(require("./nodes/Blockquote"));
@@ -73,4 +74,5 @@ exports.parser = extensions.parser({
     schema: exports.schema,
 });
 exports.serializer = extensions.serializer();
+exports.renderToHtml = renderToHtml_1.default;
 //# sourceMappingURL=server.js.map

@@ -48,7 +48,7 @@ export default class CodeFence extends Node {
         "Shift-Enter": (state: any, dispatch: any) => boolean;
         Tab: (state: any, dispatch: any) => boolean;
     };
-    handleCopyToClipboard(node: any): () => void;
+    handleCopyToClipboard: (event: any) => void;
     handleLanguageChange: (event: any) => void;
     get plugins(): import("prosemirror-state").Plugin<any, any>[];
     inputRules({ type }: {

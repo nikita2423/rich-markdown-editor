@@ -44,6 +44,7 @@ exports.base = {
     noResults: "No results",
     openLink: "Open link",
     orderedList: "Ordered list",
+    pageBreak: "Page break",
     pasteLink: "Paste a link…",
     pasteLinkWithTitle: (title) => `Paste a ${title} link…`,
     placeholder: "Placeholder",

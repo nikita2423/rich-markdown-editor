@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = __importDefault(require("./index"));
-const lodash_1 = require("lodash");
+const debounce_1 = __importDefault(require("lodash/debounce"));
 const react_1 = __importDefault(require("react"));
 exports.default = {
     title: "Editor",
@@ -142,7 +142,7 @@ exports.Persisted.args = {
         `# Persisted
   
 The contents of this editor are persisted to local storage on change (edit and reload)`,
-    onChange: lodash_1.debounce((value) => {
+    onChange: debounce_1.default((value) => {
         const text = value();
         localStorage.setItem("saved", text);
     }, 250),
@@ -151,6 +151,11 @@ exports.Placeholder = Template.bind({});
 exports.Placeholder.args = {
     defaultValue: "",
     placeholder: "This is a custom placeholder…",
+};
+exports.Images = Template.bind({});
+exports.Images.args = {
+    defaultValue: `# Images
+![A caption](https://upload.wikimedia.org/wikipedia/commons/0/06/Davide-ragusa-gcDwzUGuUoI-unsplash.jpg)`,
 };
 exports.Focused = Template.bind({});
 exports.Focused.args = {

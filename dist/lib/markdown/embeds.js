@@ -56,7 +56,6 @@ function default_1(embeds) {
                                 const { content } = current;
                                 const token = new token_1.default("embed", "iframe", 0);
                                 token.attrSet("href", content);
-                                token.attrSet("component", result.component);
                                 token.attrSet("matches", result.matches);
                                 tokens.splice(i - 1, 3, token);
                                 break;

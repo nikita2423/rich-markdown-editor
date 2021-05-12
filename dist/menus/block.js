@@ -106,6 +106,14 @@ function blockMenuItems(dictionary) {
             keywords: "horizontal rule break line",
         },
         {
+            name: "hr",
+            title: dictionary.pageBreak,
+            description: dictionary.dividerDesc,
+            icon: DividerIcon_1.default,
+            keywords: "page print break line",
+            attrs: { markup: "***" },
+        },
+        {
             name: "image",
             title: dictionary.image,
             description: dictionary.imageDesc,

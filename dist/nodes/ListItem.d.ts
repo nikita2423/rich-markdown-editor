@@ -1,3 +1,5 @@
+import { Transaction, EditorState, Plugin } from "prosemirror-state";
+import { DecorationSet } from "prosemirror-view";
 import Node from "./Node";
 export default class ListItem extends Node {
     get name(): string;
@@ -10,15 +12,18 @@ export default class ListItem extends Node {
         }[];
         toDOM: () => (string | number)[];
     };
+    get plugins(): Plugin<DecorationSet<any>, any>[];
     keys({ type }: {
         type: any;
     }): {
-        Enter: (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
-        Tab: (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
-        "Shift-Tab": (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
-        "Mod-]": (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
-        "Mod-[": (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
+        Enter: (state: EditorState<any>, dispatch?: ((tr: Transaction<any>) => void) | undefined) => boolean;
+        Tab: (state: EditorState<any>, dispatch?: ((tr: Transaction<any>) => void) | undefined) => boolean;
+        "Shift-Tab": (state: EditorState<any>, dispatch?: ((tr: Transaction<any>) => void) | undefined) => boolean;
+        "Mod-]": (state: EditorState<any>, dispatch?: ((tr: Transaction<any>) => void) | undefined) => boolean;
+        "Mod-[": (state: EditorState<any>, dispatch?: ((tr: Transaction<any>) => void) | undefined) => boolean;
         "Shift-Enter": (state: any, dispatch: any) => boolean;
+        "Alt-ArrowUp": (state: any, dispatch: any) => boolean;
+        "Alt-ArrowDown": (state: any, dispatch: any) => boolean;
     };
     toMarkdown(state: any, node: any): void;
     parseMarkdown(): {

@@ -26,6 +26,7 @@ const powershell_1 = __importDefault(require("refractor/lang/powershell"));
 const ruby_1 = __importDefault(require("refractor/lang/ruby"));
 const sql_1 = __importDefault(require("refractor/lang/sql"));
 const typescript_1 = __importDefault(require("refractor/lang/typescript"));
+const yaml_1 = __importDefault(require("refractor/lang/yaml"));
 const prosemirror_commands_1 = require("prosemirror-commands");
 const prosemirror_inputrules_1 = require("prosemirror-inputrules");
 const copy_to_clipboard_1 = __importDefault(require("copy-to-clipboard"));
@@ -49,10 +50,26 @@ const types_1 = require("../types");
     ruby_1.default,
     sql_1.default,
     typescript_1.default,
+    yaml_1.default,
 ].forEach(core_1.default.register);
 class CodeFence extends Node_1.default {
     constructor() {
         super(...arguments);
+        this.handleCopyToClipboard = event => {
+            const { view } = this.editor;
+            const element = event.target;
+            const { top, left } = element.getBoundingClientRect();
+            const result = view.posAtCoords({ top, left });
+            if (result) {
+                const node = view.state.doc.nodeAt(result.pos);
+                if (node) {
+                    copy_to_clipboard_1.default(node.textContent);
+                    if (this.options.onShowToast) {
+                        this.options.onShowToast(this.options.dictionary.codeCopied, types_1.ToastType.Info);
+                    }
+                }
+            }
+        };
         this.handleLanguageChange = (event) => {
             const { view } = this.editor;
             const { tr } = view.state;
@@ -103,7 +120,7 @@ class CodeFence extends Node_1.default {
                 const button = document.createElement("button");
                 button.innerText = "Copy";
                 button.type = "button";
-                button.addEventListener("click", this.handleCopyToClipboard(node));
+                button.addEventListener("click", this.handleCopyToClipboard);
                 const select = document.createElement("select");
                 select.addEventListener("change", this.handleLanguageChange);
                 this.languageOptions.forEach(([key, label]) => {
@@ -147,21 +164,8 @@ class CodeFence extends Node_1.default {
             },
         };
     }
-    handleCopyToClipboard(node) {
-        return () => {
-            copy_to_clipboard_1.default(node.textContent);
-            if (this.options.onShowToast) {
-                this.options.onShowToast(this.options.dictionary.codeCopied, types_1.ToastType.Info);
-            }
-        };
-    }
     get plugins() {
-        return [
-            Prism_1.default({
-                name: this.name,
-                deferred: !this.options.initialReadOnly,
-            }),
-        ];
+        return [Prism_1.default({ name: this.name })];
     }
     inputRules({ type }) {
         return [prosemirror_inputrules_1.textblockTypeInputRule(/^```$/, type)];

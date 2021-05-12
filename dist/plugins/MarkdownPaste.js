@@ -50,8 +50,9 @@ class MarkdownPaste extends Extension_1.default {
                             view.dispatch(transaction);
                             return true;
                         }
-                        if (text.length === 0 || html)
+                        if (text.length === 0 || (html && html.includes("data-pm-slice"))) {
                             return false;
+                        }
                         event.preventDefault();
                         if (isInCode_1.default(view.state)) {
                             view.dispatch(view.state.tr.insertText(text));

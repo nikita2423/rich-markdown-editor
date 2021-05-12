@@ -42,6 +42,7 @@ export declare const base: {
     noResults: string;
     openLink: string;
     orderedList: string;
+    pageBreak: string;
     pasteLink: string;
     pasteLinkWithTitle: (title: string) => string;
     placeholder: string;

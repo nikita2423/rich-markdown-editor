@@ -23,7 +23,7 @@ import Tooltip from "./components/Tooltip";
 import Extension from "./lib/Extension";
 import ExtensionManager from "./lib/ExtensionManager";
 import ComponentView from "./lib/ComponentView";
-export { schema, parser, serializer } from "./server";
+export { schema, parser, serializer, renderToHtml } from "./server";
 export { default as Extension } from "./lib/Extension";
 export declare const theme: {
     background: string;
@@ -75,7 +75,10 @@ export declare const theme: {
     blockToolbarTrigger: string;
     blockToolbarTriggerIcon: string;
     blockToolbarItem: string;
+    blockToolbarIcon: undefined;
+    blockToolbarIconSelected: string;
     blockToolbarText: string;
+    blockToolbarTextSelected: string;
     blockToolbarHoverBackground: string;
     blockToolbarDivider: string;
     noticeInfoBackground: string;
@@ -291,7 +294,10 @@ declare class RichMarkdownEditor extends React.PureComponent<Props, State> {
         blockToolbarTrigger: string;
         blockToolbarTriggerIcon: string;
         blockToolbarItem: string;
+        blockToolbarIcon: undefined;
+        blockToolbarIconSelected: string;
         blockToolbarText: string;
+        blockToolbarTextSelected: string;
         blockToolbarHoverBackground: string;
         blockToolbarDivider: string;
         noticeInfoBackground: string;
@@ -361,6 +367,7 @@ declare class RichMarkdownEditor extends React.PureComponent<Props, State> {
         noResults: string;
         openLink: string;
         orderedList: string;
+        pageBreak: string;
         pasteLink: string;
         pasteLinkWithTitle: (title: string) => string;
         placeholder: string;
@@ -438,6 +445,7 @@ declare class RichMarkdownEditor extends React.PureComponent<Props, State> {
         noResults: string;
         openLink: string;
         orderedList: string;
+        pageBreak: string;
         pasteLink: string;
         pasteLinkWithTitle: (title: string) => string;
         placeholder: string;
@@ -515,6 +523,7 @@ declare class RichMarkdownEditor extends React.PureComponent<Props, State> {
         noResults: string;
         openLink: string;
         orderedList: string;
+        pageBreak: string;
         pasteLink: string;
         pasteLinkWithTitle: (title: string) => string;
         placeholder: string;

@@ -29,8 +29,13 @@ const createAndInsertLink_1 = __importDefault(require("../commands/createAndInse
 function isActive(props) {
     const { view } = props;
     const { selection } = view.state;
-    const paragraph = view.domAtPos(selection.from);
-    return props.isActive && !!paragraph.node;
+    try {
+        const paragraph = view.domAtPos(selection.from);
+        return props.isActive && !!paragraph.node;
+    }
+    catch (err) {
+        return false;
+    }
 }
 class LinkToolbar extends React.Component {
     constructor() {

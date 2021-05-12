@@ -16,11 +16,12 @@ function rules({ embeds }) {
     return markdown_it_1.default("default", {
         breaks: false,
         html: false,
+        linkify: true,
     })
         .use(embeds_1.default(embeds))
         .use(breaks_1.default)
         .use(checkboxes_1.default)
-        .use(mark_1.default({ delim: "==", mark: "mark" }))
+        .use(mark_1.default({ delim: "==", mark: "highlight" }))
         .use(mark_1.default({ delim: "!!", mark: "placeholder" }))
         .use(underlines_1.default)
         .use(tables_1.default)

@@ -8,7 +8,7 @@ const markInputRule_1 = __importDefault(require("../lib/markInputRule"));
 const Mark_1 = __importDefault(require("./Mark"));
 class Highlight extends Mark_1.default {
     get name() {
-        return "mark";
+        return "highlight";
     }
     get schema() {
         return {
@@ -33,7 +33,7 @@ class Highlight extends Mark_1.default {
         };
     }
     parseMarkdown() {
-        return { mark: "mark" };
+        return { mark: "highlight" };
     }
 }
 exports.default = Highlight;

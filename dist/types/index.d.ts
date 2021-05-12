@@ -12,6 +12,7 @@ export declare type MenuItem = {
     shortcut?: string;
     keywords?: string;
     tooltip?: string;
+    defaultHidden?: boolean;
     attrs?: Record<string, any>;
     visible?: boolean;
     active?: (state: EditorState) => boolean;
