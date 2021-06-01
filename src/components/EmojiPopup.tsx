@@ -198,7 +198,6 @@ class EmojiPopup extends React.Component<Props, State> {
     const { dictionary, isActive } = this.props;
     // const items = this.filtered;
     const { ...positioning } = this.state;
-    const items: (EmbedDescriptor | MenuItem)[] = getMenuItems(dictionary);
     return (
       <Portal>
         <Wrapper

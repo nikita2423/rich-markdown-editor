@@ -19,6 +19,7 @@ declare type Props = {
     onClose: () => void;
     embeds: EmbedDescriptor[];
     onOpenEmoji?: () => void;
+    hideUpload?: boolean;
 };
 declare type State = {
     insertItem?: EmbedDescriptor;

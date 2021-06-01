@@ -368,8 +368,8 @@ class BlockMenu extends React.Component {
         }
     }
     get filtered() {
-        const { dictionary, embeds, search = "", uploadImage, uploadFile, } = this.props;
-        let items = block_1.default(dictionary);
+        const { dictionary, embeds, search = "", uploadImage, uploadFile, hideUpload, } = this.props;
+        let items = block_1.default(dictionary, hideUpload);
         const embedItems = [];
         for (const embed of embeds) {
             if (embed.title && embed.icon) {

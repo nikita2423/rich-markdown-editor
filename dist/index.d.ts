@@ -150,6 +150,7 @@ export declare type Props = {
     emojiData: string[];
     mentionUsers?: any;
     style?: Record<string, string>;
+    hideUpload?: boolean;
 };
 declare type State = {
     isEditorFocused: boolean;

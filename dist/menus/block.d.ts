@@ -1,4 +1,4 @@
 import { MenuItem } from "../types";
 import baseDictionary from "../dictionary";
-export default function blockMenuItems(dictionary: typeof baseDictionary): MenuItem[];
+export default function blockMenuItems(dictionary: typeof baseDictionary, hideUpload: any): MenuItem[];
 //# sourceMappingURL=block.d.ts.map

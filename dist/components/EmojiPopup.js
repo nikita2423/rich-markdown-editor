@@ -25,7 +25,6 @@ const React = __importStar(require("react"));
 const react_portal_1 = require("react-portal");
 const prosemirror_utils_1 = require("prosemirror-utils");
 const styled_components_1 = __importDefault(require("styled-components"));
-const block_1 = __importDefault(require("../menus/block"));
 const map_1 = __importDefault(require("lodash/map"));
 const SSR = typeof window === "undefined";
 class EmojiPopup extends React.Component {
@@ -148,7 +147,6 @@ class EmojiPopup extends React.Component {
     render() {
         const { dictionary, isActive } = this.props;
         const positioning = __rest(this.state, []);
-        const items = block_1.default(dictionary);
         return (React.createElement(react_portal_1.Portal, null,
             React.createElement(exports.Wrapper, Object.assign({ id: "block-menu-container", active: isActive, ref: this.menuRef }, positioning), isActive && (React.createElement("div", { className: "editor-emoji-container" }, this.getAllEmojis())))));
     }

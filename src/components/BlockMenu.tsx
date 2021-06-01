@@ -41,7 +41,7 @@ type Props = {
   onClose: () => void;
   embeds: EmbedDescriptor[];
   onOpenEmoji?: () => void;
-  hideUpload: boolean;
+  hideUpload?: boolean;
 };
 
 type State = {

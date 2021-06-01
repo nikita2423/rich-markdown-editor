@@ -355,7 +355,7 @@ class RichMarkdownEditor extends React.PureComponent {
             return emojiList;
         };
         this.render = () => {
-            const { readOnly, readOnlyWriteCheckboxes, style, tooltip, className, onKeyDown, } = this.props;
+            const { readOnly, readOnlyWriteCheckboxes, style, tooltip, className, onKeyDown, hideUpload, } = this.props;
             const dictionary = this.dictionary(this.props.dictionary);
             return (React.createElement(Flex_1.default, { onKeyDown: onKeyDown, style: style, className: className, align: "flex-start", justify: "center", column: true },
                 React.createElement(styled_components_1.ThemeProvider, { theme: this.theme() },
@@ -364,7 +364,7 @@ class RichMarkdownEditor extends React.PureComponent {
                         !readOnly && this.view && (React.createElement(React.Fragment, null,
                             React.createElement(SelectionToolbar_1.default, { view: this.view, dictionary: dictionary, commands: this.commands, isTemplate: this.props.template === true, onOpen: this.handleOpenSelectionMenu, onClose: this.handleCloseSelectionMenu, onSearchLink: this.props.onSearchLink, onClickLink: this.props.onClickLink, onCreateLink: this.props.onCreateLink, tooltip: tooltip }),
                             React.createElement(LinkToolbar_1.default, { view: this.view, dictionary: dictionary, isActive: this.state.linkMenuOpen, onCreateLink: this.props.onCreateLink, onSearchLink: this.props.onSearchLink, onClickLink: this.props.onClickLink, onShowToast: this.props.onShowToast, onClose: this.handleCloseLinkMenu, tooltip: tooltip }),
-                            React.createElement(BlockMenu_1.default, { view: this.view, commands: this.commands, dictionary: dictionary, isActive: this.state.blockMenuOpen, search: this.state.blockMenuSearch, onClose: this.handleCloseBlockMenu, uploadImage: this.props.uploadImage, uploadFile: this.props.uploadFile, onLinkToolbarOpen: this.handleOpenLinkMenu, onImageUploadStart: this.props.onImageUploadStart, onImageUploadStop: this.props.onImageUploadStop, onShowToast: this.props.onShowToast, embeds: this.props.embeds, onOpenEmoji: this.handleOpenEmojiIcons }),
+                            React.createElement(BlockMenu_1.default, { view: this.view, commands: this.commands, dictionary: dictionary, isActive: this.state.blockMenuOpen, search: this.state.blockMenuSearch, onClose: this.handleCloseBlockMenu, uploadImage: this.props.uploadImage, uploadFile: this.props.uploadFile, onLinkToolbarOpen: this.handleOpenLinkMenu, onImageUploadStart: this.props.onImageUploadStart, onImageUploadStop: this.props.onImageUploadStop, onShowToast: this.props.onShowToast, embeds: this.props.embeds, onOpenEmoji: this.handleOpenEmojiIcons, hideUpload: hideUpload }),
                             React.createElement(EmojiPopup_1.default, { view: this.view, isActive: this.state.emojiIconsOpen, onClose: this.handleCloseEmojiIcons, commands: this.commands, dictionary: dictionary, emojiData: this.getEmoji() })))))));
         };
     }
