@@ -138,6 +138,7 @@ export type Props = {
   emojiData: string[];
   mentionUsers?: any;
   style?: Record<string, string>;
+  hideUpload?: boolean;
 };
 
 type State = {
@@ -880,6 +881,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
       tooltip,
       className,
       onKeyDown,
+      hideUpload,
     } = this.props;
     const dictionary = this.dictionary(this.props.dictionary);
     return (
@@ -938,6 +940,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
                   onShowToast={this.props.onShowToast}
                   embeds={this.props.embeds}
                   onOpenEmoji={this.handleOpenEmojiIcons}
+                  hideUpload={hideUpload}
                 />
                 <EmojiPopup
                   view={this.view}

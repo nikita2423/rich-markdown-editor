@@ -41,6 +41,7 @@ type Props = {
   onClose: () => void;
   embeds: EmbedDescriptor[];
   onOpenEmoji?: () => void;
+  hideUpload: boolean;
 };
 
 type State = {
@@ -489,8 +490,12 @@ class BlockMenu extends React.Component<Props, State> {
       search = "",
       uploadImage,
       uploadFile,
+      hideUpload,
     } = this.props;
-    let items: (EmbedDescriptor | MenuItem)[] = getMenuItems(dictionary);
+    let items: (EmbedDescriptor | MenuItem)[] = getMenuItems(
+      dictionary,
+      hideUpload
+    );
     const embedItems: EmbedDescriptor[] = [];
     // console.log("Items", items);
     for (const embed of embeds) {

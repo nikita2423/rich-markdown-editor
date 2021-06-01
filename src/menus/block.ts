@@ -24,9 +24,11 @@ const isMac = !SSR && window.navigator.platform === "MacIntel";
 const mod = isMac ? "⌘" : "ctrl";
 
 export default function blockMenuItems(
-  dictionary: typeof baseDictionary
+  dictionary: typeof baseDictionary,
+  hideUpload: boolean
 ): MenuItem[] {
-  return [
+  let list = [];
+  list = [
     {
       name: "heading",
       title: dictionary.h1,
@@ -187,4 +189,8 @@ export default function blockMenuItems(
       shortcut: `@`,
     },
   ];
+  if (hideUpload) {
+    list.splice(11, 2);
+  }
+  return list;
 }
