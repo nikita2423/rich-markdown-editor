@@ -34,6 +34,8 @@ const Prism_1 = __importStar(require("../plugins/Prism"));
 const isInCode_1 = __importDefault(require("../queries/isInCode"));
 const Node_1 = __importDefault(require("./Node"));
 const types_1 = require("../types");
+const PERSISTENCE_KEY = "rme-code-language";
+const DEFAULT_LANGUAGE = "javascript";
 [
     bash_1.default,
     css_1.default,
@@ -71,16 +73,19 @@ class CodeFence extends Node_1.default {
             }
         };
         this.handleLanguageChange = (event) => {
+            var _a;
             const { view } = this.editor;
             const { tr } = view.state;
             const element = event.target;
             const { top, left } = element.getBoundingClientRect();
             const result = view.posAtCoords({ top, left });
             if (result) {
+                const language = element.value;
                 const transaction = tr.setNodeMarkup(result.inside, undefined, {
-                    language: element.value,
+                    language,
                 });
                 view.dispatch(transaction);
+                (_a = localStorage) === null || _a === void 0 ? void 0 : _a.setItem(PERSISTENCE_KEY, language);
             }
         };
     }
@@ -94,7 +99,7 @@ class CodeFence extends Node_1.default {
         return {
             attrs: {
                 language: {
-                    default: "javascript",
+                    default: DEFAULT_LANGUAGE,
                 },
             },
             content: "text*",
@@ -141,7 +146,12 @@ class CodeFence extends Node_1.default {
         };
     }
     commands({ type }) {
-        return () => prosemirror_commands_1.setBlockType(type);
+        return () => {
+            var _a;
+            return prosemirror_commands_1.setBlockType(type, {
+                language: ((_a = localStorage) === null || _a === void 0 ? void 0 : _a.getItem(PERSISTENCE_KEY)) || DEFAULT_LANGUAGE,
+            });
+        };
     }
     keys({ type }) {
         return {

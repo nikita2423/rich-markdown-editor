@@ -18,6 +18,7 @@ export declare const base: {
     deleteRow: string;
     deleteTable: string;
     deleteImage: string;
+    downloadImage: string;
     alignImageLeft: string;
     alignImageRight: string;
     alignImageDefault: string;

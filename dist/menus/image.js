@@ -7,6 +7,7 @@ const TrashIcon_1 = __importDefault(require("../icons/TrashIcon"));
 const LeftImageIcon_1 = __importDefault(require("../icons/LeftImageIcon"));
 const RightImageIcon_1 = __importDefault(require("../icons/RightImageIcon"));
 const CenterImageIcon_1 = __importDefault(require("../icons/CenterImageIcon"));
+const DownloadIcon_1 = __importDefault(require("../icons/DownloadIcon"));
 const isNodeActive_1 = __importDefault(require("../queries/isNodeActive"));
 function imageMenuItems(state, dictionary) {
     const { schema } = state;
@@ -43,6 +44,13 @@ function imageMenuItems(state, dictionary) {
         {
             name: "separator",
             visible: true,
+        },
+        {
+            name: "downloadImage",
+            tooltip: dictionary.downloadImage,
+            icon: DownloadIcon_1.default,
+            visible: !!fetch,
+            active: () => false,
         },
         {
             name: "deleteImage",

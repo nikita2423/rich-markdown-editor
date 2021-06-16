@@ -53,6 +53,9 @@ export default class Image extends Node {
     }) => (event: any) => void;
     getExtension: (url: any) => any;
     isImage: (url: any) => boolean;
+    handleDownload: ({ node }: {
+        node: any;
+    }) => (event: any) => void;
     component: (props: any) => JSX.Element;
     toMarkdown(state: any, node: any): void;
     parseMarkdown(): {
@@ -77,6 +80,7 @@ export default class Image extends Node {
     commands({ type }: {
         type: any;
     }): {
+        downloadImage: () => (state: any) => Promise<boolean>;
         deleteImage: () => (state: any, dispatch: any) => boolean;
         alignRight: () => (state: any, dispatch: any) => boolean;
         alignLeft: () => (state: any, dispatch: any) => boolean;

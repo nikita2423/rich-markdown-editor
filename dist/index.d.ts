@@ -344,6 +344,7 @@ declare class RichMarkdownEditor extends React.PureComponent<Props, State> {
         deleteRow: string;
         deleteTable: string;
         deleteImage: string;
+        downloadImage: string;
         alignImageLeft: string;
         alignImageRight: string;
         alignImageDefault: string;
@@ -422,6 +423,7 @@ declare class RichMarkdownEditor extends React.PureComponent<Props, State> {
         deleteRow: string;
         deleteTable: string;
         deleteImage: string;
+        downloadImage: string;
         alignImageLeft: string;
         alignImageRight: string;
         alignImageDefault: string;
@@ -500,6 +502,7 @@ declare class RichMarkdownEditor extends React.PureComponent<Props, State> {
         deleteRow: string;
         deleteTable: string;
         deleteImage: string;
+        downloadImage: string;
         alignImageLeft: string;
         alignImageRight: string;
         alignImageDefault: string;

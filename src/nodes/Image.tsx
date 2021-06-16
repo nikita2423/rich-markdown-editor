@@ -297,7 +297,7 @@ export default class Image extends Node {
           >
             <Button>
               <DownloadIcon
-                color="currentColor"
+                // color="currentColor"
                 onClick={this.handleDownload(props)}
               />
             </Button>

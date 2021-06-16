@@ -21,6 +21,7 @@ const uploadPlaceholder_1 = __importDefault(require("../lib/uploadPlaceholder"))
 const insertFiles_1 = __importDefault(require("../commands/insertFiles"));
 const Node_1 = __importDefault(require("./Node"));
 const DocImage_1 = __importDefault(require("../icons/DocImage"));
+const DownloadIcon_1 = __importDefault(require("../icons/DownloadIcon"));
 const helper_1 = require("../helper");
 const IMAGE_INPUT_REGEX = /!\[(?<alt>.*?)]\((?<filename>.*?)(?=\“|\))\“?(?<layoutclass>[^\”]+)?\”?\)/;
 const uploadPlugin = (options) => new prosemirror_state_1.Plugin({
@@ -83,6 +84,19 @@ const getLayoutAndTitle = (tokenTitle) => {
             title: tokenTitle,
         };
     }
+};
+const downloadImageNode = async (node) => {
+    const image = await fetch(node.attrs.src);
+    const imageBlob = await image.blob();
+    const imageURL = URL.createObjectURL(imageBlob);
+    const extension = imageBlob.type.split("/")[1];
+    const potentialName = node.attrs.alt || "image";
+    const link = document.createElement("a");
+    link.href = imageURL;
+    link.download = `${potentialName}.${extension}`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 };
 class Image extends Node_1.default {
     constructor() {
@@ -151,6 +165,11 @@ class Image extends Node_1.default {
             }
             return false;
         };
+        this.handleDownload = ({ node }) => (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            downloadImageNode(node);
+        };
         this.component = (props) => {
             const { theme, isSelected } = props;
             const { alt, src, title, layoutClass } = props.node.attrs;
@@ -160,6 +179,8 @@ class Image extends Node_1.default {
                     React.createElement("a", { href: src, target: "__blank" },
                         React.createElement(DocImage_1.default, { text: this.getExtension(src) })))),
                 this.isImage(src) && (React.createElement(ImageWrapper, { className: isSelected ? "ProseMirror-selectednode" : "", onClick: this.handleSelect(props) },
+                    React.createElement(Button, null,
+                        React.createElement(DownloadIcon_1.default, { onClick: this.handleDownload(props) })),
                     React.createElement(react_medium_image_zoom_1.default, { image: {
                             src,
                             alt,
@@ -253,6 +274,14 @@ class Image extends Node_1.default {
     }
     commands({ type }) {
         return {
+            downloadImage: () => async (state) => {
+                const { node } = state.selection;
+                if (node.type.name !== "image") {
+                    return false;
+                }
+                downloadImageNode(node);
+                return true;
+            },
             deleteImage: () => (state, dispatch) => {
                 dispatch(state.tr.deleteSelection());
                 return true;
@@ -305,9 +334,42 @@ class Image extends Node_1.default {
     }
 }
 exports.default = Image;
+const Button = styled_components_1.default.button `
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  border-radius: 4px;
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.textSecondary};
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 100ms ease-in-out;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:hover {
+    color: ${(props) => props.theme.text};
+    opacity: 1;
+  }
+`;
 const ImageWrapper = styled_components_1.default.span `
   line-height: 0;
   display: inline-block;
+  position: relative;
+
+  &:hover {
+    ${Button} {
+      opacity: 0.9;
+    }
+  }
 `;
 const Caption = styled_components_1.default.p `
   border: 0;

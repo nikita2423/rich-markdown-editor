@@ -225,7 +225,7 @@ class MarkdownSerializerState {
         });
         this.inTable = prevTable;
     }
-    esc(str, startOfLine) {
+    esc(str = "", startOfLine) {
         str = str.replace(/[`*\\~\[\]]/g, "\\$&");
         if (startOfLine) {
             str = str.replace(/^[:#\-*+]/, "\\$&").replace(/^(\d+)\./, "$1\\.");

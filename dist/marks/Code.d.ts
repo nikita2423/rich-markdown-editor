@@ -5,6 +5,7 @@ export default class Code extends Mark {
         excludes: string;
         parseDOM: {
             tag: string;
+            preserveWhitespace: boolean;
         }[];
         toDOM: () => (string | {
             spellCheck: boolean;
@@ -19,6 +20,8 @@ export default class Code extends Mark {
         "Mod`": (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
         "Shift-Cmd-8": (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
         "Shift-Ctrl-8": (state: import("prosemirror-state").EditorState<any>, dispatch?: ((tr: import("prosemirror-state").Transaction<any>) => void) | undefined) => boolean;
+        ArrowLeft: (state: import("prosemirror-state").EditorState<any>, dispatch: (tr: import("prosemirror-state").Transaction<any>) => void) => boolean;
+        ArrowRight: (state: import("prosemirror-state").EditorState<any>, dispatch: (tr: import("prosemirror-state").Transaction<any>) => void) => boolean;
     };
     get toMarkdown(): {
         open(_state: any, _mark: any, parent: any, index: any): string;

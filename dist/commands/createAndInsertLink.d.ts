@@ -20,6 +20,7 @@ declare const createAndInsertLink: (view: EditorView<any>, title: string, href: 
         deleteRow: string;
         deleteTable: string;
         deleteImage: string;
+        downloadImage: string;
         alignImageLeft: string;
         alignImageRight: string;
         alignImageDefault: string;

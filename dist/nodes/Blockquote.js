@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const prosemirror_inputrules_1 = require("prosemirror-inputrules");
 const Node_1 = __importDefault(require("./Node"));
 const toggleWrap_1 = __importDefault(require("../commands/toggleWrap"));
+const isNodeActive_1 = __importDefault(require("../queries/isNodeActive"));
 class Blockquote extends Node_1.default {
     get name() {
         return "blockquote";
@@ -31,6 +32,14 @@ class Blockquote extends Node_1.default {
             "Mod-]": toggleWrap_1.default(type),
             "Shift-Ctrl-7": toggleWrap_1.default(type),
             "Shift-Cmd-7": toggleWrap_1.default(type),
+            "Shift-Enter": (state, dispatch) => {
+                if (!isNodeActive_1.default(type)(state)) {
+                    return false;
+                }
+                const { tr, selection } = state;
+                dispatch(tr.split(selection.to));
+                return true;
+            },
         };
     }
     toMarkdown(state, node) {

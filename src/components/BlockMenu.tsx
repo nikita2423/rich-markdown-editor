@@ -304,7 +304,7 @@ class BlockMenu extends React.Component<Props, State> {
     const { state } = view;
     const parent = findParentNode((node) => !!node)(state.selection);
 
-    this.clearSearch();
+    this.clearSearch(false);
 
     if (parent) {
       insertFiles(view, event, parent.pos, files, {
