@@ -1,6 +1,7 @@
 import { wrappingInputRule } from "prosemirror-inputrules";
 import Node from "./Node";
 import toggleWrap from "../commands/toggleWrap";
+import isNodeActive from "../queries/isNodeActive";
 
 export default class Blockquote extends Node {
   get name() {
@@ -31,6 +32,15 @@ export default class Blockquote extends Node {
       "Mod-]": toggleWrap(type),
       "Shift-Ctrl-7": toggleWrap(type),
       "Shift-Cmd-7": toggleWrap(type),
+      "Shift-Enter": (state, dispatch) => {
+        if (!isNodeActive(type)(state)) {
+          return false;
+        }
+
+        const { tr, selection } = state;
+        dispatch(tr.split(selection.to));
+        return true;
+      },
     };
   }
 

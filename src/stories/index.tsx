@@ -70,8 +70,8 @@ const embeds = [
         height={24}
       />
     ),
-    matcher: url => {
-      return !!url.match(
+    matcher: (url) => {
+      return url.match(
         /(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/?.*(?:watch|embed)?(?:.*v=|v\/|\/)([a-zA-Z0-9_-]{11})$/i
       );
     },
@@ -117,7 +117,7 @@ export default function Example(props) {
         }}
         uploadImage={(file) => {
           // Delay to simulate time taken to upload
-          return new Promise(resolve => {
+          return new Promise((resolve) => {
             setTimeout(() => resolve(URL.createObjectURL(file)), 1500);
           });
         }}

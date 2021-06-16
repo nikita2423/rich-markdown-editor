@@ -9,6 +9,7 @@ import TrashIcon from "../icons/TrashIcon";
 import AlignImageLeftIcon from "../icons/LeftImageIcon";
 import AlignImageRightIcon from "../icons/RightImageIcon";
 import AlignImageCenterIcon from "../icons/CenterImageIcon";
+import DownloadIcon from "../icons/DownloadIcon";
 
 import isNodeActive from "../queries/isNodeActive";
 import { MenuItem } from "../types";
@@ -55,6 +56,13 @@ export default function imageMenuItems(
     {
       name: "separator",
       visible: true,
+    },
+    {
+      name: "downloadImage",
+      tooltip: dictionary.downloadImage,
+      icon: DownloadIcon,
+      visible: !!fetch,
+      active: () => false,
     },
     {
       name: "deleteImage",
