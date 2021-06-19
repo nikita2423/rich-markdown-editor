@@ -53,7 +53,7 @@ function isVisible(props) {
   const fragment = slice.content;
   const nodes = fragment.content;
 
-  return some(nodes, n => n.content.size);
+  return some(nodes, (n) => n.content.size);
 }
 
 export default class SelectionToolbar extends React.Component<Props> {
@@ -149,7 +149,7 @@ export default class SelectionToolbar extends React.Component<Props> {
     } else if (rowIndex !== undefined) {
       items = getTableRowMenuItems(state, rowIndex, dictionary);
     } else if (isImageSelection) {
-      items = getImageMenuItems(state, dictionary);
+      // items = getImageMenuItems(state, dictionary);
     } else if (isDividerSelection) {
       items = getDividerMenuItems(state, dictionary);
     } else {
