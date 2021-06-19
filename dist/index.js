@@ -711,6 +711,10 @@ const StyledEditor = styled_components_1.default("div") `
     text-align: center;
     max-width: 100%;
     clear: both;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 15px;
 
     img {
       pointer-events: ${(props) => (props.readOnly ? "initial" : "none")};

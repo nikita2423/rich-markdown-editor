@@ -29,7 +29,6 @@ const tableCol_1 = __importDefault(require("../menus/tableCol"));
 const tableRow_1 = __importDefault(require("../menus/tableRow"));
 const table_1 = __importDefault(require("../menus/table"));
 const formatting_1 = __importDefault(require("../menus/formatting"));
-const image_1 = __importDefault(require("../menus/image"));
 const divider_1 = __importDefault(require("../menus/divider"));
 const FloatingToolbar_1 = __importDefault(require("./FloatingToolbar"));
 const LinkEditor_1 = __importDefault(require("./LinkEditor"));
@@ -58,7 +57,7 @@ function isVisible(props) {
     const slice = selection.content();
     const fragment = slice.content;
     const nodes = fragment.content;
-    return some_1.default(nodes, n => n.content.size);
+    return some_1.default(nodes, (n) => n.content.size);
 }
 class SelectionToolbar extends React.Component {
     constructor() {
@@ -130,7 +129,6 @@ class SelectionToolbar extends React.Component {
             items = tableRow_1.default(state, rowIndex, dictionary);
         }
         else if (isImageSelection) {
-            items = image_1.default(state, dictionary);
         }
         else if (isDividerSelection) {
             items = divider_1.default(state, dictionary);
