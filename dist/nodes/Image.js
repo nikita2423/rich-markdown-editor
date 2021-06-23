@@ -189,8 +189,7 @@ class Image extends Node_1.default {
                             overlay: {
                                 backgroundColor: theme.background,
                             },
-                        }, shouldRespectMaxDimension: true }))),
-                React.createElement(Caption, { onKeyDown: this.handleKeyDown(props), onBlur: this.handleBlur(props), className: "caption", tabIndex: -1, role: "textbox", contentEditable: true, suppressContentEditableWarning: true, onPaste: this.handlePaste(props) }, alt)));
+                        }, shouldRespectMaxDimension: true })))));
         };
     }
     get name() {

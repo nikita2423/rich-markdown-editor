@@ -125,8 +125,7 @@ class File extends Node_1.default {
             return (React.createElement("div", { className: "file", contentEditable: false },
                 React.createElement("div", { style: { display: "flex", justifyContent: "center" } },
                     React.createElement("a", { href: src, target: "__blank" },
-                        React.createElement(DocImage_1.default, { text: this.getExtension(src) }))),
-                (options.isEditable || alt) && (React.createElement(Caption, { onKeyDown: this.handleKeyDown(options), onBlur: this.handleBlur(options), tabIndex: -1, contentEditable: options.isEditable, suppressContentEditableWarning: true, onPaste: this.handlePaste(options) }, alt))));
+                        React.createElement(DocImage_1.default, { text: this.getExtension(src) })))));
         };
     }
     get name() {

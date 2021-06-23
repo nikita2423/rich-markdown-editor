@@ -984,7 +984,7 @@ const StyledEditor = styled_components_1.default("div") `
       background: ${(props) => props.theme.quote};
     }
     p {
-      margin: 0 !important;
+      margin: 0 0 0 7px !important;
     }
   }
 
@@ -1025,7 +1025,7 @@ const StyledEditor = styled_components_1.default("div") `
 
     ul,
     ol {
-      margin-right: -24px;
+      margin-right: -22px;
     }
   }
 
