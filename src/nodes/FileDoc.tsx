@@ -200,7 +200,7 @@ export default class File extends Node {
           </a>
         </div>
 
-        {(options.isEditable || alt) && (
+        {/* {(options.isEditable || alt) && (
           <Caption
             onKeyDown={this.handleKeyDown(options)}
             onBlur={this.handleBlur(options)}
@@ -211,7 +211,7 @@ export default class File extends Node {
           >
             {alt}
           </Caption>
-        )}
+        )} */}
       </div>
     );
   };

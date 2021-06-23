@@ -1281,7 +1281,7 @@ const StyledEditor = styled("div")<{
       background: ${(props) => props.theme.quote};
     }
     p {
-      margin: 0 !important;
+      margin: 0 0 0 7px !important;
     }
   }
 
@@ -1323,7 +1323,7 @@ const StyledEditor = styled("div")<{
 
     ul,
     ol {
-      margin-right: -24px;
+      margin-right: -22px;
     }
   }
 

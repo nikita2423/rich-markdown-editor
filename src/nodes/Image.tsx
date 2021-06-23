@@ -317,7 +317,7 @@ export default class Image extends Node {
           </ImageWrapper>
         )}
 
-        <Caption
+        {/* <Caption
           onKeyDown={this.handleKeyDown(props)}
           onBlur={this.handleBlur(props)}
           className="caption"
@@ -328,7 +328,7 @@ export default class Image extends Node {
           onPaste={this.handlePaste(props)}
         >
           {alt}
-        </Caption>
+        </Caption> */}
       </div>
     );
   };
